@@ -1,0 +1,33 @@
+{
+  "name": "ez-uploader.de",
+  "version": "1.0.0",
+  "description": "An Image/Text upload service which provides a bunch of extras and should integrate with ShareX",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jodu555/ez-uploader.de.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jodu555/ez-uploader.de/issues"
+  },
+  "homepage": "https://github.com/Jodu555/ez-uploader.de#readme",
+  "dependencies": {
+    "@jodu555/mysqlapi": "^3.3.6",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.6.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}
