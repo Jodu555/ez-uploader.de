@@ -26,7 +26,6 @@ I want to learn how to work with these types of sharing things\
 I want to learn how generally a public application like this is structured also with where the files are stored\
 
 ## Todo
-## Todo
 *	[ ]  Entry: Image / Text: An Entry is just my naming representation for this system
 *	[ ] Multiple Accounts System
 *	[ ] Image-Uploader (SahreX Integration)
