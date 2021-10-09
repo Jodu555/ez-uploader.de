@@ -25,3 +25,14 @@ I want to test e.g the hierarchical folder structure and how to represent them i
 I want to learn how to work with these types of sharing things\
 I want to learn how generally a public application like this is structured also with where the files are stored\
 
+## Todo
+## Todo
+*	[ ]  Entry: Image / Text: An Entry is just my naming representation for this system
+*	[ ] Multiple Accounts System
+*	[ ] Image-Uploader (SahreX Integration)
+*	[ ] Text-Uploader (ShareX Integration)
+*	[ ] An ability to create folders with hierarchical structures: To sort the entries
+*	[ ] A Permission system to clarify if an Entry is password protected or just unlisted
+*	[ ] An Global Permission system to allow an account to choose which user can see their pictures
+*	[ ] Sorting System Day/Month/Year
+*	[ ] Public page for any user to show their published entries
