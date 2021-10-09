@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Jodu555/ez-uploader.de#readme",
   "dependencies": {
     "@jodu555/mysqlapi": "^3.3.6",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
