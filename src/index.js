@@ -12,6 +12,7 @@ const database = Database.createDatabase(process.env.DB_HOST,
 database.connect();
 require('./utils/tables').createTables();
 
+const { router: auth } = require('./routes/auth/index');
 
 const app = express();
 app.use(cors());
@@ -20,8 +21,11 @@ app.use(helmet());
 app.use(express.json());
 
 
+app.use('/auth', auth);
 
-
+const { errorHandling, notFound } = require('./utils/middleware');
+app.use('*', notFound);
+app.use(errorHandling);
 
 const PORT = process.env.PORT || 3100;
 app.listen(PORT, () => {
