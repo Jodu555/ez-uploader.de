@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs');
 const register = async (req, res, next) => {
     const validation = userRegisterSchema.validate(req.body);
     if (validation.error) {
-        res.json(jsonError(validation.error.details[0].message));
+        next(new Error(validation.error.details[0].message));
     } else {
         const user = validation.value
         const search = { ...user }; //Spreading to disable the reference
@@ -17,7 +17,7 @@ const register = async (req, res, next) => {
         const result = await database.get('accounts').get(search);
 
         if (result.length == 0) {
-            const obj = jsonSuccess('Registered');
+            const obj = {};
             user.uuid = v4();
             user.password = await bcrypt.hash(user.password, 8);
             await database.get('accounts').create(user);
@@ -26,7 +26,7 @@ const register = async (req, res, next) => {
             obj.user = user;
             res.json(obj);
         } else {
-            res.json(jsonError('The email or the username is already taken!'));
+            next(new Error('The email or the username is already taken!'));
         }
     }
 };
@@ -34,23 +34,23 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
     const validation = userLoginSchema.validate(req.body);
     if (validation.error) {
-        res.json(jsonError(validation.error.details[0].message));
+        next(new Error(validation.error.details[0].message));
     } else {
         const user = validation.value;
         const result = await database.get('accounts').get({ username: user.username, unique: true });
         if (result.length > 0) {
             if (await bcrypt.compare(user.password, result[0].password)) {
-                const obj = jsonSuccess('Successfully logged In');
+                const obj = {};
                 const token = v4();
                 obj.token = token;
                 authManager.addToken(token, result[0]);
                 res.json(obj);
             } else {
-                res.json(jsonError('Invalid password!'));
+                next(new Error('Invalid password!'));
             }
         } else {
             const value = user.username ? 'username' : 'email';
-            res.json(jsonError('Invalid ' + value + '!'));
+            next(new Error('Invalid ' + value + '!'));
         }
     }
 };
@@ -58,7 +58,7 @@ const login = async (req, res, next) => {
 const logout = async (req, res, next) => {
     const token = req.credentials.token;
     authManager.removeToken(token);
-    res.json(jsonSuccess('Successfully logged out!'))
+    res.json({ message: 'Successfully logged out!' });
 };
 
 // function generateVerificationToken(len) {
@@ -73,6 +73,5 @@ const logout = async (req, res, next) => {
 module.exports = {
     register,
     login,
-    logout,
-    emailValidation
+    logout
 }
