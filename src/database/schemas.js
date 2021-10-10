@@ -12,6 +12,13 @@ const userLoginSchema = Joi.object({
     password: Joi.string().alphanum().min(8).max(50).required(),
 }).xor('username', 'email');
 
+const folderCreationSchema = Joi.object({
+    name: Joi.string().alphanum().min(3).max(20).required(),
+    parent_UUID: Joi.string().guid({ version: ['uuidv4'] }).required(),
+    public: Joi.number().integer().min(0).max(1).required(),
+    share: Joi.number().integer().min(0).max(1).required(),
+})
+
 
 module.exports = {
     userRegisterSchema,
