@@ -22,5 +22,6 @@ const folderCreationSchema = Joi.object({
 
 module.exports = {
     userRegisterSchema,
-    userLoginSchema
+    userLoginSchema,
+    folderCreationSchema
 };
