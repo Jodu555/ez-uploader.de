@@ -12,6 +12,8 @@ const database = Database.createDatabase(process.env.DB_HOST,
 database.connect();
 require('./database/tables').createTables();
 
+//Test Account: Finn:Developer:test@test.com
+
 const { router: auth } = require('./routes/auth/index');
 
 const app = express();
