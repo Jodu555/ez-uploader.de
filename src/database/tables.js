@@ -14,6 +14,22 @@ function createTables() {
         password: 'TEXT',
     });
 
+    database.createTable('folders', {
+        options: {
+            K: ['UUID'],
+            PK: 'UUID',
+            FK: {
+                'account_UUID': 'accounts/UUID',
+            },
+        },
+        UUID: 'varchar(64)',
+        account_UUID: 'varchar(64)',
+        name: 'TEXT',
+        parent_UUID: 'TEXT',
+        public: 'BOOL',
+        share: 'BOOL'
+    });
+
 }
 
 module.exports = { createTables };
