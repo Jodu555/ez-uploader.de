@@ -1,5 +1,3 @@
-const { jsonSuccess, jsonError } = require('./jsonMessages');
-
 const tokens = new Map();
 
 function addToken(token, user) {
@@ -29,10 +27,10 @@ function authentication(req, res, next) {
 			};
 			next();
 		} else {
-			res.status(401).json(jsonError('Invalid auth-token'));
+			next(new Error('Invalid auth-token'))
 		}
 	} else {
-		res.status(401).json(jsonError('Missing auth-token in headers'));
+		next(new Error('Missing auth-token in headers'));
 	}
 }
 
