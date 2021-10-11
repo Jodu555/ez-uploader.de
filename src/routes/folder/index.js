@@ -7,6 +7,7 @@ router.get('/', (req, res) => {
     res.json({ message: 'Folder-Router works just fine' });
 });
 
+//TODO: maybe add a possibllity to get all Folders wich are in a specific!
 router.get('/', authManager.authentication, null); //Returns all folders a user owns
 router.post('/', authManager.authentication, null); //Created a folder
 router.patch('/:uuid', authManager.authentication, null); //Updated a particular folder
