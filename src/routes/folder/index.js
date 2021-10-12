@@ -5,9 +5,9 @@ const router = express.Router();
 
 
 //TODO: maybe add a possibllity to get all Folders wich are in a specific!
-router.get('/', authManager.authentication, controller.get); //Returns all folders a user owns
-// router.post('/', authManager.authentication, null); //Created a folder
-// router.patch('/:uuid', authManager.authentication, null); //Updated a particular folder
+router.get('/', controller.get); //Returns all folders a user owns
+// router.post('/', null); //Created a folder
+// router.patch('/:uuid', null); //Updated a particular folder
 
 module.exports = {
     router,
