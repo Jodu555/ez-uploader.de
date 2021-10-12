@@ -14,6 +14,7 @@ require('./database/tables').createTables();
 
 //Test Account: Finn:Developer:test@test.com
 
+
 const { router: auth } = require('./routes/auth/index');
 const { router: folder } = require('./routes/folder/index');
 
