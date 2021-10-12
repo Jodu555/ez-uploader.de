@@ -4,7 +4,7 @@ const { Database } = require('@jodu555/mysqlapi');
 const database = Database.getDatabase();
 
 const get = async (req, res, next) => {
-    console.log(req.credentials.user);
+    const userUUID = req.credentials.user.UUID;
 }
 
 module.exports = {
