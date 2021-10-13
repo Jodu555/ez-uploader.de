@@ -22,10 +22,12 @@ const create = async (req, res, next) => {
         folder.UUID = v4();
         folder.account_UUID = req.credentials.user.UUID;
         //TODO: Validate if parent_UUID is a folder which owns the user
+        //TODO: Check if folder name is unique
         folder.parent_UUID = folder.parent_UUID || (await database.get('folders').actions.getRootFolder(req.credentials.user.UUID)).UUID;
         folder.public = folder.public || 0;
         folder.share = folder.share || 0;
-        res.json(folder);
+        const created = database.get('folders').create(folder);
+        res.json(created);
     }
 }
 
