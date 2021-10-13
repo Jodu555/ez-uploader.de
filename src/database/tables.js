@@ -30,6 +30,15 @@ function createTables() {
         share: 'BOOL'
     });
 
+    database.get('folders').actions = {
+        getRootFolder: async (UUID) => {
+            console.log('Get Root Folder' + UUID);
+            const folder = await database.get('folders').getOne({ account_UUID: UUID, name: 'ROOT' });
+            return folder;
+        },
+    };
+
+
 }
 
 module.exports = { createTables };
