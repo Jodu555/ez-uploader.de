@@ -14,16 +14,25 @@ const get = async (req, res, next) => {
 }
 
 const create = async (req, res, next) => {
+    const account_UUID = req.credentials.user.UUID;
     const validation = folderCreationSchema.validate(req.body);
     if (validation.error) {
         next(new Error(validation.error.details[0].message));
     } else {
         const folder = validation.value;
         folder.UUID = v4();
-        folder.account_UUID = req.credentials.user.UUID;
-        //TODO: Validate if parent_UUID is a folder which owns the user
+        folder.account_UUID = account_UUID;
+
+        //Validate if parent_UUID is a folder which the user owns
+        if (folder.parent_UUID) {
+            if (!await database.get('folders').getOne({ account_UUID, UUID: folder.parent_UUID, unique: true })) {
+                next(new Error('You dont own this folder!'))
+                return;
+            }
+        }
+
         //TODO: Check if folder name is unique
-        folder.parent_UUID = folder.parent_UUID || (await database.get('folders').actions.getRootFolder(req.credentials.user.UUID)).UUID;
+        folder.parent_UUID = folder.parent_UUID || (await database.get('folders').actions.getRootFolder(account_UUID)).UUID;
         folder.public = folder.public || 0;
         folder.share = folder.share || 0;
         const created = database.get('folders').create(folder);
