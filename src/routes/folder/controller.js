@@ -31,7 +31,12 @@ const create = async (req, res, next) => {
             }
         }
 
-        //TODO: Check if folder name is unique
+        //Check if folder name is unique
+        if (await database.get('folders').getOne({ account_UUID, name: folder.name, unique: true })) {
+            next(new Error('This folder already exists!'));
+            return;
+        }
+
         folder.parent_UUID = folder.parent_UUID || (await database.get('folders').actions.getRootFolder(account_UUID)).UUID;
         folder.public = folder.public || 0;
         folder.share = folder.share || 0;
