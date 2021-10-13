@@ -22,7 +22,7 @@ const create = async (req, res, next) => {
         folder.UUID = v4();
         folder.account_UUID = req.credentials.user.UUID;
 
-        folder.parent_UUID = folder.parent_UUID || await database.get('folders').get({ account_UUID: req.credentials.user.UUID, name: 'ROOT' });
+        folder.parent_UUID = folder.parent_UUID || await database.get('folders').get({ account_UUID: req.credentials.user.UUID, name: 'ROOT' }).UUID;
         folder.public = folder.public || 0;
         folder.share = folder.share || 0;
         res.json(folder);
