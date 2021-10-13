@@ -13,6 +13,11 @@ const get = async (req, res, next) => {
     }
 }
 
+const getRootFolder = async (account_UUID) => {
+    const folder = await database.get('folders').getOne({ account_UUID, name: 'ROOT' });
+    return folder.UUID;
+}
+
 const create = async (req, res, next) => {
     const validation = folderCreationSchema.validate(req.body);
     if (validation.error) {
@@ -21,8 +26,7 @@ const create = async (req, res, next) => {
         const folder = validation.value;
         folder.UUID = v4();
         folder.account_UUID = req.credentials.user.UUID;
-
-        folder.parent_UUID = folder.parent_UUID || await database.get('folders').get({ account_UUID: req.credentials.user.UUID, name: 'ROOT' }).UUID;
+        folder.parent_UUID = folder.parent_UUID || await getRootFolder(req.credentials.user.UUID);
         folder.public = folder.public || 0;
         folder.share = folder.share || 0;
         res.json(folder);
