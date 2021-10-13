@@ -14,9 +14,9 @@ const userLoginSchema = Joi.object({
 
 const folderCreationSchema = Joi.object({
     name: Joi.string().alphanum().min(3).max(20).required(),
-    parent_UUID: Joi.string().guid({ version: ['uuidv4'] }).required(),
-    public: Joi.number().integer().min(0).max(1).required(),
-    share: Joi.number().integer().min(0).max(1).required(),
+    parent_UUID: Joi.string().guid({ version: ['uuidv4'] }),
+    public: Joi.number().integer().min(0).max(1),
+    share: Joi.number().integer().min(0).max(1),
 })
 
 
