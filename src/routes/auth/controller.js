@@ -52,6 +52,7 @@ const login = async (req, res, next) => {
                 const obj = {};
                 const token = v4();
                 obj.token = token;
+                delete result[0].password;
                 authManager.addToken(token, result[0]);
                 res.json(obj);
             } else {
