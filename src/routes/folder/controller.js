@@ -25,9 +25,11 @@ const create = async (req, res, next) => {
         folder.parent_UUID = folder.parent_UUID || await database.get('folders').get({ account_UUID: req.credentials.user.UUID, name: 'ROOT' });
         folder.public = folder.public || 0;
         folder.share = folder.share || 0;
+        res.json(folder);
     }
 }
 
 module.exports = {
     get,
+    create
 }
