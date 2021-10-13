@@ -15,8 +15,8 @@ const get = async (req, res, next) => {
 
 const create = async (req, res, next) => {
     const validation = folderCreationSchema.validate(req.body);
-    if (validatio.error) {
-        next(new Error(validatio.error.details[0].message));
+    if (validation.error) {
+        next(new Error(validation.error.details[0].message));
     } else {
         const folder = validation.value;
         folder.UUID = v4();
