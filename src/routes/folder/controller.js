@@ -46,7 +46,15 @@ const create = async (req, res, next) => {
 }
 
 const update = async (req, res, next) => {
-
+    const uuid = req.params.uuid;
+    const account_UUID = req.credentials.user.UUID;
+    const validation = folderCreationSchema.validate(req.body);
+    if (validation.error) {
+        next(new Error(validation.error.details[0].message));
+    } else {
+        const folder = validation.value;
+        console.log(uuid, folder, account_UUID);
+    }
 };
 
 module.exports = {
