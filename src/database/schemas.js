@@ -19,9 +19,17 @@ const folderCreationSchema = Joi.object({
     share: Joi.number().integer().min(0).max(1),
 })
 
+const folderUpdateSchema = Joi.object({
+    name: Joi.string().alphanum().min(3).max(20),
+    parent_UUID: Joi.string().guid({ version: ['uuidv4'] }),
+    public: Joi.number().integer().min(0).max(1),
+    share: Joi.number().integer().min(0).max(1),
+})
+
 
 module.exports = {
     userRegisterSchema,
     userLoginSchema,
-    folderCreationSchema
+    folderCreationSchema,
+    folderUpdateSchema
 };

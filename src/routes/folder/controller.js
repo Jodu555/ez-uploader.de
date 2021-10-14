@@ -1,4 +1,4 @@
-const { folderCreationSchema } = require('../../database/schemas');
+const { folderCreationSchema, folderUpdateSchema } = require('../../database/schemas');
 const { v4 } = require('uuid');
 const { Database } = require('@jodu555/mysqlapi');
 const database = Database.getDatabase();
@@ -48,7 +48,7 @@ const create = async (req, res, next) => {
 const update = async (req, res, next) => {
     const uuid = req.params.uuid;
     const account_UUID = req.credentials.user.UUID;
-    const validation = folderCreationSchema.validate(req.body);
+    const validation = folderUpdateSchema.validate(req.body);
     if (validation.error) {
         next(new Error(validation.error.details[0].message));
     } else {
