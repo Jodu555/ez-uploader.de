@@ -63,8 +63,11 @@ const update = async (req, res, next) => {
             next(new Error('You dont own this folder!'));
             return;
         }
-
-
+        //Check if the user want to edit the name of the root folder
+        if (folder.name && database.get('folders').getRootFolder(account_UUID).UUID == uuid) {
+            next(new Error('You cannot change the name of the root folder!'));
+            return;
+        }
 
         console.log(uuid, folder, account_UUID);
     }
