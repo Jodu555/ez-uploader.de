@@ -17,6 +17,7 @@ function errorHandling(err, req, res, next) {
         } else {
             res.status(500).send({
                 success: false,
+                method: req.method,
                 path: req.path,
                 error,
             });
