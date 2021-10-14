@@ -69,7 +69,14 @@ const update = async (req, res, next) => {
             return;
         }
 
+        const updated = await database.get('folders').update({
+            UUID: uuid,
+            account_UUID,
+            unique: true,
+        }, folder);
+
         console.log(uuid, folder, account_UUID);
+        res.json(updated);
     }
 };
 
