@@ -59,5 +59,6 @@ const update = async (req, res, next) => {
 
 module.exports = {
     get,
-    create
+    create,
+    update,
 }
