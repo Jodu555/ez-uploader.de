@@ -59,7 +59,7 @@ const update = async (req, res, next) => {
             return;
         }
         //Check if user owns the folder
-        if (!database.get('folders').getOne({ UUID: uuid, account_UUID, unique: true })) {
+        if (!await database.get('folders').getOne({ UUID: uuid, account_UUID, unique: true })) {
             next(new Error('You dont own this folder!'));
             return;
         }
