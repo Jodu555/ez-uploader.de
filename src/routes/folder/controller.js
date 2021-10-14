@@ -53,6 +53,11 @@ const update = async (req, res, next) => {
         next(new Error(validation.error.details[0].message));
     } else {
         const folder = validation.value;
+        if (Object.keys(folder).length <= 0) {
+            next(new Error('You must provide a value which you want to change!'));
+            return;
+        }
+
         console.log(uuid, folder, account_UUID);
     }
 };
