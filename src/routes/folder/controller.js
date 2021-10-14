@@ -75,7 +75,6 @@ const update = async (req, res, next) => {
             unique: true,
         }, folder);
 
-        console.log(uuid, folder, account_UUID);
         res.json(updated);
     }
 };
