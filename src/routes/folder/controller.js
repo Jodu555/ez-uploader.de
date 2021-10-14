@@ -53,10 +53,18 @@ const update = async (req, res, next) => {
         next(new Error(validation.error.details[0].message));
     } else {
         const folder = validation.value;
+        //Check if oject has keys
         if (Object.keys(folder).length <= 0) {
             next(new Error('You must provide a value which you want to change!'));
             return;
         }
+        //Check if user owns the folder
+        if (!database.get('folders').getOne({ UUID: uuid, account_UUID, unique: true })) {
+            next(new Error('You dont own this folder!'));
+            return;
+        }
+
+
 
         console.log(uuid, folder, account_UUID);
     }
