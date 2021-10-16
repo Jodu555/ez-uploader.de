@@ -12,6 +12,16 @@ const get = async (req, res, next) => {
     }
 }
 
+const getFromFolder = async (req, res, next) => {
+    try {
+        const account_UUID = req.credentials.user.UUID;
+        const folder = req.params.folderUUID;
+        const result = (await database.get('entrys').actions.getAllFromAccount(account_UUID)).filter(e => e.folder_UUID == folder);
+        res.json(result);
+    } catch (error) {
+        next(error);
+    }
+}
 
 module.exports = {
     get,
