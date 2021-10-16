@@ -27,7 +27,7 @@ const folderUpdateSchema = Joi.object({
 })
 
 const entryCreationSchema = Joi.object({
-    type: Joi.string().case('image').case('text'),
+    type: Joi.string().valid('image', 'text').required(),
     public: Joi.number().integer().min(0).max(1),
     share: Joi.number().integer().min(0).max(1),
 })
@@ -37,5 +37,6 @@ module.exports = {
     userRegisterSchema,
     userLoginSchema,
     folderCreationSchema,
-    folderUpdateSchema
+    folderUpdateSchema,
+    entryCreationSchema
 };
