@@ -55,12 +55,13 @@ function createTables() {
 
     database.get('entrys').actions = {
         getAllFromAccount: async (account_UUID) => {
-            const folders = (await database.get('folders').get({ account_UUID })).map(e => e.UUID);
-            const entys = (await database.get('entys').get({})).filter(e => folders.includes(e.folder_UUID));
-            console.log(entrys);
+            const folders = (await database.get('folders').get({ account_UUID, unique: true })).map(e => e.UUID);
+            const entrys = (await database.get('entrys').get()).filter(e => folders.includes(e.folder_UUID));
+            return entrys;
         },
         owns: async (UUID, account_UUID) => {
-
+            const allFromAccount = (await database.get('entrys').actions.getAllFromAccount(account_UUID)).map(e => e.UUID);
+            return allFromAccount.includes(UUID);
         }
     }
 
