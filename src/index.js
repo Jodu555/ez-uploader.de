@@ -38,6 +38,9 @@ app.use('*', notFound);
 app.use(errorHandling);
 
 const PORT = process.env.PORT || 3100;
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
     console.log(`Express App is listening on ${PORT}`);
+
+    const res = await database.get('entrys').actions.getAllFromAccount('044644dd-f1f8-4200-8029-64a3c872e282');
+    console.log(res);
 });

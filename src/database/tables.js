@@ -41,7 +41,6 @@ function createTables() {
         UUID: 'varchar(64)',
         folder_UUID: 'varchar(64)',
         type: 'varchar(64)',
-        parent_UUID: 'TEXT',
         public: 'BOOL',
         share: 'BOOL'
     });
@@ -55,10 +54,12 @@ function createTables() {
     };
 
     database.get('entrys').actions = {
-        getAllFromAccount(account_UUID) {
-
+        getAllFromAccount: async (account_UUID) => {
+            const folders = (await database.get('folders').get({ account_UUID })).map(e => e.UUID);
+            const entys = (await database.get('entys').get({})).filter(e => folders.includes(e.folder_UUID));
+            console.log(entrys);
         },
-        owns(UUID, account_UUID) {
+        owns: async (UUID, account_UUID) => {
 
         }
     }
