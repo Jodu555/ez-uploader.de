@@ -23,7 +23,17 @@ const getFromFolder = async (req, res, next) => {
     }
 }
 
+const create = (req, res, next) => {
+
+}
+
+const update = async (req, res, next) => {
+
+}
+
 module.exports = {
     get,
-    getFromFolder
+    getFromFolder,
+    create,
+    update
 }
