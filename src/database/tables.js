@@ -30,6 +30,22 @@ function createTables() {
         share: 'BOOL'
     });
 
+    database.createTable('entrys', {
+        options: {
+            K: ['UUID'],
+            PK: 'UUID',
+            FK: {
+                'folder_UUID': 'folders/UUID',
+            },
+        },
+        UUID: 'varchar(64)',
+        folder_UUID: 'varchar(64)',
+        type: 'varchar(64)',
+        parent_UUID: 'TEXT',
+        public: 'BOOL',
+        share: 'BOOL'
+    });
+
     database.get('folders').actions = {
         getRootFolder: async (UUID) => {
             console.log('Get Root Folder' + UUID);
@@ -37,6 +53,15 @@ function createTables() {
             return folder;
         },
     };
+
+    database.get('entrys').actions = {
+        getAllFromAccount(account_UUID) {
+
+        },
+        owns(UUID, account_UUID) {
+
+        }
+    }
 
 
 }
