@@ -71,9 +71,8 @@ const update = async (req, res, next) => {
             next(new Error('You dont own this entry!'));
             return;
         }
-
-        console.log(entry);
-
+        const updated = await database.get('entrys').update({ UUID }, entry)
+        res.json(updated);
     }
 }
 
