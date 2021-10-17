@@ -66,7 +66,13 @@ const update = async (req, res, next) => {
             next(new Error('You must provide a value which you want to change!'));
             return;
         }
+        //Check if user owns the entry
+        if (!await database.get('entrys').actions.owns(UUID, account_UUID)) {
+            next(new Error('You dont own this entry!'));
+            return;
+        }
 
+        console.log(entry);
 
     }
 }
