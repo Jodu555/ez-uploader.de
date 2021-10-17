@@ -35,6 +35,7 @@ const entryCreationSchema = Joi.object({
 const entryUpdateSchema = Joi.object({
     public: Joi.number().integer().min(0).max(1),
     share: Joi.number().integer().min(0).max(1),
+    folder_UUID: Joi.string().guid({ version: ['uuidv4'] })
 })
 
 

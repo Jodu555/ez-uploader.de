@@ -71,6 +71,13 @@ const update = async (req, res, next) => {
             next(new Error('You dont own this entry!'));
             return;
         }
+        //Check if he owns the folder in which he want to update the entry in
+        if (entry.folder_UUID) {
+            if (!await database.get('folders').getOne({ UUID: entry.folder_UUID, account_UUID, unique: true })) {
+                next(new Error('You dont own this folder!'));
+                return;
+            }
+        }
         const updated = await database.get('entrys').update({ UUID }, entry)
         res.json(updated);
     }
