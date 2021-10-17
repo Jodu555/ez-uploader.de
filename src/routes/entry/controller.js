@@ -52,6 +52,7 @@ const create = async (req, res, next) => {
 }
 
 const update = async (req, res, next) => {
+    const account_UUID = req.credentials.user.UUID;
     const UUID = req.params.uuid;
     const validation = entryUpdateSchema.validate(req.body);
     if (validation.error) {
@@ -59,6 +60,14 @@ const update = async (req, res, next) => {
         return;
     } else {
         const entry = validation.value;
+
+        //Check if entry oject has keys
+        if (Object.keys(entry).length <= 0) {
+            next(new Error('You must provide a value which you want to change!'));
+            return;
+        }
+
+
     }
 }
 
