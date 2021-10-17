@@ -32,11 +32,17 @@ const entryCreationSchema = Joi.object({
     share: Joi.number().integer().min(0).max(1),
 })
 
+const entryUpdateSchema = Joi.object({
+    public: Joi.number().integer().min(0).max(1),
+    share: Joi.number().integer().min(0).max(1),
+})
+
 
 module.exports = {
     userRegisterSchema,
     userLoginSchema,
     folderCreationSchema,
     folderUpdateSchema,
-    entryCreationSchema
+    entryCreationSchema,
+    entryUpdateSchema
 };

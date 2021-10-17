@@ -1,4 +1,4 @@
-const { entryCreationSchema } = require('../../database/schemas');
+const { entryCreationSchema, entryUpdateSchema } = require('../../database/schemas');
 const { v4 } = require('uuid');
 const { Database } = require('@jodu555/mysqlapi');
 const database = Database.getDatabase();
@@ -29,6 +29,7 @@ const create = async (req, res, next) => {
     const validation = entryCreationSchema.validate(req.body);
     if (validation.error) {
         next(new Error(validation.error.details[0].message));
+        return;
     } else {
         const entry = validation.value;
         entry.UUID = v4();
@@ -51,7 +52,14 @@ const create = async (req, res, next) => {
 }
 
 const update = async (req, res, next) => {
-
+    const UUID = req.params.uuid;
+    const validation = entryUpdateSchema.validate(req.body);
+    if (validation.error) {
+        next(new Error(validation.error.details[0].message));
+        return;
+    } else {
+        const entry = validation.value;
+    }
 }
 
 module.exports = {
