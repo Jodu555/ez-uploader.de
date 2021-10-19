@@ -25,6 +25,9 @@ I want to test e.g the hierarchical folder structure and how to represent them i
 I want to learn how to work with these types of sharing things\
 I want to learn how generally a public application like this is structured also with where the files are stored\
 
+### Idea behind the upload and entry thing
+My Idea is that first an file gets uploaded and for this file in the background an entry got created
+And if you want to maybe generate an text only then an entry will be created! I must write this out so  i get it myself
 ## Todo
 *	[ ]  Entry: Image / Text: An Entry is just my naming representation for this system
 *	[ ] Multiple Accounts System
