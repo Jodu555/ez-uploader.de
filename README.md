@@ -28,6 +28,7 @@ I want to learn how generally a public application like this is structured also 
 ### Idea behind the upload and entry thing
 My Idea is that first an file gets uploaded and for this file in the background an entry got created
 And if you want to maybe generate an text only then an entry will be created! I must write this out so  i get it myself
+
 ## Todo
 *	[ ]  Entry: Image / Text: An Entry is just my naming representation for this system
 *	[ ] Multiple Accounts System
