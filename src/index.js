@@ -36,7 +36,7 @@ app.use(express.json());
 app.use('/auth', auth);
 app.use('/folder', authManager.authentication, folder);
 app.use('/entry', authManager.authentication, entry);
-app.use('/entry', authManager.authentication, upload);
+app.use('/upload', authManager.authentication, upload);
 
 const { errorHandling, notFound } = require('./utils/middleware');
 app.use('*', notFound);
