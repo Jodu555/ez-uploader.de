@@ -23,6 +23,8 @@ const authManager = require('./utils/authManager');
 const { router: auth } = require('./routes/auth/index');
 const { router: folder } = require('./routes/folder/index');
 const { router: entry } = require('./routes/entry/index');
+const { router: upload } = require('./routes/uploader/index');
+
 
 const app = express();
 app.use(cors());
@@ -34,6 +36,7 @@ app.use(express.json());
 app.use('/auth', auth);
 app.use('/folder', authManager.authentication, folder);
 app.use('/entry', authManager.authentication, entry);
+app.use('/entry', authManager.authentication, upload);
 
 const { errorHandling, notFound } = require('./utils/middleware');
 app.use('*', notFound);
