@@ -8,12 +8,10 @@ const upload = multer({ dest: 'upload/' }).single('image');
 
 router.post('/', (req, res, next) => {
     upload(req, res, (err) => {
-        if (err)
-            throw err;
-        // if (err instanceof multer.MulterError) {
-        // } else if (err) {
-        // }
-
+        if (err) {
+            next(err);
+            return;
+        }
     })
 });
 
