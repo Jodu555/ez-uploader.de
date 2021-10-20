@@ -31,6 +31,7 @@ And if you want to maybe generate an text only then an entry will be created! I 
 
 ## Todo
 *	[ ]  Entry: Image / Text: An Entry is just my naming representation for this system
+*   [ ] Add an specific key for each user which allows to upload with shareX
 *	[ ] Multiple Accounts System
 *	[ ] Image-Uploader (SahreX Integration)
 *	[ ] Text-Uploader (ShareX Integration)
