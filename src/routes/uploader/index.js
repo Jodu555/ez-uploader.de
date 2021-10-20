@@ -4,7 +4,7 @@ const authManager = require('../../utils/authManager');
 const router = express.Router();
 
 
-const upload = multer().single('image');
+const upload = multer({ dest: 'uploads/' }).single('image');
 
 router.post('/', (req, res, next) => {
     upload(req, res, (err) => {
