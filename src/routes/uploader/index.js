@@ -1,17 +1,19 @@
 const express = require('express');
 const multer = require('multer');
-const authManager = require('../../utils/authManager');
+const { v4 } = require('uuid');
 const router = express.Router();
-
+const { Database } = require('@jodu555/mysqlapi');
+const database = Database.getDatabase();
 
 const upload = multer({ dest: 'upload/' }).single('image');
 
-router.post('/', (req, res, next) => {
-    upload(req, res, (err) => {
+router.post('/', async (req, res, next) => {
+    await upload(req, res, async (err) => {
         if (err) {
             next(err);
             return;
         }
+
     })
 });
 
