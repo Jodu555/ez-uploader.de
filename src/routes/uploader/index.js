@@ -10,8 +10,6 @@ const storage = multer.diskStorage({
         cb(null, 'upload/');
     },
     filename: (req, file, cb) => {
-        console.log(1, req.api);
-        console.log(2, file);
         const fileName = req.api + '.' + file.originalname.toLowerCase().split('.')[1];
         cb(null, fileName)
     }
@@ -20,6 +18,7 @@ const storage = multer.diskStorage({
 const upload = multer({
     storage: storage,
     fileFilter: (req, file, cb) => {
+        const fileSize = parseInt(req.headers['content-length']);
         if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
             cb(null, true);
         } else {
