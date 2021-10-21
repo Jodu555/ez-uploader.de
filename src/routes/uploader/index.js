@@ -43,11 +43,8 @@ router.post('/', async (req, res, next) => {
             next(err);
             return;
         }
-
-        console.log(entry);
-        res.json(entry);
-        // const created = database.get('entrys').create(entry);
-        // res.json(created);
+        const created = database.get('entrys').create(entry);
+        res.json(created);
     })
 });
 
