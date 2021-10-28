@@ -124,7 +124,7 @@
 				headers: {
 					Accept: 'application/json',
 					// 'Content-Type': 'multipart/form-data',
-					'auth-token': 'SECRET-DEV-KEY',
+					'auth-token': 'SECRET-DEV-KEY', //TODO: replace this with the actual
 				},
 				body,
 			});
@@ -139,8 +139,6 @@
 					uploadInfo.style.display = 'none';
 				}, 5000);
 			}
-
-			console.log(json);
 		});
 
 		document.querySelector('#upload').addEventListener('change', () => {
