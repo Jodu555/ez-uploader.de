@@ -24,7 +24,7 @@
 				opacity: 0;
 			}
 
-			#upload-label {
+			#uploadLabel {
 				position: absolute;
 				top: 50%;
 				left: 1rem;
@@ -65,7 +65,7 @@
 					<form id="uploadForm">
 						<div class="input-group mb-3 px-2 py-2 rounded-pill shadow-sm">
 							<input id="upload" type="file" class="form-control border-0" />
-							<label id="upload-label" for="upload" class="font-weight-light text-muted"
+							<label id="uploadLabel" for="upload" class="font-weight-light text-muted"
 								>Choose file</label
 							>
 							<div class="input-group-append">
@@ -107,6 +107,8 @@
 		const input = document.querySelector('#upload');
 		const uploadForm = document.querySelector('#uploadForm');
 		const uploadInfo = document.querySelector('#uploadInfo');
+		const imageResult = document.querySelector('#imageResult');
+		const uploadLabel = document.querySelector('#uploadLabel');
 
 		uploadInfo.style.display = 'none';
 
@@ -128,9 +130,14 @@
 			});
 			const json = await response.json();
 			console.log(json.success, json.success == 'false');
-			if (json.success == 'false') {
+			if (json.success == false) {
+				imageResult.setAttribute('src', '#');
+				uploadLabel.textContent = 'File name: ';
 				uploadInfo.style.display = '';
 				uploadInfo.innerText = json.error.message;
+				setTimeout(() => {
+					uploadInfo.style.display = 'none';
+				}, 5000);
 			}
 
 			console.log(json);
@@ -140,7 +147,7 @@
 			if (input.files && input.files[0]) {
 				const reader = new FileReader();
 				reader.onload = (e) => {
-					document.querySelector('#imageResult').setAttribute('src', e.target.result);
+					imageResult.setAttribute('src', e.target.result);
 				};
 				reader.readAsDataURL(input.files[0]);
 			}
@@ -149,7 +156,7 @@
 		function showFileName(event) {
 			const input = event.srcElement;
 			const fileName = input.files[0].name;
-			document.querySelector('#upload-label').textContent = 'File name: ' + fileName;
+			uploadLabel.textContent = 'File name: ' + fileName;
 		}
 	</script>
 	<!-- <script src="upload.js"></script> -->
