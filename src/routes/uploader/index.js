@@ -43,6 +43,10 @@ router.post('/', async (req, res, next) => {
             next(err);
             return;
         }
+        if (!req.file) {
+            next(new Error('No file present in request body!'));
+            return;
+        }
         const created = database.get('entrys').create(entry);
         res.json(created);
     })

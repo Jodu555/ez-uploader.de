@@ -61,6 +61,7 @@
 			<div class="row py-4">
 				<div class="col-lg-6 mx-auto">
 					<!-- Upload image input-->
+					<div id="uploadInfo" class="alert alert-danger"></div>
 					<form id="uploadForm">
 						<div class="input-group mb-3 px-2 py-2 rounded-pill shadow-sm">
 							<input id="upload" type="file" class="form-control border-0" />
@@ -105,6 +106,9 @@
 	<script>
 		const input = document.querySelector('#upload');
 		const uploadForm = document.querySelector('#uploadForm');
+		const uploadInfo = document.querySelector('#uploadInfo');
+
+		uploadInfo.style.display = 'none';
 
 		uploadForm.addEventListener('submit', async (event) => {
 			event.preventDefault();
@@ -123,6 +127,11 @@
 				body,
 			});
 			const json = await response.json();
+			console.log(json.success, json.success == 'false');
+			if (json.success == 'false') {
+				uploadInfo.style.display = '';
+				uploadInfo.innerText = json.error.message;
+			}
 
 			console.log(json);
 		});
@@ -131,7 +140,6 @@
 			if (input.files && input.files[0]) {
 				const reader = new FileReader();
 				reader.onload = (e) => {
-					console.log(e);
 					document.querySelector('#imageResult').setAttribute('src', e.target.result);
 				};
 				reader.readAsDataURL(input.files[0]);
