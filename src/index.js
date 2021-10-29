@@ -29,7 +29,9 @@ const { router: image } = require('./routes/image/index');
 
 const app = express();
 app.use(cors());
-app.use(morgan('dev'));
+app.use(morgan('dev', {
+    skip: (req, res) => req.originalUrl.startsWith('/image/'),
+}));
 app.use(helmet());
 app.use(express.json());
 
