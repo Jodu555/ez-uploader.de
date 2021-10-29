@@ -24,6 +24,13 @@ async function post(endpoint, body) {
     return await response.json();
 }
 
-function get() {
-
+async function get(endpoint) {
+    const response = await fetch(API_URL + endpoint, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'auth-token': 'SECRET-DEV-KEY', //TODO: replace this with the actual
+        },
+    });
+    return await response.json();
 }
