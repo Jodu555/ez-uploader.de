@@ -24,6 +24,7 @@ const { router: auth } = require('./routes/auth/index');
 const { router: folder } = require('./routes/folder/index');
 const { router: entry } = require('./routes/entry/index');
 const { router: upload } = require('./routes/uploader/index');
+const { router: image } = require('./routes/image/index');
 
 
 const app = express();
@@ -37,6 +38,7 @@ app.use('/auth', auth);
 app.use('/folder', authManager.authentication, folder);
 app.use('/entry', authManager.authentication, entry);
 app.use('/upload', authManager.authentication, upload);
+app.use('/image', image)
 
 const { errorHandling, notFound } = require('./utils/middleware');
 app.use('*', notFound);
