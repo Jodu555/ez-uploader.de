@@ -33,6 +33,7 @@ router.post('/', async (req, res, next) => {
     const entry = {
         UUID: v4(),
         folder_UUID: (await database.get('folders').actions.getRootFolder(account_UUID)).UUID,
+        type: 'image',
         public: 0,
         share: 0,
     }
