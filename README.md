@@ -29,11 +29,16 @@ I want to learn how generally a public application like this is structured also 
 My Idea is that first an file gets uploaded and for this file in the background an entry got created
 And if you want to maybe generate an text only then an entry will be created! I must write this out so  i get it myself
 
+### Nice Info
+It's always better to start hacking things out and then to codem them for production
+* Because basically the mvp of this is finished
+* Now i start to code these existing thing more out and make it step for step as close as finish that i can get
+
 ## Todo
 *	[ ]  Entry: Image / Text: An Entry is just my naming representation for this system
 *   [ ] Add an specific key for each user which allows to upload with shareX
 *	[ ] Multiple Accounts System
-*	[ ] Image-Uploader (SahreX Integration)
+*	[x] Image-Uploader (SahreX Integration)
 *	[ ] Text-Uploader (ShareX Integration)
 *	[ ] An ability to create folders with hierarchical structures: To sort the entries
 *	[ ] A Permission system to clarify if an Entry is password protected or just unlisted
