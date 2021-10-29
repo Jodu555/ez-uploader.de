@@ -31,7 +31,7 @@
 						<th scope="col">Name</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="tabelPlace">
 					<tr class="place">
 						<td>...</td>
 						<td>...</td>
@@ -44,14 +44,6 @@
 						<td>FOLDER</td>
 						<td>Private</td>
 					</tr>
-					<tr class="draggable" draggable="true">
-						<td>IMAGE</td>
-						<td>test</td>
-					</tr>
-					<tr class="draggable" draggable="true">
-						<td>IMAGE</td>
-						<td>test2</td>
-					</tr>
 				</tbody>
 			</table>
 		</div>
@@ -62,5 +54,19 @@
 		crossorigin="anonymous"
 	></script>
 	<script src="utils.js"></script>
+	<script>
+		(async () => {
+			const json = await get('entry');
+			json.forEach((img) => {
+				const tr = document.createElement('tr');
+				tr.classList.add('draggable');
+				tr.setAttribute('draggable', true);
+				tr.innerHTML = `<td><img src="http://localhost:3100/upload/${img.UUID}"/></td>
+						<td>${img.UUID.split('-')[0]}</td>`;
+
+				document.querySelector('#tabelPlace').appendChild(tr);
+			});
+		})();
+	</script>
 	<script src="dragDrop.js"></script>
 </html>
