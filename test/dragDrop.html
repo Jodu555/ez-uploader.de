@@ -20,6 +20,10 @@
 			.draggable.dragging {
 				opacity: 0.5;
 			}
+			.preview-image {
+				height: auto;
+				width: 5vw;
+			}
 		</style>
 	</head>
 	<body>
@@ -63,7 +67,7 @@
 				tr.setAttribute('draggable', true);
 				tr.innerHTML = `<td><img src="http://localhost:3100/image/${
 					img.UUID
-				}&key=SECRET-DEV-KEY"/></td>
+				}?key=SECRET-DEV-KEY" class="img-thumbnail preview-image" /></td>
 						<td>${img.UUID.split('-')[0]}</td>`;
 
 				document.querySelector('#tabelPlace').appendChild(tr);

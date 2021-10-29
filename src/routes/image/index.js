@@ -7,17 +7,17 @@ const authManager = require('../../utils/authManager');
 const path = require('path');
 
 router.get('/:UUID', (req, res, next) => {
-    const UUID = req.params.UUID
-    //Check if user has this key
-    console.log(UUID);
-    console.log(req.query.key);
-    if (authManager.getUser(req.query.key)) {
-        const imagePath = path.join(__dirname, '../../../upload', UUID + '.png');
-        console.log(imagePath);
-        res.sendFile(imagePath);
+    try {
+        const UUID = req.params.UUID
+        if (authManager.getUser(req.query.key)) {
+            const imagePath = path.join(__dirname, '../../../upload', UUID + '.png');
+            res.sendFile(imagePath);
+        } else {
+            next(new Error('Unauthorized!'));
+        }
+    } catch (error) {
+        next(error);
     }
-
-    console.log('Image Request');
 })
 
 
