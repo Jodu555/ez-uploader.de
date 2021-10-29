@@ -70,11 +70,8 @@
 							>
 							<div class="input-group-append">
 								<label for="upload" class="btn btn-light m-0 rounded-pill px-4">
-									<i class="fa fa-cloud-upload mr-2 text-muted"></i
-									><small class="text-uppercase font-weight-bold text-muted"
-										>Choose file</small
-									></label
-								>
+									<small class="text-uppercase font-weight-bold text-muted"> Choose file </small>
+								</label>
 							</div>
 						</div>
 						<div class="text-center">
@@ -116,20 +113,9 @@
 		uploadForm.addEventListener('submit', async (event) => {
 			event.preventDefault();
 			const image = input.files[0];
-			console.log(image);
 			const body = new FormData();
 			body.append('image', image);
-
-			const response = await fetch('http://localhost:3100/upload', {
-				method: 'POST',
-				headers: {
-					Accept: 'application/json',
-					// 'Content-Type': 'multipart/form-data',
-					'auth-token': 'SECRET-DEV-KEY', //TODO: replace this with the actual
-				},
-				body,
-			});
-			const json = await response.json();
+			const json = await post('upload', body);
 			if (json.success == false) {
 				imageResult.setAttribute('src', '#');
 				uploadLabel.textContent = 'File name: ';
