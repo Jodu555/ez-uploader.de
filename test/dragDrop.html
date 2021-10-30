@@ -36,7 +36,7 @@
 					</tr>
 				</thead>
 				<tbody id="tabelPlace">
-					<tr class="place">
+					<!-- <tr class="place">
 						<td>...</td>
 						<td>...</td>
 					</tr>
@@ -47,7 +47,7 @@
 					<tr class="draggable place" draggable="true">
 						<td>FOLDER</td>
 						<td>Private</td>
-					</tr>
+					</tr> -->
 				</tbody>
 			</table>
 		</div>
@@ -59,18 +59,34 @@
 	></script>
 	<script src="utils.js"></script>
 	<script>
+		const tabelPlace = document.querySelector('#tabelPlace');
 		(async () => {
-			const json = await get('entry');
-			json.forEach((img) => {
+			const directoryJson = await get('folder');
+			directoryJson.forEach((dir) => {
+				const tr = document.createElement('tr');
+				tr.classList.add('draggable');
+				tr.classList.add('place');
+				tr.setAttribute('draggable', true);
+				tr.setAttribute('data-folder-UUID', dir.UUID);
+				tr.innerHTML = `<tr class="draggable place" draggable="true">
+						<td>FOLDER</td>
+						<td>${dir.name}</td>
+					</tr>`;
+				tabelPlace.appendChild(tr);
+			});
+
+			const entryJson = await get('entry');
+			entryJson.forEach((img) => {
 				const tr = document.createElement('tr');
 				tr.classList.add('draggable');
 				tr.setAttribute('draggable', true);
+				tr.setAttribute('data-entry-UUID', dir.UUID);
 				tr.innerHTML = `<td><img src="http://localhost:3100/image/${
 					img.UUID
 				}?key=SECRET-DEV-KEY" class="img-thumbnail preview-image" /></td>
 						<td>${img.UUID.split('-')[0]}</td>`;
 
-				document.querySelector('#tabelPlace').appendChild(tr);
+				tabelPlace.appendChild(tr);
 			});
 			initDragDrop();
 		})();
