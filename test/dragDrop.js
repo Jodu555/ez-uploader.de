@@ -21,6 +21,8 @@ function initDragDrop() {
                 place.classList.remove(errorClass)
                 if (place != draggable) {
                     draggable.remove();
+                    const draggableUUID = draggable.getAttribute('data-entry-UUID') || draggable.getAttribute('data-folder-UUID');
+                    console.log(place.getAttribute('data-folder-UUID'), draggableUUID);
                 }
             }
         });
