@@ -31,6 +31,12 @@
 				height: auto;
 				width: 5vw;
 			}
+			.preview-folder {
+				font-size: 4vw;
+			}
+			#tabelPlace tr {
+				cursor: pointer;
+			}
 		</style>
 	</head>
 	<body>
@@ -38,24 +44,11 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th scope="col">TYPE</th>
+						<th scope="col">Preview</th>
 						<th scope="col">Name</th>
 					</tr>
 				</thead>
-				<tbody id="tabelPlace">
-					<!-- <tr class="place">
-						<td>...</td>
-						<td>...</td>
-					</tr>
-					<tr class="draggable place" draggable="true">
-						<td>FOLDER</td>
-						<td>Main</td>
-					</tr>
-					<tr class="draggable place" draggable="true">
-						<td>FOLDER</td>
-						<td>Private</td>
-					</tr> -->
-				</tbody>
+				<tbody id="tabelPlace"></tbody>
 			</table>
 		</div>
 	</body>
@@ -76,7 +69,7 @@
 				tr.setAttribute('draggable', true);
 				tr.setAttribute('data-folder-UUID', dir.UUID);
 				tr.innerHTML = `<tr class="draggable place" draggable="true">
-						<td>FOLDER</td>
+						<td><i class="far fa-folder preview-folder"></i></td>
 						<td>${dir.name}</td>
 					</tr>`;
 				tabelPlace.appendChild(tr);
