@@ -7,7 +7,6 @@ const errorClass = 'table-danger';
 initDragDrop();
 
 function initDragDrop() {
-    console.log(123);
     draggables = document.querySelectorAll('.draggable');
     places = document.querySelectorAll('.place');
     draggables.forEach((draggable) => {
