@@ -1,4 +1,4 @@
-const API_URL = 'http://github-stats.jodu555.de/';
+const API_URL = 'https://github-stats.jodu555.de/';
 
 let lastChange;
 
