@@ -14,29 +14,28 @@ function alert(selector, success, message, cb) {
     }, 5000);
 }
 
-function post(endpoint, body) {
+async function post(endpoint, body) {
     return network(endpoint, 'POST', body);
 }
 
 async function patch(endpoint, body) {
-    console.log(body);
-    return network(endpoint, 'PATCH', body);
+    return network(endpoint, 'PATCH', body, null, true);
 }
 
 function get(endpoint) {
     return network(endpoint, 'GET');
 }
 
-async function network(endpoint, method, headers, body) {
+async function network(endpoint, method, body, additionalHeaders, json) {
     const response = await fetch(API_URL + endpoint, {
         method,
         headers: {
-
+            'Content-Type': json ? 'application/json' : '',
             Accept: 'application/json',
             'auth-token': 'SECRET-DEV-KEY', //TODO: replace this with the actual
-            ...headers
+            ...additionalHeaders
         },
-        body,
+        body: body || null,
     });
     return await response.json();
 }
