@@ -1,6 +1,6 @@
 const API_URL = 'http://localhost:3100/';
 
-function alert(selector, success, message) {
+function alert(selector, success, message, cb) {
     const alert = document.querySelector(selector);
     alert.classList.remove('alert-success');
     alert.classList.remove('alert-danger');
@@ -9,6 +9,7 @@ function alert(selector, success, message) {
     alert.style.display = '';
     setTimeout(() => {
         alert.style.display = 'none';
+        cb();
     }, 5000);
 }
 
