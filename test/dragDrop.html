@@ -60,6 +60,8 @@
 	<script src="http://docs.jodu555.de/utils/utils.js"></script>
 	<script src="utils.js"></script>
 	<script>
+		const view = getURLParam('view');
+		console.log(view);
 		const tabelPlace = document.querySelector('#tabelPlace');
 		(async () => {
 			const directoryJson = await get('folder');
@@ -76,7 +78,7 @@
 				tabelPlace.appendChild(tr);
 			});
 
-			const entryJson = await get('entry');
+			const entryJson = await get('entry/' + (view ? view : ''));
 			entryJson.forEach((img) => {
 				const tr = document.createElement('tr');
 				tr.classList.add('draggable');
