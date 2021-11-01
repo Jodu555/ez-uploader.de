@@ -9,7 +9,8 @@ function alert(selector, success, message, cb) {
     alert.style.display = '';
     setTimeout(() => {
         alert.style.display = 'none';
-        cb();
+        if (cb)
+            cb();
     }, 5000);
 }
 
@@ -18,6 +19,7 @@ function post(endpoint, body) {
 }
 
 async function patch(endpoint, body) {
+    console.log(body);
     return network(endpoint, 'PATCH', body);
 }
 
@@ -29,11 +31,12 @@ async function network(endpoint, method, headers, body) {
     const response = await fetch(API_URL + endpoint, {
         method,
         headers: {
+
             Accept: 'application/json',
             'auth-token': 'SECRET-DEV-KEY', //TODO: replace this with the actual
             ...headers
         },
-        body: body || null,
+        body,
     });
     return await response.json();
 }

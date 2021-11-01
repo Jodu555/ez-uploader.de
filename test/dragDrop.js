@@ -22,7 +22,14 @@ function initDragDrop() {
                 if (place != draggable) {
                     draggable.remove();
                     const draggableUUID = draggable.getAttribute('data-entry-UUID') || draggable.getAttribute('data-folder-UUID');
-                    console.log(place.getAttribute('data-folder-UUID'), draggableUUID);
+                    const folderUUID = place.getAttribute('data-folder-UUID');
+
+                    if (draggable.getAttribute('data-entry-UUID')) {
+                        patch('entry/' + draggableUUID, JSON.stringify({
+                            folder_UUID: place.getAttribute('data-folder-UUID')
+                        }));
+                    }
+
                 }
             }
         });
