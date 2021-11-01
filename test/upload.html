@@ -115,13 +115,17 @@
 			body.append('image', image);
 			const json = await post('upload', body);
 			if (json.success == false) {
-				imageResult.setAttribute('src', '#');
-				uploadLabel.textContent = 'File name: ';
+				clearUploadContent();
 				alert('#uploadInfoAlert', false, json.error.message);
 			} else {
-				alert('#uploadInfoAlert', true, 'Image Uploaded!');
+				alert('#uploadInfoAlert', true, 'Image Uploaded!', clearUploadContent);
 			}
 		});
+
+		function clearUploadContent() {
+			imageResult.setAttribute('src', '#');
+			uploadLabel.textContent = 'File name: ';
+		}
 
 		document.querySelector('#upload').addEventListener('change', () => {
 			if (input.files && input.files[0]) {
