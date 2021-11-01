@@ -13,37 +13,27 @@ function alert(selector, success, message, cb) {
     }, 5000);
 }
 
-async function post(endpoint, body) {
-    const response = await fetch(API_URL + endpoint, {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'auth-token': 'SECRET-DEV-KEY', //TODO: replace this with the actual
-        },
-        body,
-    });
-    return await response.json();
+function post(endpoint, body) {
+    return network(endpoint, 'POST', body);
 }
 
 async function patch(endpoint, body) {
-    const response = await fetch(API_URL + endpoint, {
-        method: 'patch',
-        headers: {
-            Accept: 'application/json',
-            'auth-token': 'SECRET-DEV-KEY', //TODO: replace this with the actual
-        },
-        body,
-    });
-    return await response.json();
+    return network(endpoint, 'PATCH', body);
 }
 
-async function get(endpoint) {
+function get(endpoint) {
+    return network(endpoint, 'GET');
+}
+
+async function network(endpoint, method, headers, body) {
     const response = await fetch(API_URL + endpoint, {
-        method: 'GET',
+        method,
         headers: {
             Accept: 'application/json',
             'auth-token': 'SECRET-DEV-KEY', //TODO: replace this with the actual
+            ...headers
         },
+        body: body || null,
     });
     return await response.json();
 }
