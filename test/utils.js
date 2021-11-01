@@ -25,6 +25,18 @@ async function post(endpoint, body) {
     return await response.json();
 }
 
+async function patch(endpoint, body) {
+    const response = await fetch(API_URL + endpoint, {
+        method: 'patch',
+        headers: {
+            Accept: 'application/json',
+            'auth-token': 'SECRET-DEV-KEY', //TODO: replace this with the actual
+        },
+        body,
+    });
+    return await response.json();
+}
+
 async function get(endpoint) {
     const response = await fetch(API_URL + endpoint, {
         method: 'GET',
