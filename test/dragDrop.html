@@ -60,11 +60,9 @@
 	<script src="http://docs.jodu555.de/utils/utils.js"></script>
 	<script src="utils.js"></script>
 	<script>
-		const view = getURLParam('view');
-		console.log(view);
 		const tabelPlace = document.querySelector('#tabelPlace');
 		(async () => {
-			const root = (await get('folder/root')).UUID;
+			const view = getURLParam('view') || (await get('folder/root')).UUID;
 			const directoryJson = await get('folder/' + (view ? view : ''));
 			directoryJson.forEach((dir) => {
 				const tr = document.createElement('tr');
