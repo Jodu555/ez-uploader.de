@@ -116,29 +116,44 @@
 				'folder',
 				JSON.stringify({
 					name: obj.folderName,
-					parent_UUID: folderMap.get(obj.parentFolder),
-				})
+					parent_UUID: folderMap.get(obj.parentFolder).UUID,
+				}),
+				true
 			);
 			if (json.success == false) {
 				alert('#createFolderAlert', false, json.error.message);
 			} else {
 				alert('#createFolderAlert', true, 'Folder Created!', () => {
-					createFolder.clear();
+					createFolder.reset();
 				});
 			}
 			console.log(obj);
 		});
 
 		(async () => {
+			let currentFolder;
+
 			(await get('folder')).forEach((folder) => {
 				const parentFolder = document.querySelector('#parentFolder');
 				const option = document.createElement('option');
 				option.innerText = folder.name;
 				parentFolder.appendChild(option);
-				folderMap.set(folder.name, folder.UUID);
+				folderMap.set(folder.name, folder);
+				if (getURLParam('view') && folder.UUID == getURLParam('view')) currentFolder = folder;
 			});
 
-			const view = getURLParam('view') || (await get('folder/root')).UUID;
+			const view = getURLParam('view') || folderMap.get('ROOT').UUID;
+
+			function getUpperFolder() {
+				let ret;
+				[...folderMap.entries()].forEach((element) => {
+					if (element[1].UUID == currentFolder.parent_UUID) ret = element[1];
+				});
+				return ret;
+			}
+
+			console.log(getUpperFolder());
+
 			const directoryJson = await get('folder/' + (view ? view : ''));
 			directoryJson.forEach((dir) => {
 				const tr = document.createElement('tr');

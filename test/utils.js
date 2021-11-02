@@ -14,8 +14,8 @@ function alert(selector, success, message, cb) {
     }, 5000);
 }
 
-async function post(endpoint, body) {
-    return network(endpoint, 'POST', body);
+async function post(endpoint, body, json) {
+    return network(endpoint, 'POST', body, null, json);
 }
 
 async function patch(endpoint, body) {
