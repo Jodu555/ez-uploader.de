@@ -27,7 +27,6 @@ function get(endpoint) {
 }
 
 async function network(endpoint, method, body, additionalHeaders, json) {
-    console.log(endpoint, method, body, additionalHeaders, json);
     const headers = {
         Accept: 'application/json',
         'auth-token': 'SECRET-DEV-KEY', //TODO: replace this with the actual
