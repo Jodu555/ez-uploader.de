@@ -25,7 +25,13 @@ const getFromFolder = async (req, res, next) => {
 }
 
 const getRoot = async (req, res, next) => {
-
+    try {
+        const account_UUID = req.credentials.user.UUID;
+        const result = await database.get('folders').actions.getRootFolder(account_UUID);
+        res.json(result);
+    } catch (error) {
+        next(error);
+    }
 }
 
 const create = async (req, res, next) => {
