@@ -14,7 +14,7 @@ function alert(selector, success, message, cb) {
     }, 5000);
 }
 
-async function post(endpoint, body, json) {
+async function post(endpoint, body, json = false) {
     return network(endpoint, 'POST', body, null, json);
 }
 
@@ -27,14 +27,17 @@ function get(endpoint) {
 }
 
 async function network(endpoint, method, body, additionalHeaders, json) {
+    console.log(endpoint, method, body, additionalHeaders, json);
+    const headers = {
+        Accept: 'application/json',
+        'auth-token': 'SECRET-DEV-KEY', //TODO: replace this with the actual
+        ...additionalHeaders
+    }
+    if (json)
+        headers['Content-Type'] = 'application/json';
     const response = await fetch(API_URL + endpoint, {
         method,
-        headers: {
-            'Content-Type': json ? 'application/json' : '',
-            Accept: 'application/json',
-            'auth-token': 'SECRET-DEV-KEY', //TODO: replace this with the actual
-            ...additionalHeaders
-        },
+        headers,
         body: body || null,
     });
     return await response.json();

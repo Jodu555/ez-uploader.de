@@ -38,6 +38,8 @@ router.post('/', async (req, res, next) => {
         share: 0,
     }
     req.api = entry.UUID;
+    console.log(req.headers);
+    console.log(req.body);
 
     await upload(req, res, async (err) => {
         if (err) {
