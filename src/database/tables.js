@@ -50,7 +50,7 @@ function createTables() {
             console.log('Get Root Folder: ' + UUID);
             const folder = await database.get('folders').getOne({ account_UUID: UUID, name: 'ROOT', unique: true });
             return folder;
-        },
+        }
     };
 
     database.get('entrys').actions = {
