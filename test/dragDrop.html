@@ -40,7 +40,38 @@
 		</style>
 	</head>
 	<body>
+		<header>
+			<div
+				class="offcanvas offcanvas-start"
+				tabindex="-1"
+				id="offCanvasCreateFolder"
+				aria-labelledby="offCanvasCreateFolderLabel"
+			>
+				<div class="offcanvas-header">
+					<h5 class="offcanvas-title" id="offCanvasCreateFolderLabel">Create Folder</h5>
+					<button
+						type="button"
+						class="btn-close text-reset"
+						data-bs-dismiss="offcanvas"
+						aria-label="Close"
+					></button>
+				</div>
+				<div class="offcanvas-body"></div>
+			</div>
+		</header>
 		<div class="container-fluid">
+			<div class="container">
+				<a
+					class="btn btn-outline-success"
+					data-bs-toggle="offcanvas"
+					href="#offCanvasCreateFolder"
+					role="button"
+					aria-controls="offCanvasCreateFolder"
+				>
+					<i class="fas fa-folder-plus" style="font-size: 4vh"></i> Add Folder
+				</a>
+			</div>
+
 			<table class="table">
 				<thead>
 					<tr>
