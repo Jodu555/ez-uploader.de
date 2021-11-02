@@ -24,6 +24,10 @@ const getFromFolder = async (req, res, next) => {
     }
 }
 
+const getRoot = async (req, res, next) => {
+
+}
+
 const create = async (req, res, next) => {
     const account_UUID = req.credentials.user.UUID;
     const validation = folderCreationSchema.validate(req.body);
@@ -94,5 +98,6 @@ module.exports = {
     get,
     create,
     update,
-    getFromFolder
+    getFromFolder,
+    getRoot
 }
