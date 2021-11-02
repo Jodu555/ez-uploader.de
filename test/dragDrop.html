@@ -157,8 +157,7 @@
 			const upper = getUpperFolder();
 			if (upper) {
 				upper.name = '...';
-				directoryJson.push(upper);
-				console.log(upper, directoryJson);
+				directoryJson.unshift(upper);
 			}
 			directoryJson.forEach((dir) => {
 				console.log(dir);
