@@ -57,14 +57,14 @@
 					></button>
 				</div>
 				<div class="offcanvas-body">
-					<form>
+					<form id="createFolder">
 						<div class="mb-3">
 							<label for="folderName" class="form-label">Folder name</label>
-							<input type="text" class="form-control" id="folderName" />
+							<input type="text" class="form-control" required id="folderName" name="folderName" />
 						</div>
 						<div class="mb-3">
-							<label for="folderChoose" class="form-label">Parent Folder</label>
-							<select class="form-select" id="folderChoose"></select>
+							<label for="parentFolder" class="form-label">Parent Folder</label>
+							<select class="form-select" id="parentFolder" name="parentFolder"></select>
 						</div>
 
 						<button type="submit" class="btn btn-primary">Submit</button>
@@ -83,6 +83,7 @@
 				>
 					<i class="fas fa-folder-plus" style="font-size: 4vh"></i> Add Folder
 				</a>
+				<div class="alert" id="createFolderAlert"></div>
 			</div>
 
 			<table class="table">
@@ -105,12 +106,36 @@
 	<script src="utils.js"></script>
 	<script>
 		const tabelPlace = document.querySelector('#tabelPlace');
+		const createFolder = document.querySelector('#createFolder');
+		const folderMap = new Map();
+
+		createFolder.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const obj = formDataToObject(new FormData(createFolder));
+			const json = await post(
+				'folder',
+				JSON.stringify({
+					name: obj.folderName,
+					parent_UUID: folderMap.get(obj.parentFolder),
+				})
+			);
+			if (json.success == false) {
+				alert('#createFolderAlert', false, json.error.message);
+			} else {
+				alert('#createFolderAlert', true, 'Folder Created!', () => {
+					createFolder.clear();
+				});
+			}
+			console.log(obj);
+		});
+
 		(async () => {
 			(await get('folder')).forEach((folder) => {
-				const folderChoose = document.querySelector('#folderChoose');
+				const parentFolder = document.querySelector('#parentFolder');
 				const option = document.createElement('option');
 				option.innerText = folder.name;
-				folderChoose.appendChild(option);
+				parentFolder.appendChild(option);
+				folderMap.set(folder.name, folder.UUID);
 			});
 
 			const view = getURLParam('view') || (await get('folder/root')).UUID;
