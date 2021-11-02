@@ -13,7 +13,15 @@ const get = async (req, res, next) => {
     }
 }
 
+const getFromFolder = async (req, res, next) => {
+    try {
+        const account_UUID = req.credentials.user.UUID;
+        const folder = req.params.folderUUID;
 
+    } catch (error) {
+        next(error);
+    }
+}
 
 const create = async (req, res, next) => {
     const account_UUID = req.credentials.user.UUID;
@@ -85,4 +93,5 @@ module.exports = {
     get,
     create,
     update,
+    getFromFolder
 }
