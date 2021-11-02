@@ -64,7 +64,7 @@
 		console.log(view);
 		const tabelPlace = document.querySelector('#tabelPlace');
 		(async () => {
-			const directoryJson = await get('folder');
+			const directoryJson = await get('folder/' + (view ? view : ''));
 			directoryJson.forEach((dir) => {
 				const tr = document.createElement('tr');
 				tr.classList.add('draggable');
