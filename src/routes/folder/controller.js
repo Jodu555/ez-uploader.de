@@ -17,7 +17,7 @@ const getFromFolder = async (req, res, next) => {
     try {
         const account_UUID = req.credentials.user.UUID;
         const folder = req.params.folderUUID;
-        const result = (await database.get('folders').get({ account_UUID, parent_UUID: folder }));
+        const result = await database.get('folders').get({ account_UUID, parent_UUID: folder, unique: true });
         res.json(result);
     } catch (error) {
         next(error);
