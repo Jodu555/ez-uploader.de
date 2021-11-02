@@ -146,16 +146,22 @@
 
 			function getUpperFolder() {
 				let ret;
+				if (!currentFolder) return ret;
 				[...folderMap.entries()].forEach((element) => {
 					if (element[1].UUID == currentFolder.parent_UUID) ret = element[1];
 				});
 				return ret;
 			}
 
-			console.log(getUpperFolder());
-
 			const directoryJson = await get('folder/' + (view ? view : ''));
+			const upper = getUpperFolder();
+			if (upper) {
+				upper.name = '...';
+				directoryJson.push(upper);
+				console.log(upper, directoryJson);
+			}
 			directoryJson.forEach((dir) => {
+				console.log(dir);
 				const tr = document.createElement('tr');
 				tr.classList.add('draggable');
 				tr.classList.add('place');
