@@ -75,6 +75,11 @@
 						<td>${dir.name}</td>
 					</tr>`;
 				tabelPlace.appendChild(tr);
+				tr.addEventListener('click', () => {
+					const url = new URL(window.location.href);
+					const value = url.searchParams.set('view', dir.UUID);
+					window.location.href = url.href;
+				});
 			});
 
 			const entryJson = await get('entry/' + (view ? view : ''));
