@@ -7,6 +7,7 @@ router.get('/', controller.get); // Returns all the entrys a user owns
 router.get('/:folderUUID', controller.getFromFolder); // Returns all the entrys a user owns from a specific folder
 router.post('/', controller.create); // Crates a new entry
 router.patch('/:uuid', controller.update); // Updates an existing entry
+router.delete('/:uuid', controller.del); //Deletes the entry
 
 module.exports = {
     router,

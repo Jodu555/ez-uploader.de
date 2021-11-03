@@ -91,9 +91,26 @@ const update = async (req, res, next) => {
     }
 }
 
+const del = async (req, res, next) => {
+    try {
+        const UUID = req.params.uuid;
+
+        //Check if user owns the entry
+        if (!await database.get('entrys').actions.owns(UUID, account_UUID)) {
+            next(new Error('You dont own this entry!'));
+            return;
+        }
+
+        await database.get('entrys').delete({ UUID });
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports = {
     get,
     getFromFolder,
     create,
-    update
+    update,
+    del
 }
