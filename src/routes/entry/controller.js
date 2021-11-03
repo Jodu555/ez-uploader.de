@@ -101,7 +101,8 @@ const del = async (req, res, next) => {
             return;
         }
 
-        await database.get('entrys').delete({ UUID });
+        database.get('entrys').delete({ UUID });
+        res.json({});
     } catch (error) {
         next(error);
     }
