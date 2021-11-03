@@ -39,6 +39,8 @@ It's always better to start hacking things out and then to codem them for produc
 *   [ ] Add an specific key for each user which allows to upload with shareX
 *	[ ] Multiple Accounts System
 *	[x] Image-Uploader (SahreX Integration)
+*   [ ] Imlement Deletion on Folders: what todo with stuff inside like images or other folders
+*   [ ] Implement Deletion from images
 *	[ ] Text-Uploader (ShareX Integration)
 *	[ ] An ability to create folders with hierarchical structures: To sort the entries
 *	[ ] A Permission system to clarify if an Entry is password protected or just unlisted
