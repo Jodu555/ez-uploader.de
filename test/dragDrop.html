@@ -143,8 +143,12 @@
 			return ret;
 		}
 
-		function test() {
+		function deleteFolder(UUID) {
 			console.log('TETS');
+		}
+
+		function deleteEntry(UUID) {
+			del('entry/' + UUID);
 		}
 
 		function changeDir(UUID) {
@@ -181,7 +185,7 @@
 				tr.innerHTML = `<tr class="draggable place" draggable="true">
 						<td onclick="changeDir('${dir.UUID}')"><i class="far fa-folder preview-folder"></i></td>
 						<td onclick="changeDir('${dir.UUID}')">${dir.name}</td>
-						<td><button onclick="test()" href="" class="btn btn-outline-danger"><i class="far fa-trash-alt" style="font-size: 4vh"></i></button></td>
+						<td><button onclick="deleteFolder()" href="" class="btn btn-outline-danger"><i class="far fa-trash-alt" style="font-size: 4vh"></i></button></td>
 					</tr>`;
 				tabelPlace.appendChild(tr);
 			});
@@ -195,7 +199,10 @@
 				tr.innerHTML = `<td><img src="http://localhost:3100/image/${
 					img.UUID
 				}?key=SECRET-DEV-KEY" class="img-thumbnail preview-image" /></td>
-						<td>${img.UUID.split('-')[0]}</td>`;
+						<td>${img.UUID.split('-')[0]}</td>
+						<td><button onclick="deleteEntry('${
+							img.UUID
+						}')" href="" class="btn btn-outline-danger"><i class="far fa-trash-alt" style="font-size: 4vh"></i></button></td>`;
 
 				tabelPlace.appendChild(tr);
 			});

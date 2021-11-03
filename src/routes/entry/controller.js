@@ -93,6 +93,7 @@ const update = async (req, res, next) => {
 
 const del = async (req, res, next) => {
     try {
+        const account_UUID = req.credentials.user.UUID;
         const UUID = req.params.uuid;
 
         //Check if user owns the entry
