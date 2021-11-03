@@ -22,6 +22,10 @@ async function patch(endpoint, body) {
     return network(endpoint, 'PATCH', body, null, true);
 }
 
+async function del(endpoint, body) {
+    return network(endpoint, 'DELETE', body, null, true);
+}
+
 function get(endpoint) {
     return network(endpoint, 'GET');
 }
