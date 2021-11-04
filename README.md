@@ -34,6 +34,9 @@ It's always better to start hacking things out and then to codem them for produc
 * Because basically the mvp of this is finished
 * Now i start to code these existing thing more out and make it step for step as close as finish that i can get
 
+## Thoughts
+* [ ] Think about a stats table for each entry to get view count etc.
+
 ## Todo
 *	[ ]  Entry: Image / Text: An Entry is just my naming representation for this system
 *   [ ] Add an specific key for each user which allows to upload with shareX
