@@ -156,11 +156,15 @@
 				showDenyButton: true,
 				confirmButtonText: "Yes I'am",
 				denyButtonText: `No I dont`,
-			}).then((result) => {
+			}).then(async (result) => {
 				/* Read more about isConfirmed, isDenied below */
 				if (result.isConfirmed) {
-					Swal.fire('Deleted!', '', 'success');
-					del('entry/' + UUID);
+					const json = await del('entry/' + UUID);
+					if (json.success == false) {
+						Swal.fire(json.error.message, '', 'error');
+					} else {
+						Swal.fire('Deleted!', '', 'success');
+					}
 					init();
 				}
 			});
