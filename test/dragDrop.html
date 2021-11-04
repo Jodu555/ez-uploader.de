@@ -168,7 +168,6 @@
 					init();
 				}
 			});
-			// del('entry/' + UUID);
 		}
 
 		function changeDir(UUID) {
@@ -210,7 +209,11 @@
 				tr.innerHTML = `<tr class="draggable place" draggable="true">
 						<td onclick="changeDir('${dir.UUID}')"><i class="far fa-folder preview-folder"></i></td>
 						<td onclick="changeDir('${dir.UUID}')">${dir.name}</td>
-						<td><button onclick="deleteFolder()" href="" class="btn btn-outline-danger"><i class="far fa-trash-alt" style="font-size: 4vh"></i></button></td>
+						<td>${
+							dir.name == '...'
+								? ''
+								: '<button onclick="deleteFolder()" href="" class="btn btn-outline-danger"><i class="far fa-trash-alt" style="font-size: 4vh"></i></button>'
+						}</td>
 					</tr>`;
 				tabelPlace.appendChild(tr);
 			});
