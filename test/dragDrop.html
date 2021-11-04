@@ -110,6 +110,7 @@
 		// SESSION TODO: add delete function to front + backend
 
 		const tabelPlace = document.querySelector('#tabelPlace');
+		const parentFolder = document.querySelector('#parentFolder');
 		const createFolder = document.querySelector('#createFolder');
 		const folderMap = new Map();
 		let currentFolder;
@@ -132,7 +133,7 @@
 					createFolder.reset();
 				});
 			}
-			console.log(obj);
+			init();
 		});
 
 		function getUpperFolder() {
@@ -160,6 +161,7 @@
 				if (result.isConfirmed) {
 					Swal.fire('Deleted!', '', 'success');
 					del('entry/' + UUID);
+					init();
 				}
 			});
 			// del('entry/' + UUID);
@@ -171,9 +173,14 @@
 			window.location.href = url.href;
 		}
 
-		(async () => {
+		init();
+
+		async function init() {
+			tabelPlace.innerHTML = '';
+			parentFolder.innerHTML = '';
+
+			folderMap.clear();
 			(await get('folder')).forEach((folder) => {
-				const parentFolder = document.querySelector('#parentFolder');
 				const option = document.createElement('option');
 				option.innerText = folder.name;
 				parentFolder.appendChild(option);
@@ -221,7 +228,7 @@
 				tabelPlace.appendChild(tr);
 			});
 			initDragDrop();
-		})();
+		}
 	</script>
 	<script src="dragDrop.js"></script>
 </html>
