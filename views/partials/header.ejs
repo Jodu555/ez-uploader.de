@@ -17,8 +17,17 @@
 		>
 			<span class="navbar-toggler-icon"></span>
 		</button>
+		<script>
+			const navigation = [
+				{ page: ['index', '/'], display: 'Home' },
+				{ page: 'discover', display: 'Discover' },
+			];
+			const navFiller = document.querySelector('#navFiller');
+
+			console.log(window.location.pathname.includes);
+		</script>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mb-2 mb-lg-0" style="margin-right: calc(50vw / 4.9)">
+			<ul class="navbar-nav mb-2 mb-lg-0" id="navFiller" style="margin-right: calc(50vw / 4.9)">
 				<li class="nav-item">
 					<a class="nav-link active" href="#">Home</a>
 				</li>
