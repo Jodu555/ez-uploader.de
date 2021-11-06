@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -33,9 +34,25 @@ app.use(cors());
 app.use(morgan('dev', {
     skip: (req, res) => req.originalUrl.startsWith('/image/'),
 }));
-// app.use(helmet());
-app.use(express.json());
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'", 'cdnjs.cloudflare.com', 'fonts.gstatic.com'],
+            scriptSrc: ["'self'", "'unsafe-inline'", 'maxcdn.bootstrapcdn.com', 'docs.jodu555.de', 'cdn.jsdelivr.net'],
+            styleSrc: ["'self'", "'unsafe-inline'", 'maxcdn.bootstrapcdn.com', 'cdn.jsdelivr.net', 'cdnjs.cloudflare.com'],
+            imgSrc: ["'self'", 'images.jodu555.de'],
+            connectSrc: ["'self'"],
+            fontSrc: ["'self'", 'fonts.gstatic.com', 'cdnjs.cloudflare.com', 'data:'],
+            objectSrc: ["'self'"],
+            mediaSrc: ["'self'"],
+            frameSrc: ["'self'"]
+        },
+        reportOnly: true
+    }
+}));
 
+app.use(express.json());
+app.use(express.static('static'));
 app.set('view engine', 'ejs');
 
 const pages = fs.readdirSync('views/pages');
@@ -45,10 +62,6 @@ pages.forEach(page => {
         route += page;
     app.get(route, (req, res) => res.render('pages/' + page))
 });
-
-// app.get('/', (req, res) => {
-//     res.render('pages/index');
-// })
 
 
 app.use('/auth', auth);
