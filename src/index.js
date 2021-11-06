@@ -35,6 +35,11 @@ app.use(morgan('dev', {
 app.use(helmet());
 app.use(express.json());
 
+app.set('view engine', 'ejs');
+
+app.get('/', (req, res) => {
+    res.render('pages/index');
+})
 
 app.use('/auth', auth);
 app.use('/folder', authManager.authentication, folder);
