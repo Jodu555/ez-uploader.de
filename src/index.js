@@ -32,7 +32,7 @@ app.use(cors());
 app.use(morgan('dev', {
     skip: (req, res) => req.originalUrl.startsWith('/image/'),
 }));
-app.use(helmet());
+// app.use(helmet());
 app.use(express.json());
 
 app.set('view engine', 'ejs');
