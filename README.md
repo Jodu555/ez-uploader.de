@@ -36,6 +36,7 @@ It's always better to start hacking things out and then to codem them for produc
 
 ## Thoughts
 * [ ] Think about a stats table for each entry to get view count etc.
+* [ ] For each sahre access type from [Public / Private / Unlisted]
 
 ## Todo
 *	[ ]  Entry: Image / Text: An Entry is just my naming representation for this system
