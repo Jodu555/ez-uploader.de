@@ -1,3 +1,4 @@
+const fs = require('fs');
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -37,9 +38,18 @@ app.use(express.json());
 
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
-    res.render('pages/index');
-})
+const pages = fs.readdirSync('views/pages');
+pages.forEach(page => {
+    let route = '/';
+    if (!page.includes('index'))
+        route += page;
+    app.get(route, (req, res) => res.render('pages/' + page))
+});
+
+// app.get('/', (req, res) => {
+//     res.render('pages/index');
+// })
+
 
 app.use('/auth', auth);
 app.use('/folder', authManager.authentication, folder);
