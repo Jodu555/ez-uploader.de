@@ -43,22 +43,28 @@
 </nav>
 
 <script>
-	let currentPage;
 	const navigation = [
 		{ page: ['index', '/'], display: 'Home' },
 		{ page: 'discover', display: 'Discover' },
 		{ page: 'upload', display: 'Upload' },
 		{ page: 'myspace', display: 'MySpace' },
 	];
-	{
-		const navFiller = document.querySelector('#navFiller');
 
+	const currentPage = getCurrentPage();
+
+	generateNavBar('#navFiller', navigation);
+
+	function getCurrentPage() {
 		const path = window.location.pathname;
+		let out;
 		navigation.forEach((nav) => {
-			if ((Array.isArray(nav.page) && nav.page.includes(path)) || nav.page == path)
-				currentPage = nav;
+			if ((Array.isArray(nav.page) && nav.page.includes(path)) || nav.page == path) out = nav;
 		});
+		return out;
+	}
 
+	function generateNavBar(selector, navigation) {
+		const element = document.querySelector(selector);
 		navigation.forEach((nav) => {
 			const li = document.createElement('li');
 			li.classList.add('nav-item');
@@ -68,21 +74,7 @@
 			a.href = Array.isArray(nav.page) ? nav.page[nav.page.length - 1] : nav.page;
 			a.innerText = nav.display;
 			li.appendChild(a);
-			navFiller.appendChild(li);
-			console.log(a.href);
+			element.appendChild(li);
 		});
-		// navFiller.innerHTML = `
-		// 		<li class="nav-item">
-		// 			<a class="nav-link ${currentPage.display == 'Home' ? 'active' : ''}" href="#">Home</a>
-		// 		</li>
-		// 		<li class="nav-item">
-		// 			<a class="nav-link ${currentPage.display == 'Discover' ? 'active' : ''}" href="#">Discover</a>
-		// 		</li>
-		// 		<li class="nav-item">
-		// 			<a class="nav-link ${currentPage.display == 'Upload' ? 'active' : ''}" href="#">Upload</a>
-		// 		</li>
-		// 		<li class="nav-item">
-		// 			<a class="nav-link ${currentPage.display == 'MySpace' ? 'active' : ''}" href="#">My Space</a>
-		// 		</li>`;
 	}
 </script>
