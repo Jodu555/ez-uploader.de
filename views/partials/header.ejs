@@ -58,7 +58,6 @@
 		const path = window.location.pathname;
 		let out;
 		navigation.forEach((nav) => {
-			console.log(nav.page, path);
 			if (
 				(Array.isArray(nav.page) && nav.page.includes(path)) ||
 				nav.page == path ||
