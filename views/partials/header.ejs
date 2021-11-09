@@ -17,30 +17,12 @@
 		>
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<script>
-			const navigation = [
-				{ page: ['index', '/'], display: 'Home' },
-				{ page: 'discover', display: 'Discover' },
-			];
-			const navFiller = document.querySelector('#navFiller');
-
-			console.log(window.location.pathname.includes);
-		</script>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mb-2 mb-lg-0" id="navFiller" style="margin-right: calc(50vw / 4.9)">
-				<li class="nav-item">
-					<a class="nav-link active" href="#">Home</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Discover</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Upload</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">My Space</a>
-				</li>
-			</ul>
+			<ul
+				class="navbar-nav mb-2 mb-lg-0"
+				id="navFiller"
+				style="margin-right: calc(50vw / 4.9)"
+			></ul>
 			<form class="d-flex me-auto">
 				<input
 					id="nameSearch"
@@ -59,3 +41,34 @@
 		</div>
 	</div>
 </nav>
+
+<script>
+	let currentPage;
+	const navigation = [
+		{ page: ['index', '/'], display: 'Home' },
+		{ page: 'discover', display: 'Discover' },
+	];
+	{
+		const navFiller = document.querySelector('#navFiller');
+
+		const path = window.location.pathname;
+		navigation.forEach((nav) => {
+			if ((Array.isArray(nav.page) && nav.page.includes(path)) || nav.page == path)
+				currentPage = nav;
+		});
+
+		navFiller.innerHTML = `
+				<li class="nav-item">
+					<a class="nav-link ${currentPage.display == 'Home' ? 'active' : ''}" href="#">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link ${currentPage.display == 'Discover' ? 'active' : ''}" href="#">Discover</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link ${currentPage.display == 'Upload' ? 'active' : ''}" href="#">Upload</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link ${currentPage.display == 'MySpace' ? 'active' : ''}" href="#">My Space</a>
+				</li>`;
+	}
+</script>
