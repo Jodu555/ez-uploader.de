@@ -59,7 +59,7 @@ const pages = fs.readdirSync('views/pages');
 pages.forEach(page => {
     let route = '/';
     if (!page.includes('index'))
-        route += page;
+        route += page.split('.')[0];
     app.get(route, (req, res) => res.render('pages/' + page))
 });
 

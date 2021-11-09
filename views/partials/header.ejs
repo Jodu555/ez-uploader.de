@@ -46,7 +46,7 @@
 	const navigation = [
 		{ page: ['index', '/'], display: 'Home' },
 		{ page: 'discover', display: 'Discover' },
-		{ page: 'upload', display: 'Upload' },
+		{ page: 'uploader', display: 'Upload' },
 		{ page: 'myspace', display: 'MySpace' },
 	];
 
@@ -58,7 +58,13 @@
 		const path = window.location.pathname;
 		let out;
 		navigation.forEach((nav) => {
-			if ((Array.isArray(nav.page) && nav.page.includes(path)) || nav.page == path) out = nav;
+			console.log(nav.page, path);
+			if (
+				(Array.isArray(nav.page) && nav.page.includes(path)) ||
+				nav.page == path ||
+				'/' + nav.page == path
+			)
+				out = nav;
 		});
 		return out;
 	}
