@@ -57,18 +57,30 @@
 				currentPage = nav;
 		});
 
-		navFiller.innerHTML = `
-				<li class="nav-item">
-					<a class="nav-link ${currentPage.display == 'Home' ? 'active' : ''}" href="#">Home</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link ${currentPage.display == 'Discover' ? 'active' : ''}" href="#">Discover</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link ${currentPage.display == 'Upload' ? 'active' : ''}" href="#">Upload</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link ${currentPage.display == 'MySpace' ? 'active' : ''}" href="#">My Space</a>
-				</li>`;
+		navigation.forEach((nav) => {
+			const li = document.createElement('li');
+			li.classList.add('nav-item');
+			const a = document.createElement('a');
+			a.classList.add('nav-link');
+			if (currentPage.display == nav.display) a.classList.add('active');
+			a.href = Array.isArray(nav.page) ? nav.page[nav.page.length - 1] : nav.page;
+			a.innerText = nav.display;
+			li.appendChild(a);
+			navFiller.appendChild(li);
+			console.log(a.href);
+		});
+		// navFiller.innerHTML = `
+		// 		<li class="nav-item">
+		// 			<a class="nav-link ${currentPage.display == 'Home' ? 'active' : ''}" href="#">Home</a>
+		// 		</li>
+		// 		<li class="nav-item">
+		// 			<a class="nav-link ${currentPage.display == 'Discover' ? 'active' : ''}" href="#">Discover</a>
+		// 		</li>
+		// 		<li class="nav-item">
+		// 			<a class="nav-link ${currentPage.display == 'Upload' ? 'active' : ''}" href="#">Upload</a>
+		// 		</li>
+		// 		<li class="nav-item">
+		// 			<a class="nav-link ${currentPage.display == 'MySpace' ? 'active' : ''}" href="#">My Space</a>
+		// 		</li>`;
 	}
 </script>
