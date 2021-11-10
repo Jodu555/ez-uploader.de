@@ -44,7 +44,6 @@
 		<main class="container py-5">
 			<div class="row py-4">
 				<div class="col-lg-6 mx-auto">
-					<!-- Upload image input-->
 					<div id="uploadInfoAlert" style="display: none" class="alert"></div>
 					<form id="uploadForm">
 						<div class="input-group mb-3 px-2 py-2 rounded-pill shadow-sm">
@@ -58,13 +57,11 @@
 								</label>
 							</div>
 						</div>
-						<div class="text-center">
+						<div id="uploadBTN" style="display: none" class="text-center">
 							<button type="submit" class="btn btn-outline-success">Upload</button>
 						</div>
 					</form>
-
-					<!-- Uploaded image area-->
-					<p class="font-italic text-black text-center">
+					<p class="font-italic text-black text-center mt-2" id="uploadInfo">
 						The uploaded image will be rendered inside the box below.
 					</p>
 					<div class="image-area mt-4">
@@ -81,4 +78,47 @@
 		<footer><%- include('../partials/footer'); %></footer>
 	</body>
 	<%- include('../partials/scripts'); %>
+	<script>
+		const uploadBTN = document.querySelector('#uploadBTN');
+		const input = document.querySelector('#upload');
+		const uploadForm = document.querySelector('#uploadForm');
+		const imageResult = document.querySelector('#imageResult');
+		const uploadLabel = document.querySelector('#uploadLabel');
+
+		uploadForm.addEventListener('submit', async (event) => {
+			event.preventDefault();
+			const image = input.files[0];
+			const body = new FormData();
+			body.append('image', image);
+			const json = await post('upload', body);
+			if (json.success == false) {
+				clearUploadContent();
+				alert('#uploadInfoAlert', false, json.error.message);
+			} else {
+				alert('#uploadInfoAlert', true, 'Image Uploaded!', clearUploadContent);
+			}
+		});
+
+		function clearUploadContent() {
+			imageResult.setAttribute('src', '#');
+			uploadLabel.textContent = 'File name: ';
+			uploadBTN.style.display = 'none';
+		}
+
+		document.querySelector('#upload').addEventListener('change', () => {
+			if (input.files && input.files[0]) {
+				const reader = new FileReader();
+				reader.onload = (e) => {
+					imageResult.setAttribute('src', e.target.result);
+				};
+				reader.readAsDataURL(input.files[0]);
+				uploadBTN.style.display = '';
+			}
+		});
+		input.addEventListener('change', (event) => {
+			const input = event.srcElement;
+			const fileName = input.files[0].name;
+			uploadLabel.textContent = 'File name: ' + fileName;
+		});
+	</script>
 </html>
