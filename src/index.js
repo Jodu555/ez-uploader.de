@@ -57,8 +57,6 @@ app.set('view engine', 'ejs');
 
 const pages = fs.readdirSync('views/pages');
 pages.forEach(page => {
-    if (page == '404.ejs')
-        return;
     let route = '/';
     if (!page.includes('index'))
         route += page.split('.')[0];
