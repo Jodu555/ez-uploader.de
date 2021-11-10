@@ -5,7 +5,59 @@
 	</head>
 	<header><%- include('../partials/header'); %></header>
 	<body>
+		<main class="container">
+			<div class="row">
+				<div class="col-3">
+					<div class="text-center justify-content-center">
+						<i class="far fa-images" style="font-size: 6vw"></i>
+						<h2><span id="images">0</span> Images Uploaded</h2>
+					</div>
+				</div>
+				<div class="col"></div>
+				<div class="col-3">
+					<div class="text-center justify-content-center">
+						<i class="fas fa-users" style="font-size: 6vw"></i>
+						<h2><span id="users">0</span> Created Accounts</h2>
+					</div>
+				</div>
+			</div>
+		</main>
 		<footer><%- include('../partials/footer'); %></footer>
 	</body>
 	<%- include('../partials/scripts'); %>
+	<script>
+		animateTo(
+			0,
+			500,
+			(val) => {
+				document.querySelector('#images').innerHTML = val;
+			},
+			1000
+		);
+		animateTo(
+			0,
+			200,
+			(val) => {
+				document.querySelector('#users').innerHTML = val;
+			},
+			1000
+		);
+
+		function animateTo(start, end, cb, duration) {
+			cb(start);
+			const frameDuration = 1000 / 60;
+			const totalFrames = Math.round(duration / frameDuration);
+			const easeOutQuad = (t) => t * (2 - t);
+			let frame = 0;
+			const counter = setInterval(() => {
+				frame++;
+				const progress = easeOutQuad(frame / totalFrames);
+				const currentCount = Math.round(end * progress);
+				cb(currentCount);
+				if (frame === totalFrames) {
+					clearInterval(counter);
+				}
+			}, frameDuration);
+		}
+	</script>
 </html>
