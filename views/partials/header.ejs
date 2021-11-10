@@ -75,7 +75,7 @@
 			li.classList.add('nav-item');
 			const a = document.createElement('a');
 			a.classList.add('nav-link');
-			if (currentPage.display == nav.display) a.classList.add('active');
+			if (currentPage && currentPage.display == nav.display) a.classList.add('active');
 			a.href = Array.isArray(nav.page) ? nav.page[nav.page.length - 1] : nav.page;
 			a.innerText = nav.display;
 			li.appendChild(a);
