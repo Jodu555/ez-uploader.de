@@ -79,6 +79,7 @@
 	</body>
 	<%- include('../partials/scripts'); %>
 	<script>
+		const uploadInfo = document.querySelector('#uploadInfo');
 		const uploadBTN = document.querySelector('#uploadBTN');
 		const input = document.querySelector('#upload');
 		const uploadForm = document.querySelector('#uploadForm');
@@ -103,6 +104,7 @@
 			imageResult.setAttribute('src', '#');
 			uploadLabel.textContent = 'File name: ';
 			uploadBTN.style.display = 'none';
+			uploadInfo.style.display = '';
 		}
 
 		document.querySelector('#upload').addEventListener('change', () => {
@@ -113,6 +115,7 @@
 				};
 				reader.readAsDataURL(input.files[0]);
 				uploadBTN.style.display = '';
+				uploadInfo.style.display = 'none';
 			}
 		});
 		input.addEventListener('change', (event) => {
