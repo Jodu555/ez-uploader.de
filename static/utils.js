@@ -1,6 +1,6 @@
 const API_URL = 'http://localhost:3100/';
 
-function alert(selector, success, message, cb) {
+function alert(selector, success, message, cb, interval) {
     const alert = document.querySelector(selector);
     alert.classList.remove('alert-success');
     alert.classList.remove('alert-danger');
@@ -11,7 +11,7 @@ function alert(selector, success, message, cb) {
         alert.style.display = 'none';
         if (cb)
             cb();
-    }, 5000);
+    }, interval || 5000);
 }
 
 async function post(endpoint, body, json = false) {
