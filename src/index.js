@@ -37,10 +37,10 @@ app.use(morgan('dev', {
 app.use(helmet({
     contentSecurityPolicy: {
         directives: {
-            defaultSrc: ["'self'", 'cdnjs.cloudflare.com', 'fonts.gstatic.com'],
+            defaultSrc: ["'self'", 'cdnjs.cloudflare.com', 'fonts.gstatic.com', 'data:'],
             scriptSrc: ["'self'", "'unsafe-inline'", 'maxcdn.bootstrapcdn.com', 'docs.jodu555.de', 'cdn.jsdelivr.net'],
-            styleSrc: ["'self'", "'unsafe-inline'", 'maxcdn.bootstrapcdn.com', 'cdn.jsdelivr.net', 'cdnjs.cloudflare.com'],
-            imgSrc: ["'self'", 'images.jodu555.de'],
+            styleSrc: ["'self'", "'unsafe-inline'", 'maxcdn.bootstrapcdn.com', 'cdn.jsdelivr.net', 'cdnjs.cloudflare.com', 'fonts.googleapis.com'],
+            imgSrc: ["'self'", 'images.jodu555.de', 'data:'],
             connectSrc: ["'self'"],
             fontSrc: ["'self'", 'fonts.gstatic.com', 'cdnjs.cloudflare.com', 'data:'],
             objectSrc: ["'self'"],
