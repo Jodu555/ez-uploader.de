@@ -1,5 +1,6 @@
 function notFound(req, res) {
-    throw new Error('notFound')
+    res.render('pages/404.ejs')
+    // throw new Error('notFound')
 }
 
 function errorHandling(err, req, res, next) {
