@@ -35,12 +35,15 @@
 					<i class="fas fa-search"></i>
 				</button>
 			</form>
-			<a class="navbar-brand" href="#">
+			<!-- <a class="btn btn-outline-info">Login</a> -->
+			<!-- <a class="navbar-brand" href="#">
 				<img src="https://images.jodu555.de/Avatar-M.png" alt="" width="48" height="48"
-			/></a>
+			/></a> -->
 		</div>
 	</div>
 </nav>
+
+<script defer src="http://docs.jodu555.de/utils/utils.js"></script>
 
 <script>
 	const navigation = [
@@ -53,6 +56,14 @@
 	const currentPage = getCurrentPage();
 
 	generateNavBar('#navFiller', navigation);
+
+	renderLoginOrProfile();
+
+	function renderLoginOrProfile() {
+		const navbarSupportedContent = document.querySelector('#navbarSupportedContent');
+		console.log(getCookie);
+		// if(getCookie())
+	}
 
 	function getCurrentPage() {
 		const path = window.location.pathname;
