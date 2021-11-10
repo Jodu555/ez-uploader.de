@@ -144,14 +144,16 @@
 
 	renderLoginOrProfile();
 
-	// <!-- <a class="btn btn-outline-info" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Login</a> -->
-	// 		<!-- <a class="navbar-brand" href="#">
-	// 			<img src="https://images.jodu555.de/Avatar-M.png" alt="" width="48" height="48"
-	// 		/></a> -->
-
 	function renderLoginOrProfile() {
 		const navbarSupportedContent = document.querySelector('#navbarSupportedContent');
 		if (getCookie('auth-token')) {
+			const a = document.createElement('a');
+			a.href = '#';
+			a.classList.add('navbar-brand');
+			a.innerHTML =
+				'<img src="https://images.jodu555.de/Avatar-M.png" alt="" width="48" height="48"/>';
+			addCanvasToggle(a, '#offcanvasProfile');
+			navbarSupportedContent.appendChild(a);
 		} else {
 			const a = document.createElement('a');
 			a.classList.add('btn', 'btn-outline-info');
