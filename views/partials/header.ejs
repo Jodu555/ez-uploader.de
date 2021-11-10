@@ -39,14 +39,9 @@
 	</div>
 </nav>
 
-<div
-	class="offcanvas offcanvas-end"
-	tabindex="-1"
-	id="offcanvasProfile"
-	aria-labelledby="offcanvasProfileLabel"
->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasProfile">
 	<div class="offcanvas-header">
-		<h5 id="offcanvasProfileLabel">Profile Information</h5>
+		<h5>Profile Information</h5>
 		<button
 			type="button"
 			class="btn-close text-reset"
@@ -55,6 +50,68 @@
 		></button>
 	</div>
 	<div class="offcanvas-body">...</div>
+</div>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasLogin" data-bs-backdrop="false">
+	<div class="offcanvas-header">
+		<h5>Login</h5>
+		<button
+			type="button"
+			class="btn-close text-reset"
+			data-bs-dismiss="offcanvas"
+			aria-label="Close"
+		></button>
+	</div>
+	<div class="offcanvas-body">
+		<ul class="nav nav-tabs text-center justify-content-center" id="myTab" role="tablist">
+			<li class="nav-item" role="presentation">
+				<button
+					class="nav-link active"
+					id="login-tab"
+					data-bs-toggle="tab"
+					data-bs-target="#login"
+					type="button"
+					role="tab"
+					aria-controls="login"
+					aria-selected="true"
+				>
+					Login
+				</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button
+					class="nav-link"
+					id="register-tab"
+					data-bs-toggle="tab"
+					data-bs-target="#register"
+					type="button"
+					role="tab"
+					aria-controls="register"
+					aria-selected="false"
+				>
+					Register
+				</button>
+			</li>
+		</ul>
+		<div class="tab-content" id="myTabContent">
+			<div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+				<form class="mt-3" id="loginForm">
+					<div class="mb-3">
+						<label for="email" class="form-label">Email address</label>
+						<input type="email" name="email" class="form-control" id="email" />
+					</div>
+					<div class="mb-3">
+						<label for="password" class="form-label">Password</label>
+						<input type="password" name="password" class="form-control" id="password" />
+					</div>
+					<button type="submit" class="btn btn-primary">Login</button>
+				</form>
+			</div>
+			<div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+				...
+			</div>
+		</div>
+	</div>
 </div>
 
 <script src="http://docs.jodu555.de/utils/utils.js"></script>
@@ -73,7 +130,7 @@
 
 	renderLoginOrProfile();
 
-	// <!-- <a class="btn btn-outline-info">Login</a> -->
+	// <!-- <a class="btn btn-outline-info" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Login</a> -->
 	// 		<!-- <a class="navbar-brand" href="#">
 	// 			<img src="https://images.jodu555.de/Avatar-M.png" alt="" width="48" height="48"
 	// 		/></a> -->
@@ -84,9 +141,16 @@
 		} else {
 			const a = document.createElement('a');
 			a.classList.add('btn', 'btn-outline-info');
-			a.innerText = 'Login';
+			a.innerText = 'Login / Register';
+			addCanvasToggle(a, '#offcanvasLogin');
 			navbarSupportedContent.appendChild(a);
 		}
+	}
+
+	function addCanvasToggle(element, id) {
+		element.setAttribute('data-bs-toggle', 'offcanvas');
+		element.setAttribute('data-bs-target', id);
+		element.setAttribute('aria-controls', id);
 	}
 
 	function getCurrentPage() {
