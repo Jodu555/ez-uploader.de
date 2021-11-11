@@ -45,6 +45,9 @@
 			<div class="row py-4">
 				<div class="col-lg-6 mx-auto">
 					<div id="uploadInfoAlert" style="display: none" class="alert"></div>
+					<div id="loginInfo" style="display: none" class="alert alert-danger">
+						<h5 class="text-center">You must be logged in to upload Images!</h5>
+					</div>
 					<form id="uploadForm">
 						<div class="input-group mb-3 px-2 py-2 rounded-pill shadow-sm">
 							<input id="upload" type="file" class="form-control border-0" />
@@ -79,6 +82,7 @@
 	</body>
 	<%- include('../partials/scripts'); %>
 	<script>
+		const loginInfo = document.querySelector('#loginInfo');
 		const uploadInfo = document.querySelector('#uploadInfo');
 		const uploadBTN = document.querySelector('#uploadBTN');
 		const input = document.querySelector('#upload');
@@ -88,6 +92,7 @@
 
 		if (!getCookie('auth-token')) {
 			uploadForm.style.display = 'none';
+			loginInfo.style.display = '';
 		}
 
 		uploadForm.addEventListener('submit', async (event) => {
