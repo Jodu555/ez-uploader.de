@@ -30,13 +30,13 @@ function get(endpoint) {
     return network(endpoint, 'GET');
 }
 
-async function network(endpoint, method, body, additionalHeaders, json) {
+async function network(endpoint, method, body, additionalHeaders, jsonContent) {
     const headers = {
         Accept: 'application/json',
         'auth-token': 'SECRET-DEV-KEY', //TODO: replace this with the actual
         ...additionalHeaders
     }
-    if (json)
+    if (jsonContent)
         headers['Content-Type'] = 'application/json';
     const response = await fetch(API_URL + endpoint, {
         method,
