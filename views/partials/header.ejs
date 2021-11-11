@@ -93,6 +93,7 @@
 		</ul>
 		<div class="tab-content" id="myTabContent">
 			<div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+				<div id="loginAlert" style="display: none" class="alert"></div>
 				<form class="mt-3" id="loginForm">
 					<div class="mb-3">
 						<label for="email" class="form-label">Email address</label>
@@ -166,13 +167,28 @@
 		e.preventDefault();
 		const obj = formDataToObject(new FormData(registerForm));
 		const response = await post('auth/register', JSON.stringify(obj), true);
-		console.log(response);
 		alert(
 			'#registerAlert',
 			response.success,
 			response.json.error ? response.json.error.message : 'Successfully registered!'
 		);
 		if (response.success) registerForm.reset();
+	});
+
+	loginForm.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		const obj = formDataToObject(new FormData(loginForm));
+		const response = await post('auth/login', JSON.stringify(obj), true);
+		alert(
+			'#loginAlert',
+			response.success,
+			response.json.error ? response.json.error.message : 'Successfully Logged In!',
+			() => {
+				if (response.success) window.location.reload();
+			},
+			1500
+		);
+		if (response.success) loginForm.reset();
 	});
 
 	generateNavBar('#navFiller', navigation);
