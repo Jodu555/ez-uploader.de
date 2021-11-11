@@ -86,6 +86,10 @@
 		const imageResult = document.querySelector('#imageResult');
 		const uploadLabel = document.querySelector('#uploadLabel');
 
+		if (!getCookie('auth-token')) {
+			uploadForm.style.display = 'none';
+		}
+
 		uploadForm.addEventListener('submit', async (event) => {
 			event.preventDefault();
 			const image = input.files[0];

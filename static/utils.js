@@ -33,7 +33,7 @@ function get(endpoint) {
 async function network(endpoint, method, body, additionalHeaders, jsonContent) {
     const headers = {
         Accept: 'application/json',
-        'auth-token': 'SECRET-DEV-KEY', //TODO: replace this with the actual
+        'auth-token': getCookie('auth-token'), //TODO: replace this with the actual
         ...additionalHeaders
     }
     if (jsonContent)
