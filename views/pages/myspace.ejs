@@ -2,12 +2,62 @@
 <html lang="en">
 	<head>
 		<%- include('../partials/head'); %>
+		<style>
+			.draggable {
+				cursor: move;
+			}
+
+			.draggable.dragging {
+				opacity: 0.5;
+			}
+			.preview-image {
+				height: auto;
+				width: 5vw;
+			}
+			.preview-folder {
+				font-size: 4vw;
+			}
+			#tabelPlace tr {
+				cursor: pointer;
+			}
+		</style>
 	</head>
 	<header><%- include('../partials/header'); %></header>
 	<body>
-		<main class="container"></main>
+		<main class="container">
+			<div class="container">
+				<a
+					class="btn btn-outline-success"
+					data-bs-toggle="offcanvas"
+					href="#offCanvasCreateFolder"
+					role="button"
+					aria-controls="offCanvasCreateFolder"
+				>
+					<i class="fas fa-folder-plus" style="font-size: 4vh"></i> Add Folder
+				</a>
+				<div class="alert" id="createFolderAlert"></div>
+			</div>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Preview</th>
+						<th scope="col">Name</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody id="tabelPlace"></tbody>
+			</table>
+		</main>
 		<footer><%- include('../partials/footer'); %></footer>
 	</body>
 	<%- include('../partials/scripts'); %>
-	<script></script>
+	<script>
+		function loadEntrys(params) {}
+
+		function loadFolder(params) {}
+
+		initDragDrop();
+	</script>
+	<script src="dragDrop.js"></script>
 </html>
