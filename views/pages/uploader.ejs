@@ -91,10 +91,10 @@
 			const image = input.files[0];
 			const body = new FormData();
 			body.append('image', image);
-			const json = await post('upload', body);
-			if (json.success == false) {
+			const response = await post('upload', body);
+			if (response.success == false) {
 				clearUploadContent();
-				alert('#uploadInfoAlert', false, json.error.message);
+				alert('#uploadInfoAlert', false, response.json.error.message);
 			} else {
 				alert('#uploadInfoAlert', true, 'Image Uploaded!', clearUploadContent, 2000);
 			}

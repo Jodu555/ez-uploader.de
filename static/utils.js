@@ -43,5 +43,9 @@ async function network(endpoint, method, body, additionalHeaders, json) {
         headers,
         body: body || null,
     });
-    return await response.json();
+    const json = await response.json();
+    return {
+        success: json.success == false,
+        json,
+    }
 }

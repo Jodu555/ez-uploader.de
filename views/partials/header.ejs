@@ -166,12 +166,8 @@
 		e.preventDefault();
 		const obj = formDataToObject(new FormData(registerForm));
 		const json = await post('auth/register', JSON.stringify(obj), true);
-		alert(
-			'#registerAlert',
-			!(json.success == false),
-			json.error.message || 'Successfully registered!'
-		);
-		registerForm.reset();
+		alert('#registerAlert', json.success, json.error.message || 'Successfully registered!');
+		if (json.success) registerForm.reset();
 	});
 
 	generateNavBar('#navFiller', navigation);
