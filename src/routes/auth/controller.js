@@ -13,7 +13,7 @@ const register = async (req, res, next) => {
         const user = validation.value
         const search = { ...user }; //Spreading to disable the reference
         delete search.password;
-        search.unique = true;
+        search.unique = false;
         const result = await database.get('accounts').get(search);
 
         if (result.length == 0) {

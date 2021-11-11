@@ -165,9 +165,14 @@
 	registerForm.addEventListener('submit', async (e) => {
 		e.preventDefault();
 		const obj = formDataToObject(new FormData(registerForm));
-		const json = await post('auth/register', JSON.stringify(obj), true);
-		alert('#registerAlert', json.success, json.error.message || 'Successfully registered!');
-		if (json.success) registerForm.reset();
+		const response = await post('auth/register', JSON.stringify(obj), true);
+		console.log(response);
+		alert(
+			'#registerAlert',
+			response.success,
+			response.json.error ? response.json.error.message : 'Successfully registered!'
+		);
+		if (response.success) registerForm.reset();
 	});
 
 	generateNavBar('#navFiller', navigation);
