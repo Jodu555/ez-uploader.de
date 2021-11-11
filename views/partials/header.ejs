@@ -165,13 +165,13 @@
 	registerForm.addEventListener('submit', async (e) => {
 		e.preventDefault();
 		const obj = formDataToObject(new FormData(registerForm));
-		console.log(obj);
 		const json = await post('auth/register', JSON.stringify(obj), true);
 		alert(
 			'#registerAlert',
 			!(json.success == false),
 			json.error.message || 'Successfully registered!'
 		);
+		registerForm.reset();
 	});
 
 	generateNavBar('#navFiller', navigation);
