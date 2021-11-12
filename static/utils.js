@@ -31,6 +31,7 @@ function get(endpoint) {
 }
 
 async function network(endpoint, method, body, additionalHeaders, jsonContent) {
+    console.log(getCookie('auth-token'));
     const headers = {
         Accept: 'application/json',
         'auth-token': getCookie('auth-token'), //TODO: replace this with the actual

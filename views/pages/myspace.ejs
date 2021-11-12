@@ -25,6 +25,7 @@
 	<header><%- include('../partials/header'); %></header>
 	<body>
 		<main class="container">
+			<div class="alert" id="genInfoAlert"></div>
 			<div class="container">
 				<a
 					class="btn btn-outline-success"
@@ -35,7 +36,6 @@
 				>
 					<i class="fas fa-folder-plus" style="font-size: 4vh"></i> Add Folder
 				</a>
-				<div class="alert" id="createFolderAlert"></div>
 			</div>
 			<div class="row">
 				<div class="col">
@@ -56,12 +56,39 @@
 		<footer><%- include('../partials/footer'); %></footer>
 	</body>
 	<%- include('../partials/scripts'); %>
+	<script src="dragDrop.js"></script>
 	<script>
+		let ROOTUUID;
 		function loadEntrys(params) {}
 
-		function loadFolder(params) {}
+		async function getRootFolder() {
+			if (ROOTUUID) return ROOTUUID;
+			const response = await get('folder');
+			if (!response.success) {
+				alert('#genInfoAlert', response.success, response.josn.error.message);
+				return;
+			}
+			response.json.forEach((dir) => {
+				if (dir.name == 'ROOT') ROOTUUID = dir.UUID;
+			});
+			return ROOTUUID;
+		}
+		async function loadFolders() {
+			await getRootFolder();
+			const response = await get('folder/' + ROOTUUID);
+			if (!response.success) {
+				alert('#genInfoAlert', response.success, response.josn.error.message);
+				return;
+			}
+			response.json.forEach((dir) => {
+				console.log(dir);
+			});
+		}
+
+		(async () => {
+			loadFolders();
+		})();
 
 		initDragDrop();
 	</script>
-	<script src="dragDrop.js"></script>
 </html>
