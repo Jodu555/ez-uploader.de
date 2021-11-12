@@ -60,7 +60,37 @@
 	<script>
 		let ROOTUUID;
 		let viewDIR;
-		async function loadEntrys() {}
+
+		function changeDir(UUID) {
+			window.location = window.location.origin + '/myspace/' + UUID;
+		}
+
+		async function loadEntrys() {
+			const response = await get('entry/' + viewDIR);
+			if (!response.success) {
+				alert('#genInfoAlert', response.success, response.josn.error.message);
+				return;
+			}
+			response.json.forEach((entry) => {
+				appendEntry(entry);
+			});
+		}
+
+		function appendEntry(entry) {
+			const tr = document.createElement('tr');
+			tr.classList.add('draggable');
+			tr.setAttribute('draggable', true);
+			tr.setAttribute('data-entry-UUID', entry.UUID);
+			tr.innerHTML = `<td><img src="http://localhost:3100/image/${
+				entry.UUID
+			}?key=SECRET-DEV-KEY" class="img-thumbnail preview-image" /></td>
+						<td>${entry.UUID.split('-')[0]}</td>
+						<td><button onclick="deleteEntry('${
+							entry.UUID
+						}')" href="" class="btn btn-outline-danger"><i class="far fa-trash-alt" style="font-size: 4vh"></i></button></td>`;
+
+			tabelPlace.appendChild(tr);
+		}
 
 		async function getRootFolder() {
 			if (ROOTUUID) return ROOTUUID;
@@ -78,7 +108,7 @@
 		async function loadFolders() {
 			await getRootFolder();
 			if (true) viewDIR = ROOTUUID; // Here comes the ejs url folder thingi
-			const response = await get('folder/' + ROOTUUID);
+			const response = await get('folder/' + viewDIR);
 			if (!response.success) {
 				alert('#genInfoAlert', response.success, response.josn.error.message);
 				return;
@@ -109,8 +139,8 @@
 		(async () => {
 			await loadFolders();
 			await loadEntrys();
-		})();
 
-		initDragDrop();
+			initDragDrop();
+		})();
 	</script>
 </html>
