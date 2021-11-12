@@ -32,7 +32,7 @@ const { router: image } = require('./routes/image/index');
 const app = express();
 app.use(cors());
 app.use(morgan('dev', {
-    skip: (req, res) => req.originalUrl.startsWith('/image/'),
+    skip: (req, res) => req.originalUrl.startsWith('/image/') || req.originalUrl.startsWith('/favicon/'),
 }));
 app.use(helmet({
     contentSecurityPolicy: {
