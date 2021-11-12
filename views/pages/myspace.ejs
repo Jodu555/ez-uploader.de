@@ -59,7 +59,8 @@
 	<script src="dragDrop.js"></script>
 	<script>
 		let ROOTUUID;
-		function loadEntrys(params) {}
+		let viewDIR;
+		async function loadEntrys() {}
 
 		async function getRootFolder() {
 			if (ROOTUUID) return ROOTUUID;
@@ -73,20 +74,41 @@
 			});
 			return ROOTUUID;
 		}
+
 		async function loadFolders() {
 			await getRootFolder();
+			if (true) viewDIR = ROOTUUID; // Here comes the ejs url folder thingi
 			const response = await get('folder/' + ROOTUUID);
 			if (!response.success) {
 				alert('#genInfoAlert', response.success, response.josn.error.message);
 				return;
 			}
 			response.json.forEach((dir) => {
-				console.log(dir);
+				appendFolder(dir);
 			});
 		}
 
+		function appendFolder(dir) {
+			const tr = document.createElement('tr');
+			tr.classList.add('draggable');
+			tr.classList.add('place');
+			tr.setAttribute('draggable', true);
+			tr.setAttribute('data-folder-UUID', dir.UUID);
+			tr.innerHTML = `<tr class="draggable place" draggable="true">
+						<td onclick="changeDir('${dir.UUID}')"><i class="far fa-folder preview-folder"></i></td>
+						<td onclick="changeDir('${dir.UUID}')">${dir.name}</td>
+						<td>${
+							dir.name == '...'
+								? ''
+								: '<button onclick="deleteFolder()" href="" class="btn btn-outline-danger"><i class="far fa-trash-alt" style="font-size: 4vh"></i></button>'
+						}</td>
+					</tr>`;
+			tabelPlace.appendChild(tr);
+		}
+
 		(async () => {
-			loadFolders();
+			await loadFolders();
+			await loadEntrys();
 		})();
 
 		initDragDrop();
