@@ -62,7 +62,9 @@
 		let viewDIR;
 
 		function changeDir(UUID) {
-			window.location = window.location.origin + '/myspace/' + UUID;
+			const url = new URL(window.location.href);
+			const value = url.searchParams.set('view', UUID);
+			window.location.href = url.href;
 		}
 
 		async function loadEntrys() {
@@ -106,8 +108,6 @@
 		}
 
 		async function loadFolders() {
-			await getRootFolder();
-			if (true) viewDIR = ROOTUUID; // Here comes the ejs url folder thingi
 			const response = await get('folder/' + viewDIR);
 			if (!response.success) {
 				alert('#genInfoAlert', response.success, response.json.error.message);
@@ -137,6 +137,8 @@
 		}
 
 		(async () => {
+			viewDIR = getURLParam('view') ? getURLParam('view') : await getRootFolder();
+
 			await loadFolders();
 			await loadEntrys();
 
