@@ -1,5 +1,5 @@
 function notFound(req, res) {
-    res.redirect('404');
+    res.render('pages/404');
     // throw new Error('notFound')
 }
 
