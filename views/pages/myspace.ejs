@@ -68,7 +68,7 @@
 		async function loadEntrys() {
 			const response = await get('entry/' + viewDIR);
 			if (!response.success) {
-				alert('#genInfoAlert', response.success, response.josn.error.message);
+				alert('#genInfoAlert', response.success, response.json.error.message);
 				return;
 			}
 			response.json.forEach((entry) => {
@@ -96,7 +96,7 @@
 			if (ROOTUUID) return ROOTUUID;
 			const response = await get('folder');
 			if (!response.success) {
-				alert('#genInfoAlert', response.success, response.josn.error.message);
+				alert('#genInfoAlert', response.success, response.json.error.message);
 				return;
 			}
 			response.json.forEach((dir) => {
@@ -110,7 +110,7 @@
 			if (true) viewDIR = ROOTUUID; // Here comes the ejs url folder thingi
 			const response = await get('folder/' + viewDIR);
 			if (!response.success) {
-				alert('#genInfoAlert', response.success, response.josn.error.message);
+				alert('#genInfoAlert', response.success, response.json.error.message);
 				return;
 			}
 			response.json.forEach((dir) => {

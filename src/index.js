@@ -63,7 +63,6 @@ pages.forEach(page => {
     app.get(route, (req, res) => res.render('pages/' + page))
 });
 
-app.get('/myspace/:folderID', (req, res) => res.render('pages/myspace.ejs', { urlID: req.params.folderID }))
 
 
 app.use('/auth', auth);
