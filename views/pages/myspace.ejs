@@ -70,7 +70,7 @@
 		async function loadEntrys() {
 			const response = await get('entry/' + viewDIR);
 			if (!response.success) {
-				alert('#genInfoAlert', response.success, response.json.error.message);
+				alert('#genInfoAlert', response.success, response.error);
 				return;
 			}
 			response.json.forEach((entry) => {
@@ -98,7 +98,7 @@
 			if (ROOTUUID) return ROOTUUID;
 			const response = await get('folder');
 			if (!response.success) {
-				alert('#genInfoAlert', response.success, response.json.error.message);
+				alert('#genInfoAlert', response.success, response.error);
 				return;
 			}
 			response.json.forEach((dir) => {
@@ -110,7 +110,7 @@
 		async function loadFolders() {
 			const response = await get('folder/' + viewDIR);
 			if (!response.success) {
-				alert('#genInfoAlert', response.success, response.json.error.message);
+				alert('#genInfoAlert', response.success, response.error);
 				return;
 			}
 			response.json.forEach((dir) => {

@@ -47,6 +47,7 @@ async function network(endpoint, method, body, additionalHeaders, jsonContent) {
     const json = await response.json();
     return {
         success: !(json.success == false),
+        error: !json.success ? json.error.message : '',
         json,
     }
 }

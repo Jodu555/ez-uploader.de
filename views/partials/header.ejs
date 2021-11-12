@@ -173,7 +173,7 @@
 		alert(
 			'#registerAlert',
 			response.success,
-			response.json.error ? response.json.error.message : 'Successfully registered!'
+			!response.success ? response.error : 'Successfully registered!'
 		);
 		if (response.success) registerForm.reset();
 	});
@@ -185,7 +185,7 @@
 		alert(
 			'#loginAlert',
 			response.success,
-			response.json.error ? response.json.error.message : 'Successfully Logged In!',
+			!response.success ? response.error : 'Successfully Logged In!',
 			() => {
 				if (response.success) {
 					setCookie('auth-token', response.json.token, 30);
