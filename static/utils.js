@@ -51,5 +51,6 @@ async function network(endpoint, method, body, additionalHeaders, jsonContent) {
         error: !success ? json.error.message : '',
         json,
     };
+
     return returnObject;
 }

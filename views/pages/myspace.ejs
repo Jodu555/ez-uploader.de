@@ -24,33 +24,27 @@
 	</head>
 	<header><%- include('../partials/header'); %></header>
 	<body>
-		<main class="container">
-			<div class="alert" id="genInfoAlert"></div>
-			<div class="container">
-				<a
-					class="btn btn-outline-success"
-					data-bs-toggle="offcanvas"
-					href="#offCanvasCreateFolder"
-					role="button"
-					aria-controls="offCanvasCreateFolder"
-				>
-					<i class="fas fa-folder-plus" style="font-size: 4vh"></i> Add Folder
-				</a>
+		<main class="container py-5">
+			<div id="loginInfo" style="display: none" class="alert alert-danger">
+				<h5 class="text-center">You must be logged in to see your Space!</h5>
 			</div>
-			<div class="row">
-				<div class="col">
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">Preview</th>
-								<th scope="col">Name</th>
-								<th scope="col">Actions</th>
-							</tr>
-						</thead>
-						<tbody id="tabelPlace"></tbody>
-					</table>
+			<div id="content">
+				<div class="alert" id="genInfoAlert"></div>
+				<div class="row">
+					<div class="col">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Preview</th>
+									<th scope="col">Name</th>
+									<th scope="col">Actions</th>
+								</tr>
+							</thead>
+							<tbody id="tabelPlace"></tbody>
+						</table>
+					</div>
+					<div class="col-3"></div>
 				</div>
-				<div class="col-3"></div>
 			</div>
 		</main>
 		<footer><%- include('../partials/footer'); %></footer>
@@ -137,10 +131,14 @@
 		}
 
 		(async () => {
-			viewDIR = getURLParam('view') ? getURLParam('view') : await getRootFolder();
-
-			await loadFolders();
-			await loadEntrys();
+			if (getCookie('auth-token')) {
+				viewDIR = getURLParam('view') ? getURLParam('view') : await getRootFolder();
+				await loadFolders();
+				await loadEntrys();
+			} else {
+				document.querySelector('#loginInfo').style.display = '';
+				document.querySelector('#content').style.display = 'none';
+			}
 
 			initDragDrop();
 		})();
