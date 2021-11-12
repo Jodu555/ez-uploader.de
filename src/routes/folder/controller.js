@@ -36,7 +36,6 @@ const getRoot = async (req, res, next) => {
 
 const create = async (req, res, next) => {
     const account_UUID = req.credentials.user.UUID;
-    console.log(req.body);
     const validation = folderCreationSchema.validate(req.body);
     if (validation.error) {
         next(new Error(validation.error.details[0].message));
