@@ -39,7 +39,7 @@
 	</div>
 </nav>
 
-<div id="loginAlert" style="display: none" class="container py-5 col-lg-6 mx-auto">
+<div id="alertIfPageRequiresLogin" style="display: none" class="container py-5 col-lg-6 mx-auto">
 	<div class="alert alert-danger">
 		<h5 class="text-center">You must be logged in to see this Page!</h5>
 	</div>
@@ -233,16 +233,15 @@
 		renderLoginOrProfile();
 		if (await account) {
 			if (currentPage.login) {
-				document.querySelector('#loginAlert').style.display = 'none';
+				document.querySelector('#alertIfPageRequiresLogin').style.display = 'none';
 				document.querySelector('#content').style.display = '';
 			}
-
 			await fillProfileDescList();
 		} else {
 			if (!currentPage.login) {
 				return;
 			}
-			document.querySelector('#loginAlert').style.display = '';
+			document.querySelector('#alertIfPageRequiresLogin').style.display = '';
 			if (document.querySelector('#content'))
 				document.querySelector('#content').style.display = 'none';
 
@@ -251,7 +250,7 @@
 					clearInterval(loginProt);
 					document.querySelector('#content').style.display = 'none';
 				}
-			}, 2);
+			}, 1);
 		}
 	})();
 
