@@ -62,6 +62,7 @@
 					document.querySelector(`[data-entry-UUID="${e}"]`).classList.remove('table-info');
 				});
 				selected = [];
+				redrawSelection();
 			}
 
 			const element = document.querySelector(`[data-entry-UUID="${UUID}"]`);
@@ -69,11 +70,17 @@
 				//De Select
 				removeItemFromArray(selected, UUID);
 				element.classList.remove('table-info');
+				redrawSelection();
 			} else {
 				//New Select
 				element.classList.add('table-info');
 				selected.push(UUID);
+				redrawSelection();
 			}
+		}
+
+		function redrawSelection() {
+			//Here The Code for the redrawing selection
 		}
 
 		function deleteEntry(UUID) {
