@@ -51,6 +51,9 @@ async function network(endpoint, method, body, additionalHeaders, jsonContent) {
         error: !success ? json.error.message : '',
         json,
     };
-
+    if (!returnObject.success && returnObject.error.includes('auth-token')) {
+        deleteCookie('auth-token');
+        window.location.reload();
+    }
     return returnObject;
 }
