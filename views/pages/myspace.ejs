@@ -55,6 +55,13 @@
 		let ROOTUUID;
 		let viewDIR;
 
+		function selectEntry(UUID) {
+			console.log('SELECT ' + UUID);
+		}
+		function deleteEntry(UUID) {
+			console.log('DELETE ' + UUID);
+		}
+
 		function changeDir(UUID) {
 			const url = new URL(window.location.href);
 			const value = url.searchParams.set('view', UUID);
@@ -77,10 +84,12 @@
 			tr.classList.add('draggable');
 			tr.setAttribute('draggable', true);
 			tr.setAttribute('data-entry-UUID', entry.UUID);
-			tr.innerHTML = `<td><img src="http://localhost:3100/image/${
+			tr.innerHTML = `<td onclick="selectEntry('${
+				entry.UUID
+			}')"><img src="http://localhost:3100/image/${
 				entry.UUID
 			}?key=SECRET-DEV-KEY" class="img-thumbnail preview-image" /></td>
-						<td>${entry.UUID.split('-')[0]}</td>
+						<td onclick="selectEntry('${entry.UUID}')">${entry.UUID.split('-')[0]}</td>
 						<td><button onclick="deleteEntry('${
 							entry.UUID
 						}')" href="" class="btn btn-outline-danger"><i class="far fa-trash-alt" style="font-size: 4vh"></i></button></td>`;
