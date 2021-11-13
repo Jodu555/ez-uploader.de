@@ -63,11 +63,17 @@
 				});
 				selected = [];
 			}
-			selected.push(UUID);
-			const element = document.querySelector(`[data-entry-UUID="${UUID}"]`);
-			element.classList.add('table-info');
 
-			console.log('SELECTED ' + selected.join(', '));
+			const element = document.querySelector(`[data-entry-UUID="${UUID}"]`);
+			if (element.classList.contains('table-info')) {
+				//De Select
+				removeItemFromArray(selected, UUID);
+				element.classList.remove('table-info');
+			} else {
+				//New Select
+				element.classList.add('table-info');
+				selected.push(UUID);
+			}
 		}
 
 		function deleteEntry(UUID) {
