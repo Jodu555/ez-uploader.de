@@ -39,7 +39,7 @@
 	</div>
 </nav>
 
-<div id="login" class="container py-5 col-lg-6 mx-auto">
+<div id="loginAlert" style="display: none" class="container py-5 col-lg-6 mx-auto">
 	<div class="alert alert-danger">
 		<h5 class="text-center">You must be logged in to see this Page!</h5>
 	</div>
@@ -179,10 +179,10 @@
 
 <script>
 	const navigation = [
-		{ page: ['index', '/'], display: 'Home' },
-		{ page: 'discover', display: 'Discover' },
-		{ page: 'uploader', display: 'Upload' },
-		{ page: 'myspace', display: 'MySpace' },
+		{ page: ['index', '/'], display: 'Home', login: false },
+		{ page: 'discover', display: 'Discover', login: false },
+		{ page: 'uploader', display: 'Upload', login: true },
+		{ page: 'myspace', display: 'MySpace', login: true },
 	];
 	const loginForm = document.querySelector('#loginForm');
 	const registerForm = document.querySelector('#registerForm');
@@ -232,11 +232,17 @@
 		generateNavBar('#navFiller', navigation);
 		renderLoginOrProfile();
 		if (await account) {
-			document.querySelector('#login').style.display = 'none';
-			document.querySelector('#content').style.display = '';
+			if (currentPage.login) {
+				document.querySelector('#loginAlert').style.display = 'none';
+				document.querySelector('#content').style.display = '';
+			}
+
 			await fillProfileDescList();
 		} else {
-			document.querySelector('#login').style.display = '';
+			if (!currentPage.login) {
+				return;
+			}
+			document.querySelector('#loginAlert').style.display = '';
 			if (document.querySelector('#content'))
 				document.querySelector('#content').style.display = 'none';
 
@@ -245,7 +251,7 @@
 					clearInterval(loginProt);
 					document.querySelector('#content').style.display = 'none';
 				}
-			}, 5);
+			}, 2);
 		}
 	})();
 
