@@ -51,6 +51,23 @@
 	</div>
 	<div class="offcanvas-body">
 		<div class="d-grid gap-2">
+			<dl class="row shadow p-3 mb-5 bg-body rounded">
+				<h4>Infos:</h4>
+				<dt class="col-sm-3">Username:</dt>
+				<dd class="col-sm-9"><span id="username"></span></dd>
+				<dt class="col-sm-3">E-Mail:</dt>
+				<dd class="col-sm-9"><span id="email"></span></dd>
+			</dl>
+
+			<div class="row shadow p-3 mb-5 bg-body rounded">
+				<h4>Settings:</h4>
+				<div class="form-check form-switch">
+					<input class="form-check-input" type="checkbox" role="switch" checked />
+					<label class="form-check-label">Public Account</label>
+				</div>
+				<button class="btn btn-outline-success">Save</button>
+			</div>
+
 			<button onclick="logout()" class="btn btn-block btn-outline-danger">Logout</button>
 		</div>
 	</div>
@@ -168,8 +185,6 @@
 
 	let account;
 
-	if (getCookie('auth-token')) account = getUser();
-
 	async function getUser() {
 		const response = await get('profile');
 		if (!response.success) return logout();
@@ -207,9 +222,18 @@
 		if (response.success) loginForm.reset();
 	});
 
-	generateNavBar('#navFiller', navigation);
+	(async () => {
+		if (getCookie('auth-token')) account = await getUser();
 
-	renderLoginOrProfile();
+		generateNavBar('#navFiller', navigation);
+		renderLoginOrProfile();
+		if (account) fillProfileDescList();
+	})();
+
+	function fillProfileDescList() {
+		document.querySelector('#username').innerText = account.username;
+		document.querySelector('#email').innerText = account.email;
+	}
 
 	function logout() {
 		deleteCookie('auth-token');
