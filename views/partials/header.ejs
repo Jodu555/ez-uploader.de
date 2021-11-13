@@ -166,6 +166,16 @@
 
 	const currentPage = getCurrentPage();
 
+	let account;
+
+	if (getCookie('auth-token')) account = getUser();
+
+	async function getUser() {
+		const response = await get('profile');
+		if (!response.success) return logout();
+		return response.json;
+	}
+
 	registerForm.addEventListener('submit', async (e) => {
 		e.preventDefault();
 		const obj = formDataToObject(new FormData(registerForm));

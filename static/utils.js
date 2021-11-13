@@ -31,7 +31,6 @@ function get(endpoint) {
 }
 
 async function network(endpoint, method, body, additionalHeaders, jsonContent) {
-    console.log(getCookie('auth-token'));
     const headers = {
         Accept: 'application/json',
         'auth-token': getCookie('auth-token'), //TODO: replace this with the actual
@@ -52,8 +51,8 @@ async function network(endpoint, method, body, additionalHeaders, jsonContent) {
         json,
     };
     if (!returnObject.success && returnObject.error.includes('auth-token')) {
-        deleteCookie('auth-token');
-        window.location.reload();
+        // deleteCookie('auth-token');
+        // window.location.reload();
     }
     return returnObject;
 }
