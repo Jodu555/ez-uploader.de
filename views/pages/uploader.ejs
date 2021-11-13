@@ -41,13 +41,10 @@
 	</head>
 	<header><%- include('../partials/header'); %></header>
 	<body>
-		<main class="container py-5">
+		<main id="content" class="container py-5">
 			<div class="row py-4">
 				<div class="col-lg-6 mx-auto">
 					<div id="uploadInfoAlert" style="display: none" class="alert"></div>
-					<div id="loginInfo" style="display: none" class="alert alert-danger">
-						<h5 class="text-center">You must be logged in to upload Images!</h5>
-					</div>
 					<div id="uploadLogin">
 						<form id="uploadForm">
 							<div class="input-group mb-3 px-2 py-2 rounded-pill shadow-sm">
@@ -92,11 +89,6 @@
 		const uploadForm = document.querySelector('#uploadForm');
 		const imageResult = document.querySelector('#imageResult');
 		const uploadLabel = document.querySelector('#uploadLabel');
-
-		if (!getCookie('auth-token')) {
-			uploadLogin.style.display = 'none';
-			loginInfo.style.display = '';
-		}
 
 		uploadForm.addEventListener('submit', async (event) => {
 			event.preventDefault();

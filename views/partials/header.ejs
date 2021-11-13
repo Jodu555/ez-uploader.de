@@ -39,6 +39,12 @@
 	</div>
 </nav>
 
+<div id="login" class="container py-5 col-lg-6 mx-auto">
+	<div class="alert alert-danger">
+		<h5 class="text-center">You must be logged in to see this Page!</h5>
+	</div>
+</div>
+
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasProfile">
 	<div class="offcanvas-header">
 		<h5>Profile Information</h5>
@@ -225,8 +231,22 @@
 	(async () => {
 		generateNavBar('#navFiller', navigation);
 		renderLoginOrProfile();
-		if (await account) fillProfileDescList();
-		console.log(document.querySelector('#testID'));
+		if (await account) {
+			document.querySelector('#login').style.display = 'none';
+			document.querySelector('#content').style.display = '';
+			await fillProfileDescList();
+		} else {
+			document.querySelector('#login').style.display = '';
+			if (document.querySelector('#content'))
+				document.querySelector('#content').style.display = 'none';
+
+			const loginProt = setInterval(() => {
+				if (document.querySelector('#content')) {
+					clearInterval(loginProt);
+					document.querySelector('#content').style.display = 'none';
+				}
+			}, 5);
+		}
 	})();
 
 	async function fillProfileDescList() {
