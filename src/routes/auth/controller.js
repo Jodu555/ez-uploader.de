@@ -20,16 +20,18 @@ const register = async (req, res, next) => {
             const obj = {};
             user.uuid = v4();
             user.password = await bcrypt.hash(user.password, 8);
-            await database.get('accounts').create(user);
 
-            await database.get('folders').create({
+            const rootFolder = {
                 uuid: v4(),
                 account_UUID: user.uuid,
                 name: 'ROOT',
                 parent_UUID: '',
                 public: 0,
                 share: 0
-            });
+            };
+
+            await database.get('accounts').create({ ...user, root_folder_UUID: rootFolder.uuid });
+            await database.get('folders').create(rootFolder);
 
             delete user.password;
             obj.user = user;

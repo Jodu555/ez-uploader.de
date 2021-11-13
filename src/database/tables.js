@@ -12,6 +12,7 @@ function createTables() {
         username: 'TEXT',
         email: 'TEXT',
         password: 'TEXT',
+        root_folder_UUID: 'varchar(64)'
     });
 
     database.createTable('folders', {
