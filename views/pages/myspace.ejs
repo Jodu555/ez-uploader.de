@@ -59,14 +59,16 @@
 		let ROOTUUID;
 		let viewDIR;
 
-		let selected;
+		let selected = [];
 
-		function selectEntry(UUID) {
+		function selectEntry(event, UUID) {
 			console.log('SELECT ' + UUID);
-			if (selected) {
-				document.querySelector(`[data-entry-UUID="${selected}"]`).classList.remove('table-info');
+			if (selected.length > 0 && !event.ctrlKey) {
+				selected.forEach((e) => {
+					document.querySelector(`[data-entry-UUID="${e}"]`).classList.remove('table-info');
+				});
 			}
-			selected = UUID;
+			selected.push(UUID);
 			const element = document.querySelector(`[data-entry-UUID="${UUID}"]`);
 			element.classList.add('table-info');
 		}
@@ -97,12 +99,12 @@
 			tr.classList.add('draggable');
 			tr.setAttribute('draggable', true);
 			tr.setAttribute('data-entry-UUID', entry.UUID);
-			tr.innerHTML = `<td onclick="selectEntry('${
+			tr.innerHTML = `<td onclick="selectEntry(event, '${
 				entry.UUID
 			}')"><img src="http://localhost:3100/image/${
 				entry.UUID
 			}?key=SECRET-DEV-KEY" class="img-thumbnail preview-image" /></td>
-						<td onclick="selectEntry('${entry.UUID}')">${entry.UUID.split('-')[0]}</td>
+						<td onclick="selectEntry(event, '${entry.UUID}')">${entry.UUID.split('-')[0]}</td>
 						<td><button onclick="deleteEntry('${
 							entry.UUID
 						}')" href="" class="btn btn-outline-danger"><i class="far fa-trash-alt" style="font-size: 4vh"></i></button></td>`;
