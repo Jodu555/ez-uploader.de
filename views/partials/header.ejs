@@ -183,7 +183,7 @@
 
 	const currentPage = getCurrentPage();
 
-	let account;
+	const account = getCookie('auth-token') ? getUser() : null;
 
 	async function getUser() {
 		const response = await get('profile');
@@ -225,9 +225,7 @@
 	(async () => {
 		generateNavBar('#navFiller', navigation);
 		renderLoginOrProfile();
-
-		if (getCookie('auth-token')) account = await getUser();
-		if (account) fillProfileDescList();
+		if (await account) fillProfileDescList();
 	})();
 
 	function fillProfileDescList() {
