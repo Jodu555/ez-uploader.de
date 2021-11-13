@@ -132,7 +132,7 @@
 
 		(async () => {
 			if (getCookie('auth-token')) {
-				viewDIR = getURLParam('view') ? getURLParam('view') : await getRootFolder();
+				viewDIR = getURLParam('view') ? getURLParam('view') : (await account).root_folder_UUID;
 				await loadFolders();
 				await loadEntrys();
 			} else {
