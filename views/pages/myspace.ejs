@@ -62,15 +62,17 @@
 		let selected = [];
 
 		function selectEntry(event, UUID) {
-			console.log('SELECT ' + UUID);
 			if (selected.length > 0 && !event.ctrlKey) {
 				selected.forEach((e) => {
 					document.querySelector(`[data-entry-UUID="${e}"]`).classList.remove('table-info');
 				});
+				selected = [];
 			}
 			selected.push(UUID);
 			const element = document.querySelector(`[data-entry-UUID="${UUID}"]`);
 			element.classList.add('table-info');
+
+			console.log('SELECTED ' + selected.join(', '));
 		}
 
 		function deleteEntry(UUID) {
