@@ -59,6 +59,18 @@
 		let ROOTUUID;
 		let viewDIR;
 
+		let selected;
+
+		function selectEntry(UUID) {
+			console.log('SELECT ' + UUID);
+			if (selected) {
+				document.querySelector(`[data-entry-UUID="${selected}"]`).classList.remove('table-info');
+			}
+			selected = UUID;
+			const element = document.querySelector(`[data-entry-UUID="${UUID}"]`);
+			element.classList.add('table-info');
+		}
+
 		function deleteEntry(UUID) {
 			console.log('DELETE ' + UUID);
 		}
