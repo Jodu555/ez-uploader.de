@@ -17,7 +17,7 @@ require('./database/tables').createTables();
 //Test Account: Finn:Developer:test@test.com
 const authManager = require('./utils/authManager');
 (async () => {
-    authManager.addToken('SECRET-DEV-KEY', await database.get('accounts').getOne({ UUID: 'eb732157-bf2e-4aa0-a9f5-117cf29d7cf2' }));
+    authManager.addToken('SECRET-DEV-KEY', await database.get('accounts').getOne({ UUID: 'ebb4429d-9501-461c-a825-81d50d506837' }));
 })();
 
 //TODO: surround all routes with try catch to display the errors in errorHandler
@@ -27,6 +27,7 @@ const { router: folder } = require('./routes/folder/index');
 const { router: entry } = require('./routes/entry/index');
 const { router: upload } = require('./routes/uploader/index');
 const { router: image } = require('./routes/image/index');
+const { router: profile } = require('./routes/profile/index');
 
 
 const app = express();
@@ -69,6 +70,7 @@ app.use('/auth', auth);
 app.use('/folder', authManager.authentication, folder);
 app.use('/entry', authManager.authentication, entry);
 app.use('/upload', authManager.authentication, upload);
+app.use('/profile', authManager.authentication, profile);
 app.use('/image', image)
 
 const { errorHandling, notFound } = require('./utils/middleware');
