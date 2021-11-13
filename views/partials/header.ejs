@@ -226,11 +226,12 @@
 		generateNavBar('#navFiller', navigation);
 		renderLoginOrProfile();
 		if (await account) fillProfileDescList();
+		console.log(document.querySelector('#testID'));
 	})();
 
-	function fillProfileDescList() {
-		document.querySelector('#username').innerText = account.username;
-		document.querySelector('#email').innerText = account.email;
+	async function fillProfileDescList() {
+		document.querySelector('#username').innerText = (await account).username;
+		document.querySelector('#email').innerText = (await account).email;
 	}
 
 	function logout() {
