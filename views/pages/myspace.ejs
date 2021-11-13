@@ -24,7 +24,7 @@
 	</head>
 	<header><%- include('../partials/header'); %></header>
 	<body>
-		<main class="container py-5">
+		<main class="container py-1">
 			<div id="loginInfo" style="display: none" class="alert alert-danger">
 				<h5 class="text-center">You must be logged in to see your Space!</h5>
 			</div>
@@ -43,7 +43,11 @@
 							<tbody id="tabelPlace"></tbody>
 						</table>
 					</div>
-					<div class="col-3"></div>
+					<div class="col-3">
+						<button class="btn btn-outline-info">
+							<i class="fas fa-folder-plus" style="font-size: 3vw"></i>
+						</button>
+					</div>
 				</div>
 			</div>
 		</main>
@@ -55,9 +59,6 @@
 		let ROOTUUID;
 		let viewDIR;
 
-		function selectEntry(UUID) {
-			console.log('SELECT ' + UUID);
-		}
 		function deleteEntry(UUID) {
 			console.log('DELETE ' + UUID);
 		}
