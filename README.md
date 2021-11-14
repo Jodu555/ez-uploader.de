@@ -42,6 +42,7 @@ It's always better to start hacking things out and then to codem them for produc
 *	[ ]  Entry: Image / Text: An Entry is just my naming representation for this system
 *   [ ] Add an specific key for each user which allows to upload with shareX
     * [ ] Where to show this key
+    * [ ] maybe allow regenerating
 *	[x] Multiple Accounts System
 *	[x] Image-Uploader (SahreX Integration)
 *   [ ] Imlement Deletion on Folders: what todo with stuff inside like images or other folders

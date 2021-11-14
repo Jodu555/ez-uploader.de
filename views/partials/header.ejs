@@ -66,12 +66,31 @@
 			</dl>
 
 			<div class="row shadow p-3 mb-5 bg-body rounded">
-				<h4>Settings:</h4>
-				<div class="form-check form-switch">
+				<h4 class="mb-1">Settings:</h4>
+				<div class="form-check form-switch mb-3">
 					<input class="form-check-input" type="checkbox" role="switch" checked />
 					<label class="form-check-label">Public Account</label>
 				</div>
 				<button class="btn btn-outline-success">Save</button>
+				<div class="form-group mb-3" style="padding-left: 0px">
+					<label>Your Private ShareX Upload Token</label>
+					<div class="input-group">
+						<input
+							aria-describedby="tokenHelp"
+							class="form-control"
+							id="shareXToken"
+							disabled
+							value="SECRET_TOKEn"
+							type="password"
+						/>
+						<div class="input-group-addon">
+							<button id="shareXTokenReveal" class="btn btn-outline-secondary">
+								<i id="shareXTokenRevealIcon" class="fa fa-eye" aria-hidden="true"> </i>
+							</button>
+						</div>
+					</div>
+					<div id="tokenHelp" class="form-text">Do not share this token with others.</div>
+				</div>
 			</div>
 
 			<button onclick="logout()" class="btn btn-block btn-outline-danger">Logout</button>
@@ -226,6 +245,23 @@
 			1500
 		);
 		if (response.success) loginForm.reset();
+	});
+
+	document.querySelector('#shareXTokenReveal').addEventListener('click', () => {
+		const input = document.querySelector('#shareXToken');
+		const icon = document.querySelector('#shareXTokenRevealIcon');
+		icon.classList.remove('fa-eye-slash');
+		icon.classList.remove('fa-eye');
+
+		if (input.type == 'text') {
+			input.type = 'password';
+			icon.classList.add('fa-eye');
+			icon.classList.remove('fa-eye-slash');
+			return;
+		}
+		input.type = 'text';
+		icon.classList.add('fa-eye-slash');
+		icon.classList.remove('fa-eye');
 	});
 
 	(async () => {
