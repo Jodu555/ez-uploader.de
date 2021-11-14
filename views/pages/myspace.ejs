@@ -152,10 +152,31 @@
 
 		function deleteEntry(UUID) {
 			console.log('DELETE ENTRY ' + UUID);
+			delSwal('Are you sure you want to delete this entry?', async (result) => {
+				if (result.isConfirmed) {
+					const response = await del('entry/' + UUID);
+					if (!response.success) {
+						Swal.fire(response.error, '', 'error');
+					} else {
+						Swal.fire('Deleted!', '', 'success');
+					}
+					init();
+				}
+			});
 		}
 
 		function deleteFolder(UUID) {
 			console.log('DELETE FOLDER ' + UUID);
+		}
+
+		function delSwal(title, cb) {
+			Swal.fire({
+				title,
+				text: 'This deletion cannot be undone!',
+				showDenyButton: true,
+				confirmButtonText: "Yes I'am",
+				denyButtonText: `No I dont`,
+			}).then(cb);
 		}
 
 		function changeDir(UUID) {
