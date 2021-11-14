@@ -39,16 +39,21 @@
 						</div>
 						<div class="modal-body">
 							<form id="createFolder">
+								<div id="createFolderAlert" class="alert"></div>
 								<div class="row">
 									<div class="col-1"></div>
 									<div class="col">
-										<input type="text" class="form-control" placeholder="Folder Name" name="name" />
+										<input
+											type="text"
+											required
+											class="form-control"
+											placeholder="Folder Name"
+											name="name"
+										/>
 									</div>
 									<div class="col-1" style="width: 2.333333%"></div>
 									<div class="col-3">
-										<button type="submit" data-bs-dismiss="modal" class="btn btn-outline-success">
-											Create
-										</button>
+										<button type="submit" class="btn btn-outline-success">Create</button>
 									</div>
 									<div class="col-1"></div>
 								</div>
@@ -122,6 +127,13 @@
 		function redrawSelection() {
 			//Here The Code for the redrawing selection
 		}
+
+		document.querySelector('#createFolder').addEventListener('submit', (e) => {
+			e.preventDefault();
+			const data = formDataToObject(new FormData(e.target));
+			console.log(data);
+			// createFolderAlert
+		});
 
 		function deleteEntry(UUID) {
 			console.log('DELETE ' + UUID);
