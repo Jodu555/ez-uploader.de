@@ -238,6 +238,7 @@
 		}
 
 		async function init() {
+			document.querySelector('#tabelPlace').innerHTML = '';
 			if (getCookie('auth-token')) {
 				viewDIR = getURLParam('view') ? getURLParam('view') : (await account).root_folder_UUID;
 				await loadFolders();
