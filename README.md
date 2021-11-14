@@ -41,10 +41,11 @@ It's always better to start hacking things out and then to codem them for produc
 ## Todo
 *	[ ]  Entry: Image / Text: An Entry is just my naming representation for this system
 *   [ ] Add an specific key for each user which allows to upload with shareX
+    * [ ] Where to show this key
 *	[x] Multiple Accounts System
 *	[x] Image-Uploader (SahreX Integration)
 *   [ ] Imlement Deletion on Folders: what todo with stuff inside like images or other folders
-*   [ ] Implement Deletion from images
+*   [x] Implement Deletion from images
 *	[ ] Text-Uploader (ShareX Integration)
 *	[x] An ability to create folders with hierarchical structures: To sort the entries
 *	[ ] A Permission system to clarify if an Entry is password protected or just unlisted

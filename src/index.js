@@ -14,7 +14,7 @@ const database = Database.createDatabase(process.env.DB_HOST,
 database.connect();
 require('./database/tables').createTables();
 
-//Test Account: Finn:Developer:test@test.com
+//Test Account: Jodu:123:test@test.com
 const authManager = require('./utils/authManager');
 (async () => {
     authManager.addToken('SECRET-DEV-KEY', await database.get('accounts').getOne({ UUID: 'ebb4429d-9501-461c-a825-81d50d506837' }));
