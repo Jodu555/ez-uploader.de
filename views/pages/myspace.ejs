@@ -25,6 +25,26 @@
 	<header><%- include('../partials/header'); %></header>
 	<body>
 		<main id="content" class="container py-1">
+			<div class="modal fade" id="createFolderModal" tabindex="-1" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Create Folder</h5>
+							<button
+								type="button"
+								class="btn-close"
+								data-bs-dismiss="modal"
+								aria-label="Close"
+							></button>
+						</div>
+						<div class="modal-body">...</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save changes</button>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="alert" id="genInfoAlert"></div>
 			<div class="row">
 				<div class="col">
@@ -40,7 +60,12 @@
 					</table>
 				</div>
 				<div class="col-3">
-					<button class="btn btn-outline-info">
+					<button
+						type="button"
+						class="btn btn-outline-info"
+						data-bs-toggle="modal"
+						data-bs-target="#createFolderModal"
+					>
 						<i class="fas fa-folder-plus" style="font-size: 3vw"></i>
 					</button>
 				</div>
