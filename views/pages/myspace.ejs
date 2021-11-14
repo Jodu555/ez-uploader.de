@@ -143,7 +143,8 @@
 				response.success,
 				'Folder Created!',
 				() => {
-					window.location.reload();
+					init();
+					// window.location.reload();
 				},
 				500
 			);
@@ -236,13 +237,17 @@
 			tabelPlace.appendChild(tr);
 		}
 
-		(async () => {
+		async function init() {
 			if (getCookie('auth-token')) {
 				viewDIR = getURLParam('view') ? getURLParam('view') : (await account).root_folder_UUID;
 				await loadFolders();
 				await loadEntrys();
 			}
 			initDragDrop();
+		}
+
+		(async () => {
+			await init();
 		})();
 	</script>
 </html>
