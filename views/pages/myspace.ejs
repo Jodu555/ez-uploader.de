@@ -128,11 +128,25 @@
 			//Here The Code for the redrawing selection
 		}
 
-		document.querySelector('#createFolder').addEventListener('submit', (e) => {
+		document.querySelector('#createFolder').addEventListener('submit', async (e) => {
 			e.preventDefault();
+			const alertSel = '#createFolderAlert';
 			const data = formDataToObject(new FormData(e.target));
-			console.log(data);
-			// createFolderAlert
+			data.parent_UUID = viewDIR;
+			const response = await post('folder', JSON.stringify(data), true);
+			if (!response.success) {
+				alert(alertSel, response.success, response.error);
+				return;
+			}
+			alert(
+				alertSel,
+				response.success,
+				'Folder Created!',
+				() => {
+					window.location.reload();
+				},
+				500
+			);
 		});
 
 		function deleteEntry(UUID) {
