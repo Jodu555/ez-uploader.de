@@ -57,7 +57,7 @@
 	</div>
 	<div class="offcanvas-body">
 		<div class="d-grid gap-2">
-			<dl class="row shadow p-3 mb-5 bg-body rounded">
+			<dl class="row shadow p-3 mb-4 bg-body rounded">
 				<h4>Infos:</h4>
 				<dt class="col-sm-3">Username:</dt>
 				<dd class="col-sm-9"><span id="username"></span></dd>
@@ -65,13 +65,13 @@
 				<dd class="col-sm-9"><span id="email"></span></dd>
 			</dl>
 
-			<div class="row shadow p-3 mb-5 bg-body rounded">
+			<div class="row shadow p-3 mb-4 bg-body rounded">
 				<h4 class="mb-1">Settings:</h4>
 				<div class="form-check form-switch mb-3">
 					<input class="form-check-input" type="checkbox" role="switch" checked />
 					<label class="form-check-label">Public Account</label>
 				</div>
-				<button class="btn btn-outline-success">Save</button>
+				<button class="btn btn-outline-success mb-5">Save</button>
 				<div class="form-group mb-3" style="padding-left: 0px">
 					<label>Your Private ShareX Upload Token</label>
 					<div class="input-group">
@@ -80,7 +80,6 @@
 							class="form-control"
 							id="shareXToken"
 							disabled
-							value="SECRET_TOKEn"
 							type="password"
 						/>
 						<div class="input-group-addon">
@@ -91,6 +90,7 @@
 					</div>
 					<div id="tokenHelp" class="form-text">Do not share this token with others.</div>
 				</div>
+				<button id="regenerate" class="btn btn-outline-warning mb-4">Regenerate</button>
 			</div>
 
 			<button onclick="logout()" class="btn btn-block btn-outline-danger">Logout</button>
@@ -250,18 +250,16 @@
 	document.querySelector('#shareXTokenReveal').addEventListener('click', () => {
 		const input = document.querySelector('#shareXToken');
 		const icon = document.querySelector('#shareXTokenRevealIcon');
-		icon.classList.remove('fa-eye-slash');
-		icon.classList.remove('fa-eye');
-
+		icon.classList.remove('fa-eye-slash', 'fa-eye');
 		if (input.type == 'text') {
 			input.type = 'password';
 			icon.classList.add('fa-eye');
-			icon.classList.remove('fa-eye-slash');
+			return;
+		} else {
+			input.type = 'text';
+			icon.classList.add('fa-eye-slash');
 			return;
 		}
-		input.type = 'text';
-		icon.classList.add('fa-eye-slash');
-		icon.classList.remove('fa-eye');
 	});
 
 	(async () => {
@@ -272,7 +270,7 @@
 				document.querySelector('#alertIfPageRequiresLogin').style.display = 'none';
 				document.querySelector('#content').style.display = '';
 			}
-			await fillProfileDescList();
+			await fillProfileSettings();
 		} else {
 			if (!currentPage.login) {
 				return;
@@ -290,9 +288,10 @@
 		}
 	})();
 
-	async function fillProfileDescList() {
+	async function fillProfileSettings() {
 		document.querySelector('#username').innerText = (await account).username;
 		document.querySelector('#email').innerText = (await account).email;
+		document.querySelector('#shareXToken').value = 'LATER_SHAREX_PRIVATE_UPLOAD_TOKEN'; //TODO: Implement the code to get the shareX TOken
 	}
 
 	function logout() {
