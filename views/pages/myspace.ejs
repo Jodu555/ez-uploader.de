@@ -169,16 +169,6 @@
 			console.log('DELETE FOLDER ' + UUID);
 		}
 
-		function delSwal(title, cb) {
-			Swal.fire({
-				title,
-				text: 'This deletion cannot be undone!',
-				showDenyButton: true,
-				confirmButtonText: "Yes I'am",
-				denyButtonText: `No I dont`,
-			}).then(cb);
-		}
-
 		function changeDir(UUID) {
 			const url = new URL(window.location.href);
 			const value = url.searchParams.set('view', UUID);

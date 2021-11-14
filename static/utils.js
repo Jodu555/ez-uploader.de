@@ -14,6 +14,16 @@ function alert(selector, success, message, cb, interval) {
     }, interval || 5000);
 }
 
+function delSwal(title, cb) {
+    Swal.fire({
+        title,
+        text: 'This deletion cannot be undone!',
+        showDenyButton: true,
+        confirmButtonText: "Yes I'am",
+        denyButtonText: `No I dont`,
+    }).then(cb);
+}
+
 async function post(endpoint, body, json = false) {
     return network(endpoint, 'POST', body, null, json);
 }
