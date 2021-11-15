@@ -12,7 +12,8 @@ function createTables() {
         username: 'TEXT',
         email: 'TEXT',
         password: 'TEXT',
-        root_folder_UUID: 'varchar(64)'
+        root_folder_UUID: 'varchar(64)',
+        shareXUploadToken: 'TEXT',
     });
 
     database.createTable('folders', {
