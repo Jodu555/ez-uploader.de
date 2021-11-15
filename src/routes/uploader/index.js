@@ -62,9 +62,9 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-const auth = async (rea, res, next) => {
+const auth = async (req, res, next) => {
     const authToken = req.headers['auth-token'];
-    const shareXToken = req.headers['shareX-token'];
+    const shareXToken = req.headers['sharex-token'];
 
     if (authToken || shareXToken) {
         if (authToken) {
@@ -76,19 +76,26 @@ const auth = async (rea, res, next) => {
                 return true;
             } else {
                 next(new Error('Invalid auth-token!'));
+                return false;
             }
         }
         if (shareXToken) {
-            const response = await database.get('accounts').get({ shareXUploadToken: shareXToken });
-            delete response.password;
-            req.credentials = {
-                token: shareXToken,
-                user: response,
-            };
-            return true;
+            const response = await database.get('accounts').getOne({ shareXUploadToken: shareXToken, unique: true });
+            if (response) {
+                delete response.password;
+                req.credentials = {
+                    token: shareXToken,
+                    user: response,
+                };
+                return true;
+            } else {
+                next(new Error('Invalid shareX-token!'));
+                return false;
+            }
         }
     } else {
         next(new Error('Missing auth-token or shareX-token in headers!'));
+        return false;
     }
     return false;
 }

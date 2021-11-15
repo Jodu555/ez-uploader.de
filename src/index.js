@@ -69,7 +69,7 @@ pages.forEach(page => {
 app.use('/auth', auth);
 app.use('/folder', authManager.authentication, folder);
 app.use('/entry', authManager.authentication, entry);
-app.use('/upload', authManager.authentication, upload);
+app.use('/upload', upload);
 app.use('/profile', authManager.authentication, profile);
 app.use('/image', image)
 
