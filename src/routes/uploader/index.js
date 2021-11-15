@@ -32,7 +32,7 @@ const upload = multer({
 
 router.post('/', async (req, res, next) => {
     try {
-        if (!auth(req, res, next))
+        if (!await auth(req, res, next))
             return;
 
         const account_UUID = req.credentials.user.UUID;
@@ -62,7 +62,7 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-const auth = (rea, res, next) => {
+const auth = async (rea, res, next) => {
     const authToken = req.headers['auth-token'];
     const shareXToken = req.headers['shareX-token'];
 
@@ -79,7 +79,13 @@ const auth = (rea, res, next) => {
             }
         }
         if (shareXToken) {
-
+            const response = await database.get('accounts').get({ shareXUploadToken: shareXToken });
+            delete response.password;
+            req.credentials = {
+                token: shareXToken,
+                user: response,
+            };
+            return true;
         }
     } else {
         next(new Error('Missing auth-token or shareX-token in headers!'));
