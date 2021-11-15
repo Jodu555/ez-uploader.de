@@ -5,6 +5,8 @@ const router = express.Router();
 const { Database } = require('@jodu555/mysqlapi');
 const database = Database.getDatabase();
 
+const authManager = require('../../utils/authManager');
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'upload/');
@@ -29,29 +31,61 @@ const upload = multer({
 }).single('image');
 
 router.post('/', async (req, res, next) => {
-    const account_UUID = req.credentials.user.UUID;
-    const entry = {
-        UUID: v4(),
-        folder_UUID: (await database.get('folders').actions.getRootFolder(account_UUID)).UUID,
-        type: 'image',
-        public: 0,
-        share: 0,
-    }
-    req.api = entry.UUID;
+    try {
+        if (!auth(req, res, next))
+            return;
 
-    await upload(req, res, async (err) => {
-        if (err) {
-            next(err);
-            return;
+        const account_UUID = req.credentials.user.UUID;
+        const entry = {
+            UUID: v4(),
+            folder_UUID: (await database.get('folders').actions.getRootFolder(account_UUID)).UUID,
+            type: 'image',
+            public: 0,
+            share: 0,
         }
-        if (!req.file) {
-            next(new Error('No file present in request body!'));
-            return;
-        }
-        const created = database.get('entrys').create(entry);
-        res.json(created);
-    })
+        req.api = entry.UUID;
+
+        await upload(req, res, async (err) => {
+            if (err) {
+                next(err);
+                return;
+            }
+            if (!req.file) {
+                next(new Error('No file present in request body!'));
+                return;
+            }
+            const created = database.get('entrys').create(entry);
+            res.json(created);
+        })
+    } catch (error) {
+        next(error);
+    }
 });
+
+const auth = (rea, res, next) => {
+    const authToken = req.headers['auth-token'];
+    const shareXToken = req.headers['shareX-token'];
+
+    if (authToken || shareXToken) {
+        if (authToken) {
+            if (authManager.getToken(authToken)) {
+                req.credentials = {
+                    token,
+                    user: getUser(token),
+                };
+                return true;
+            } else {
+                next(new Error('Invalid auth-token!'));
+            }
+        }
+        if (shareXToken) {
+
+        }
+    } else {
+        next(new Error('Missing auth-token or shareX-token in headers!'));
+    }
+    return false;
+}
 
 module.exports = {
     router,
