@@ -291,7 +291,7 @@
 	async function fillProfileSettings() {
 		document.querySelector('#username').innerText = (await account).username;
 		document.querySelector('#email').innerText = (await account).email;
-		document.querySelector('#shareXToken').value = 'LATER_SHAREX_PRIVATE_UPLOAD_TOKEN'; //TODO: Implement the code to get the shareX TOken
+		document.querySelector('#shareXToken').value = (await account).shareXUploadToken; //TODO: Implement the code to get the shareX TOken
 	}
 
 	function logout() {
