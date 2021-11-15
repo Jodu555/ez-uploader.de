@@ -30,7 +30,9 @@ const register = async (req, res, next) => {
                 share: 0
             };
 
-            await database.get('accounts').create({ ...user, root_folder_UUID: rootFolder.uuid });
+            const shareXUploadToken = generateShareXUploadToken(5);
+            await database.get('accounts').create({ ...user, root_folder_UUID: rootFolder.uuid, shareXUploadToken });
+
             await database.get('folders').create(rootFolder);
 
             delete user.password;
@@ -73,14 +75,14 @@ const logout = async (req, res, next) => {
     res.json({ message: 'Successfully logged out!' });
 };
 
-// function generateVerificationToken(len) {
-//     let token = '';
-//     for (let i = 0; i < len; i++) {
-//         token += v4();
-//     }
-//     token = token.split('-').join('');
-//     return token;
-// };
+function generateShareXUploadToken(len) {
+    let token = '';
+    for (let i = 0; i < len; i++) {
+        token += v4();
+    }
+    token = token.split('-').join('');
+    return token;
+};
 
 module.exports = {
     register,
