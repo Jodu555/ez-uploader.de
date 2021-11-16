@@ -76,8 +76,14 @@ const logout = async (req, res, next) => {
 };
 
 const regenShareXToken = async (req, res, next) => {
-
-
+    try {
+        const account_UUID = req.credentials.user.UUID;
+        const newToken = generateShareXUploadToken(5);
+        const response = await database.get('accounts').update({ UUID: account_UUID }, { shareXUploadToken: newToken });
+        res.json(response);
+    } catch (error) {
+        next(error);
+    }
 };
 
 function generateShareXUploadToken(len) {
