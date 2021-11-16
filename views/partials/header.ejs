@@ -270,8 +270,9 @@
 			alert('#settingsAlert', response.success, response.error);
 			return;
 		} else {
-			alert('#settingsAlert', response.success, 'Regenerated the ShareXToken!', () => {
-				window.location.reload();
+			alert('#settingsAlert', response.success, 'Regenerated the ShareXToken!', async () => {
+				(await account).shareXUploadToken = response.json[0].shareXUploadToken;
+				await fillProfileSettings();
 			});
 			return;
 		}
