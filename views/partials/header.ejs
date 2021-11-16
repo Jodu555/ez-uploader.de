@@ -270,8 +270,11 @@
 			alert('#settingsAlert', response.success, response.error);
 			return;
 		} else {
+			alert('#settingsAlert', response.success, 'Regenerated the ShareXToken!', () => {
+				window.location.reload();
+			});
+			return;
 		}
-		console.log(response);
 	});
 
 	(async () => {
