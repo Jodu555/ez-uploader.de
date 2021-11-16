@@ -80,6 +80,7 @@ const regenShareXToken = async (req, res, next) => {
         const account_UUID = req.credentials.user.UUID;
         const newToken = generateShareXUploadToken(5);
         const response = await database.get('accounts').update({ UUID: account_UUID }, { shareXUploadToken: newToken });
+        response.map(v => delete v.password);
         res.json(response);
     } catch (error) {
         next(error);
