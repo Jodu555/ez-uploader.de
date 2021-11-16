@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
 router.post('/register', controller.register);
 router.post('/login', controller.login);
 router.get('/logout', authManager.authentication, controller.logout);
+router.get('/regen', authManager.authentication, controller.regenShareXToken);
 
 module.exports = {
     router,

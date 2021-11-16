@@ -75,6 +75,11 @@ const logout = async (req, res, next) => {
     res.json({ message: 'Successfully logged out!' });
 };
 
+const regenShareXToken = async (req, res, next) => {
+
+
+};
+
 function generateShareXUploadToken(len) {
     let token = '';
     for (let i = 0; i < len; i++) {
