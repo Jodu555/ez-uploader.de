@@ -98,5 +98,6 @@ function generateShareXUploadToken(len) {
 module.exports = {
     register,
     login,
-    logout
+    logout,
+    regenShareXToken
 }
