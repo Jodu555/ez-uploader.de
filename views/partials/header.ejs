@@ -65,6 +65,8 @@
 				<dd class="col-sm-9"><span id="email"></span></dd>
 			</dl>
 
+			<div class="alert" id="settingsAlert"></div>
+
 			<div class="row shadow p-3 mb-4 bg-body rounded">
 				<h4 class="mb-1">Settings:</h4>
 				<div class="form-check form-switch mb-3">
@@ -260,6 +262,16 @@
 			icon.classList.add('fa-eye-slash');
 			return;
 		}
+	});
+
+	document.querySelector('#regenerate').addEventListener('click', async () => {
+		const response = await get('auth/regen');
+		if (!response.success) {
+			alert('#settingsAlert', response.success, response.error);
+			return;
+		} else {
+		}
+		console.log(response);
 	});
 
 	(async () => {
