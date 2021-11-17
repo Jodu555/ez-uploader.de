@@ -53,3 +53,8 @@ It's always better to start hacking things out and then to codem them for produc
 *	[ ] An Global Permission system to allow an account to choose which user can see their pictures
 *	[ ] Sorting System Day/Month/Year
 *	[ ] Public page for any user to show their published entries
+
+## Stretch
+
+*   [ ] Think about to store the authtoken in a database for multiple server support
+
