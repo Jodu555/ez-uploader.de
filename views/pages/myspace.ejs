@@ -179,13 +179,25 @@
 			} else {
 				url.searchParams.delete('view');
 			}
+			manageStorage(UUID, name);
 			window.location.href = url.href;
 		}
 
 		function manageStorage(UUID, name) {
+			const search = { UUID, name };
+			const find = (e) => e.UUID == UUID && e.name == name;
+
 			if (sessionStorage.getItem('path')) {
-				const array = JSON.parse(sessionStorage.getItem('path'));
-				array.push({ UUID, name });
+				let array = JSON.parse(sessionStorage.getItem('path'));
+				console.log(1);
+				if (array.some(find)) {
+					console.log(2);
+					const idx = array.findIndex(find);
+					array = array.slice(0, idx + 1);
+				} else {
+					array.push({ UUID, name });
+				}
+
 				sessionStorage.setItem('path', JSON.stringify(array));
 			}
 		}
