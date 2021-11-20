@@ -259,6 +259,9 @@
 			document.querySelector('#tabelPlace').innerHTML = '';
 			if (getCookie('auth-token')) {
 				viewDIR = getURLParam('view') ? getURLParam('view') : (await account).root_folder_UUID;
+				if (!sessionStorage.getItem('path'))
+					sessionStorage.setItem('path', JSON.stringify([{ UUID: viewDIR, name: 'ROOTI' }]));
+
 				await loadFolders();
 				await loadEntrys();
 				fillBreadCrumb();
