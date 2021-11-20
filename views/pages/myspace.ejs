@@ -66,6 +66,9 @@
 				</div>
 			</div>
 			<div class="alert" id="genInfoAlert"></div>
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb" id="breadCrumb"></ol>
+			</nav>
 			<div class="row">
 				<div class="col">
 					<table class="table">
@@ -256,6 +259,10 @@
 				await loadEntrys();
 			}
 			initDragDrop();
+		}
+
+		function fillBreadCrumb() {
+			document.querySelector('#breadCrumb').appendChild(li);
 		}
 
 		(async () => {
