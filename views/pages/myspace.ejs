@@ -193,9 +193,9 @@
 			tr.setAttribute('data-entry-UUID', entry.UUID);
 			tr.innerHTML = `<td onclick="selectEntry(event, '${
 				entry.UUID
-			}')"><img src="http://localhost:3100/image/${
-				entry.UUID
-			}?key=SECRET-DEV-KEY" class="img-thumbnail preview-image" /></td>
+			}')"><img src="http://localhost:3100/image/${entry.UUID}?key=${getCookie(
+				'auth-token'
+			)}" class="img-thumbnail preview-image" /></td>
 						<td onclick="selectEntry(event, '${entry.UUID}')">${entry.UUID.split('-')[0]}</td>
 						<td><button onclick="deleteEntry('${
 							entry.UUID
