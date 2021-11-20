@@ -178,12 +178,17 @@
 		function changeDir(UUID, name) {
 			const url = new URL(window.location.href);
 			if (UUID && name != 'ROOT') {
-				url.searchParams.set('view', UUID);
+				url.searchParams.set('view', name == '...' ? getPrevFolder().UUID : UUID);
 			} else {
 				url.searchParams.delete('view');
 			}
 			manageStorage(UUID, name);
 			window.location.href = url.href;
+		}
+
+		function getPrevFolder() {
+			const array = JSON.parse(sessionStorage.getItem('path'));
+			return array[array.length - 2];
 		}
 
 		function manageStorage(UUID, name) {
@@ -192,10 +197,8 @@
 
 			if (sessionStorage.getItem('path')) {
 				let array = JSON.parse(sessionStorage.getItem('path'));
-				console.log(1);
 				if (array.some(find)) {
-					console.log(2);
-					const idx = array.findIndex(find);
+					const idx = name == '...' ? array.length - 1 : findIndex(find);
 					array = array.slice(0, idx + 1);
 				} else {
 					array.push({ UUID, name });
@@ -253,6 +256,8 @@
 				alert('#genInfoAlert', response.success, response.error);
 				return;
 			}
+			if (getURLParam('view') && getURLParam('view') !== (await account).root_folder_UUID)
+				appendFolder({ name: '...' });
 			response.json.forEach((dir) => {
 				appendFolder(dir);
 			});
@@ -264,11 +269,10 @@
 			tr.classList.add('place');
 			tr.setAttribute('draggable', true);
 			tr.setAttribute('data-folder-UUID', dir.UUID);
-			tr.innerHTML = `<tr class="draggable place" draggable="true">
-						<td onclick="changeDir('${dir.UUID}', '${
-				dir.name
-			}')"><i class="far fa-folder preview-folder"></i></td>
-						<td onclick="changeDir('${dir.UUID}', '${dir.name}')">${dir.name}</td>
+			const onclick = `onclick="changeDir('${dir.UUID}', '${dir.name}')"`;
+			tr.innerHTML = `<tr class="draggable place" draggable="true" ${onclick}>
+						<td ${onclick}><i class="far fa-folder preview-folder"></i></td>
+						<td ${onclick}>${dir.name}</td>
 						<td>${
 							dir.name == '...'
 								? ''
@@ -305,7 +309,6 @@
 				} else {
 					li.innerHTML = `${path.name}`;
 				}
-
 				document.querySelector('#breadCrumb').appendChild(li);
 			});
 		}
