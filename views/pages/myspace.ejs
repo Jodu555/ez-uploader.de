@@ -174,7 +174,11 @@
 
 		function changeDir(UUID) {
 			const url = new URL(window.location.href);
-			const value = url.searchParams.set('view', UUID);
+			if (UUID) {
+				url.searchParams.set('view', UUID);
+			} else {
+				url.searchParams.delete('view');
+			}
 			window.location.href = url.href;
 		}
 
@@ -257,11 +261,15 @@
 				viewDIR = getURLParam('view') ? getURLParam('view') : (await account).root_folder_UUID;
 				await loadFolders();
 				await loadEntrys();
+				fillBreadCrumb();
 			}
 			initDragDrop();
 		}
 
 		function fillBreadCrumb() {
+			const li = document.createElement('li');
+			li.classList.add('breadcrumb-item');
+			li.innerHTML = `<a onclick="changeDir()" href="#">Rooti</a>`;
 			document.querySelector('#breadCrumb').appendChild(li);
 		}
 
