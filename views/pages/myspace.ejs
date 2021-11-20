@@ -66,9 +66,12 @@
 				</div>
 			</div>
 			<div class="alert" id="genInfoAlert"></div>
-			<nav aria-label="breadcrumb">
-				<ol class="breadcrumb" id="breadCrumb"></ol>
-			</nav>
+			<div>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb" id="breadCrumb"></ol>
+				</nav>
+			</div>
+
 			<div class="row">
 				<div class="col">
 					<table class="table">
@@ -294,10 +297,15 @@
 		function fillBreadCrumb() {
 			const array = JSON.parse(sessionStorage.getItem('path'));
 			document.querySelector('#breadCrumb').innerHTML = '';
-			array.forEach((path) => {
+			array.forEach((path, idx) => {
 				const li = document.createElement('li');
 				li.classList.add('breadcrumb-item');
-				li.innerHTML = `<a onclick="changeDir('${path.UUID}', '${path.name}')" href="#">${path.name}</a>`;
+				if (idx !== array.length - 1) {
+					li.innerHTML = `<a onclick="changeDir('${path.UUID}', '${path.name}')" href="#">${path.name}</a>`;
+				} else {
+					li.innerHTML = `${path.name}`;
+				}
+
 				document.querySelector('#breadCrumb').appendChild(li);
 			});
 		}
