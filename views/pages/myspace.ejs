@@ -271,9 +271,7 @@
 			tr.classList.add('place');
 			tr.setAttribute('data-folder-UUID', dir.UUID);
 			const onclick = `onclick="changeDir('${dir.UUID}', '${dir.name}')"`;
-			tr.innerHTML = `<tr class="${dir.name == '...' ? '' : 'draggable'} place" ${
-				dir.name == '...' ? '' : 'draggable="true"'
-			} ${onclick}>
+			tr.innerHTML = `
 						<td ${onclick}><i class="far fa-folder preview-folder"></i></td>
 						<td ${onclick}>${dir.name}</td>
 						<td>${
@@ -283,7 +281,7 @@
 								  dir.UUID +
 								  '\')" href="" class="btn btn-outline-danger"><i class="far fa-trash-alt" style="font-size: 4vh"></i></button>'
 						}</td>
-					</tr>`;
+					`;
 			tabelPlace.appendChild(tr);
 		}
 
@@ -297,8 +295,9 @@
 				await loadFolders();
 				await loadEntrys();
 				fillBreadCrumb();
+
+				initDragDrop();
 			}
-			initDragDrop();
 		}
 
 		function fillBreadCrumb() {
