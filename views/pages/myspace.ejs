@@ -174,7 +174,7 @@
 
 		function changeDir(UUID, name) {
 			const url = new URL(window.location.href);
-			if (UUID) {
+			if (UUID && name != 'ROOT') {
 				url.searchParams.set('view', UUID);
 			} else {
 				url.searchParams.delete('view');
@@ -281,8 +281,8 @@
 			document.querySelector('#tabelPlace').innerHTML = '';
 			if (getCookie('auth-token')) {
 				viewDIR = getURLParam('view') ? getURLParam('view') : (await account).root_folder_UUID;
-				if (!sessionStorage.getItem('path'))
-					sessionStorage.setItem('path', JSON.stringify([{ UUID: viewDIR, name: 'ROOTI' }]));
+				if (!sessionStorage.getItem('path') || !getURLParam('view'))
+					sessionStorage.setItem('path', JSON.stringify([{ UUID: viewDIR, name: 'ROOT' }]));
 
 				await loadFolders();
 				await loadEntrys();
@@ -293,7 +293,7 @@
 
 		function fillBreadCrumb() {
 			const array = JSON.parse(sessionStorage.getItem('path'));
-			console.log(array);
+			document.querySelector('#breadCrumb').innerHTML = '';
 			array.forEach((path) => {
 				const li = document.createElement('li');
 				li.classList.add('breadcrumb-item');
