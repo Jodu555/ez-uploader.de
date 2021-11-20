@@ -178,7 +178,7 @@
 		function changeDir(UUID, name) {
 			const url = new URL(window.location.href);
 			if (UUID && name != 'ROOT') {
-				url.searchParams.set('view', name == '...' ? getPrevFolder().UUID : UUID);
+				url.searchParams.set('view', UUID);
 			} else {
 				url.searchParams.delete('view');
 			}
@@ -194,16 +194,15 @@
 		function manageStorage(UUID, name) {
 			const search = { UUID, name };
 			const find = (e) => e.UUID == UUID && e.name == name;
-
 			if (sessionStorage.getItem('path')) {
 				let array = JSON.parse(sessionStorage.getItem('path'));
-				if (array.some(find)) {
-					const idx = name == '...' ? array.length - 1 : findIndex(find);
+				console.log(1);
+				if (array.some(find) || name == '...') {
+					const idx = name == '...' ? array.length - 2 : findIndex(find);
 					array = array.slice(0, idx + 1);
 				} else {
 					array.push({ UUID, name });
 				}
-
 				sessionStorage.setItem('path', JSON.stringify(array));
 			}
 		}
@@ -257,7 +256,7 @@
 				return;
 			}
 			if (getURLParam('view') && getURLParam('view') !== (await account).root_folder_UUID)
-				appendFolder({ name: '...' });
+				appendFolder({ UUID: getPrevFolder().UUID, name: '...' });
 			response.json.forEach((dir) => {
 				appendFolder(dir);
 			});
@@ -265,12 +264,16 @@
 
 		function appendFolder(dir) {
 			const tr = document.createElement('tr');
-			tr.classList.add('draggable');
+			if (dir.name !== '...') {
+				tr.classList.add('draggable');
+				tr.setAttribute('draggable', true);
+			}
 			tr.classList.add('place');
-			tr.setAttribute('draggable', true);
 			tr.setAttribute('data-folder-UUID', dir.UUID);
 			const onclick = `onclick="changeDir('${dir.UUID}', '${dir.name}')"`;
-			tr.innerHTML = `<tr class="draggable place" draggable="true" ${onclick}>
+			tr.innerHTML = `<tr class="${dir.name == '...' ? '' : 'draggable'} place" ${
+				dir.name == '...' ? '' : 'draggable="true"'
+			} ${onclick}>
 						<td ${onclick}><i class="far fa-folder preview-folder"></i></td>
 						<td ${onclick}>${dir.name}</td>
 						<td>${
