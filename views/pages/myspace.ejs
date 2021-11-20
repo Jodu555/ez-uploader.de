@@ -172,7 +172,7 @@
 			console.log('DELETE FOLDER ' + UUID);
 		}
 
-		function changeDir(UUID) {
+		function changeDir(UUID, name) {
 			const url = new URL(window.location.href);
 			if (UUID) {
 				url.searchParams.set('view', UUID);
@@ -180,6 +180,14 @@
 				url.searchParams.delete('view');
 			}
 			window.location.href = url.href;
+		}
+
+		function manageStorage(UUID, name) {
+			if (sessionStorage.getItem('path')) {
+				const array = JSON.parse(sessionStorage.getItem('path'));
+				array.push({ UUID, name });
+				sessionStorage.setItem('path', JSON.stringify(array));
+			}
 		}
 
 		async function loadEntrys() {
@@ -242,8 +250,10 @@
 			tr.setAttribute('draggable', true);
 			tr.setAttribute('data-folder-UUID', dir.UUID);
 			tr.innerHTML = `<tr class="draggable place" draggable="true">
-						<td onclick="changeDir('${dir.UUID}')"><i class="far fa-folder preview-folder"></i></td>
-						<td onclick="changeDir('${dir.UUID}')">${dir.name}</td>
+						<td onclick="changeDir('${dir.UUID}', '${
+				dir.name
+			}')"><i class="far fa-folder preview-folder"></i></td>
+						<td onclick="changeDir('${dir.UUID}', '${dir.name}')">${dir.name}</td>
 						<td>${
 							dir.name == '...'
 								? ''
@@ -270,10 +280,14 @@
 		}
 
 		function fillBreadCrumb() {
-			const li = document.createElement('li');
-			li.classList.add('breadcrumb-item');
-			li.innerHTML = `<a onclick="changeDir()" href="#">Rooti</a>`;
-			document.querySelector('#breadCrumb').appendChild(li);
+			const array = JSON.parse(sessionStorage.getItem('path'));
+			console.log(array);
+			array.forEach((path) => {
+				const li = document.createElement('li');
+				li.classList.add('breadcrumb-item');
+				li.innerHTML = `<a onclick="changeDir('${path.UUID}', '${path.name}')" href="#">${path.name}</a>`;
+				document.querySelector('#breadCrumb').appendChild(li);
+			});
 		}
 
 		(async () => {
