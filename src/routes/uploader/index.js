@@ -68,10 +68,10 @@ const auth = async (req, res, next) => {
 
     if (authToken || shareXToken) {
         if (authToken) {
-            if (authManager.getToken(authToken)) {
+            if (authManager.getUser(authToken)) {
                 req.credentials = {
-                    token,
-                    user: getUser(token),
+                    authToken,
+                    user: authManager.getUser(authToken),
                 };
                 return true;
             } else {
