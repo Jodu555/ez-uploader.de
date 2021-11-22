@@ -10,7 +10,6 @@ router.get('/', async (req, res, next) => {
         if (database.cache && database.cache.infos && (database.cache.infos.time >= Date.now())) {
             res.json({ ...database.cache.infos, cached: true });
         } else {
-            console.log(0);
             database.cache = database.cache || {};
             const accounts = await database.get('accounts').get();
             const entrys = await database.get('entrys').get();
