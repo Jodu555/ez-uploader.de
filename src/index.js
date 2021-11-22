@@ -28,6 +28,7 @@ const { router: entry } = require('./routes/entry/index');
 const { router: upload } = require('./routes/uploader/index');
 const { router: image } = require('./routes/image/index');
 const { router: profile } = require('./routes/profile/index');
+const { router: info } = require('./routes/info/index');
 
 
 const app = express();
@@ -71,7 +72,8 @@ app.use('/folder', authManager.authentication, folder);
 app.use('/entry', authManager.authentication, entry);
 app.use('/upload', upload);
 app.use('/profile', authManager.authentication, profile);
-app.use('/image', image)
+app.use('/image', image);
+app.use('/info', info);
 
 const { errorHandling, notFound } = require('./utils/middleware');
 app.use('*', notFound);
