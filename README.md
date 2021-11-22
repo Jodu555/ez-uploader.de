@@ -4,7 +4,7 @@ An Image/Text upload service which provides a bunch of extras and should integra
 
 Database
 ======
-![This is the basic DB modeling.](https://images.jodu555.de/a3136c46fc90223942413b42d3c8a609.png "This is the db model till now.")
+![This is the basic DB modeling.](https://images.jodu555.de/9d891c41c7731b5e06d7575d4f37b503.png "This is the db model till now.")
 
 
 ## Basic Thoughts
