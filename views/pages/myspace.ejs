@@ -198,7 +198,7 @@
 				let array = JSON.parse(sessionStorage.getItem('path'));
 				console.log(1);
 				if (array.some(find) || name == '...') {
-					const idx = name == '...' ? array.length - 2 : findIndex(find);
+					const idx = name == '...' ? array.length - 2 : array.findIndex(find);
 					array = array.slice(0, idx + 1);
 				} else {
 					array.push({ UUID, name });
