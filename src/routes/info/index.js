@@ -3,13 +3,14 @@ const router = express.Router();
 const { Database } = require('@jodu555/mysqlapi');
 const database = Database.getDatabase();
 
-const cacheTime = 1000 * 60;
+const cacheTime = 1000 * 60 * 60;
 
 router.get('/', async (req, res, next) => {
     try {
-        if (database.cache.infos && (database.cache.infos.time <= Date.now())) {
-            res.json(database.cache.infos);
+        if (database.cache && database.cache.infos && (database.cache.infos.time >= Date.now())) {
+            res.json({ ...database.cache.infos, cached: true });
         } else {
+            console.log(0);
             database.cache = database.cache || {};
             const accounts = await database.get('accounts').get();
             const entrys = await database.get('entrys').get();
@@ -18,7 +19,7 @@ router.get('/', async (req, res, next) => {
                 accounts: accounts.length,
                 entrys: entrys.length,
             }
-            res.json(database.cache.infos);
+            res.json({ ...database.cache.infos, cached: false });
         }
     } catch (error) {
         next(error);
