@@ -32,22 +32,26 @@
 	</body>
 	<%- include('../partials/scripts'); %>
 	<script>
-		animateTo(
-			0,
-			500,
-			(val) => {
-				document.querySelector('#images').innerHTML = val;
-			},
-			1000
-		);
-		animateTo(
-			0,
-			200,
-			(val) => {
-				document.querySelector('#users').innerHTML = val;
-			},
-			1000
-		);
+		(async () => {
+			const json = (await get('info')).json;
+			console.log(json);
+			animateTo(
+				0,
+				json.entrys,
+				(val) => {
+					document.querySelector('#images').innerHTML = val;
+				},
+				1000
+			);
+			animateTo(
+				0,
+				json.accounts,
+				(val) => {
+					document.querySelector('#users').innerHTML = val;
+				},
+				1000
+			);
+		})();
 
 		function animateTo(start, end, cb, duration) {
 			cb(start);
