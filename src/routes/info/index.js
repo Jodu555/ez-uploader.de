@@ -13,6 +13,7 @@ router.get('/', async (req, res, next) => {
             database.cache = database.cache || {};
             const accounts = await database.get('accounts').get();
             const entrys = await database.get('entrys').get();
+            const folders = await database.get('folders').get();
             database.cache.infos = {
                 time: Date.now() + cacheTime,
                 accounts: accounts.length,
