@@ -18,6 +18,7 @@ router.get('/', async (req, res, next) => {
                 time: Date.now() + cacheTime,
                 accounts: accounts.length,
                 entrys: entrys.length,
+                folders: folders.length
             }
             res.json({ ...database.cache.infos, cached: false });
         }
