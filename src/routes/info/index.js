@@ -3,7 +3,7 @@ const router = express.Router();
 const { Database } = require('@jodu555/mysqlapi');
 const database = Database.getDatabase();
 
-const cacheTime = 1000 * 60 * 60;
+const cacheTime = (1000 * 60 * 60 /** 1 Hour */) + 2; // 2 Hours
 
 router.get('/', async (req, res, next) => {
     try {
