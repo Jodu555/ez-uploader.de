@@ -33,7 +33,7 @@
 	<%- include('../partials/scripts'); %>
 	<script>
 		(async () => {
-			const json = (await get('info')).json;
+			const json = (await get('info')).json.data;
 			console.log(json);
 			animateTo(
 				0,
