@@ -10,6 +10,7 @@ router.get('/:UUID', (req, res, next) => {
     try {
         const UUID = req.params.UUID
         //TODO: here comes the point on share public etc.
+        //TODO: Here comes also the extension choose hin (png, jpg)
         if (authManager.getUser(req.query.key)) {
             const imagePath = path.join(__dirname, '../../../upload', UUID + '.png');
             res.sendFile(imagePath);
