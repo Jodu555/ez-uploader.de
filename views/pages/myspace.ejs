@@ -23,7 +23,7 @@
 		</style>
 	</head>
 	<header><%- include('../partials/header'); %></header>
-	<body>
+	<body style="min-height: 100vh; position: relative">
 		<main id="content" class="container py-1">
 			<div class="modal fade" id="createFolderModal" tabindex="-1" aria-hidden="true">
 				<div class="modal-dialog">
@@ -97,7 +97,7 @@
 				</div>
 			</div>
 		</main>
-		<footer><%- include('../partials/footer'); %></footer>
+		<footer class="footer"><%- include('../partials/footer'); %></footer>
 	</body>
 	<%- include('../partials/scripts'); %>
 	<script src="dragDrop.js"></script>
