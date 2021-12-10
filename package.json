@@ -19,20 +19,20 @@
   },
   "homepage": "https://github.com/Jodu555/ez-uploader.de#readme",
   "dependencies": {
-    "@jodu555/mysqlapi": "^3.3.6",
+    "@jodu555/mysqlapi": "^3.6.2",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "helmet": "^4.6.0",
-    "joi": "^17.4.2",
+    "joi": "^17.5.0",
     "morgan": "^1.10.0",
-    "multer": "^1.4.3",
-    "nodemailer": "^6.6.5",
+    "multer": "^1.4.4",
+    "nodemailer": "^6.7.2",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.13"
+    "nodemon": "^2.0.15"
   }
 }
