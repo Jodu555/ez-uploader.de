@@ -16,7 +16,7 @@ const register = async (req, res, next) => {
         search.unique = false;
         const result = await database.get('accounts').get(search);
 
-        if (result.length !== 0) {
+        if (result.length == 0) {
             const obj = {};
             user.uuid = v4();
             user.password = await bcrypt.hash(user.password, 8);
