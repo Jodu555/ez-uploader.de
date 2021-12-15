@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3100/';
+const API_URL = window.location.hostname == 'localhost' ? 'http://localhost:3100/' : 'https://dev.ez-uploader.de/';
 
 function alert(selector, success, message, cb, interval) {
     const alert = document.querySelector(selector);
