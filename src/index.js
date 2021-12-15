@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
+const https = require('https');
 const cors = require('cors');
 const morgan = require('morgan');
 const helmet = require('helmet');
@@ -80,6 +81,16 @@ app.use('*', notFound);
 app.use(errorHandling);
 
 const PORT = process.env.PORT || 3100;
-app.listen(PORT, () => {
-    console.log(`Express App is listening on ${PORT}`);
-});
+if (process.env.https) {
+    const sslProperties = {
+        key: fs.readFileSync(process.env.KEY_FILE),
+        cert: fs.readFileSync(process.env.CERT_FILE),
+    };
+    https.createServer(sslProperties, app).listen(PORT, () => {
+        console.log(`Express App Listening on ${PORT}`);
+    });
+} else {
+    app.listen(PORT, async () => {
+        console.log(`Express App Listening on ${PORT}`);
+    });
+}
