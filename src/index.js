@@ -87,7 +87,7 @@ if (process.env.https) {
         cert: fs.readFileSync(process.env.CERT_FILE),
     };
     https.createServer(sslProperties, app).listen(PORT, () => {
-        console.log(`Express App Listening on ${PORT}`);
+        console.log(`Express App Listening with SSL on ${PORT}`);
     });
 } else {
     app.listen(PORT, async () => {
