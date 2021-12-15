@@ -18,7 +18,7 @@ require('./database/tables').createTables();
 //Test Account: Jodu:123:test@test.com
 const authManager = require('./utils/authManager');
 (async () => {
-    authManager.addToken('SECRET-DEV-KEY', await database.get('accounts').getOne({ UUID: 'ebb4429d-9501-461c-a825-81d50d506837' }));
+    // authManager.addToken('SECRET-DEV-KEY', await database.get('accounts').getOne({ UUID: 'ebb4429d-9501-461c-a825-81d50d506837' }));
 })();
 
 //TODO: surround all routes with try catch to display the errors in errorHandler
