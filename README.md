@@ -38,6 +38,11 @@ It's always better to start hacking things out and then to codem them for produc
 * [ ] Think about a stats table for each entry to get view count etc.
 * [ ] For each sahre access type from [Public / Private / Unlisted]
 
+## MVP Todos
+* [ ] Implement a Folder Deletion
+* [ ] Implement a pofile image selection
+* [ ] add Deselection for a selected entry
+
 ## Todo
 *	[ ]  Entry: Image / Text: An Entry is just my naming representation for this system
 *   [x] Add an specific key for each user which allows to upload with shareX
