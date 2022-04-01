@@ -59,7 +59,7 @@ It's always better to start hacking things out and then to codem them for produc
   - [x] maybe allow regenerating
 - [x] Multiple Accounts System
 - [x] Image-Uploader (SahreX Integration)
-- [ ] Add an Image View in a modal or so
+- [x] Add an Image View in a modal or so
 - [ ] Imlement Deletion on Folders: what todo with stuff inside like images or other folders
 - [x] Implement Deletion from images
 - [ ] Text-Uploader (ShareX Integration)
