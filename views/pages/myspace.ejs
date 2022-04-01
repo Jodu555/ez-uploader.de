@@ -107,6 +107,10 @@
 
 		let selected = [];
 
+		function viewEntry(UUID) {
+			console.log(UUID);
+		}
+
 		function selectEntry(event, UUID) {
 			if (selected.length > 0 && !event.ctrlKey) {
 				selected.forEach((e) => {
@@ -229,7 +233,11 @@
 						<td onclick="selectEntry(event, '${entry.UUID}')">${entry.UUID.split('-')[0]}</td>
 						<td><button onclick="deleteEntry('${
 							entry.UUID
-						}')" href="" class="btn btn-outline-danger"><i class="far fa-trash-alt" style="font-size: 4vh"></i></button></td>`;
+						}')" href="" class="btn btn-outline-danger"><i class="far fa-trash-alt" style="font-size: 4vh"></i></button>
+						<button onclick="viewEntry('${
+							entry.UUID
+						}')" href="" class="btn btn-outline-info"><i class="far fa-eye" style="font-size: 4vh"></i></button>
+						</td>`;
 
 			tabelPlace.appendChild(tr);
 		}
