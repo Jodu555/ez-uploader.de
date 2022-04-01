@@ -72,6 +72,31 @@
 				</nav>
 			</div>
 
+			<div
+				class="modal fade"
+				id="viewEntryModal"
+				tabindex="-1"
+				aria-labelledby="viewEntryModalLabel"
+				aria-hidden="true"
+			>
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="viewEntryModalLabel">View Entry</h5>
+							<button
+								type="button"
+								class="btn-close"
+								data-bs-dismiss="modal"
+								aria-label="Close"
+							></button>
+						</div>
+						<div class="modal-body">
+							<img id="view-img" alt="Image" />
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<div class="row">
 				<div class="col">
 					<table class="table">
@@ -108,7 +133,12 @@
 		let selected = [];
 
 		function viewEntry(UUID) {
+			const modal = new bootstrap.Modal(document.querySelector('#viewEntryModal'), {});
 			console.log(UUID);
+			document.querySelector('#view-img').src = `${API_URL}image/${UUID}?key=${getCookie(
+				'auth-token'
+			)}`;
+			modal.show();
 		}
 
 		function selectEntry(event, UUID) {
