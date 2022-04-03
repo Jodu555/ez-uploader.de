@@ -37,22 +37,22 @@ app.use(cors());
 app.use(morgan('dev', {
     skip: (req, res) => req.originalUrl.startsWith('/image/') || req.originalUrl.startsWith('/favicon/'),
 }));
-app.use(helmet({
-    contentSecurityPolicy: {
-        directives: {
-            defaultSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", 'cdnjs.cloudflare.com', 'fonts.gstatic.com', 'data:', 'https:', 'all'],
-            scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", 'cdnjs.cloudflare.com', 'maxcdn.bootstrapcdn.com', 'docs.jodu555.de', 'cdn.jsdelivr.net'],
-            styleSrc: ["'self'", "'unsafe-inline'", 'maxcdn.bootstrapcdn.com', 'cdn.jsdelivr.net', 'cdnjs.cloudflare.com', 'fonts.googleapis.com'],
-            imgSrc: ["'self'", 'images.jodu555.de', 'data:'],
-            connectSrc: ["'self'"],
-            fontSrc: ["'self'", 'fonts.gstatic.com', 'cdnjs.cloudflare.com', 'data:'],
-            objectSrc: ["'self'"],
-            mediaSrc: ["'self'"],
-            frameSrc: ["'self'"]
-        },
-        reportOnly: true
-    }
-}));
+// app.use(helmet({
+//     contentSecurityPolicy: {
+//         directives: {
+//             defaultSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", 'cdnjs.cloudflare.com', 'fonts.gstatic.com', 'data:', 'https:', 'all'],
+//             scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", 'cdnjs.cloudflare.com', 'maxcdn.bootstrapcdn.com', 'docs.jodu555.de', 'cdn.jsdelivr.net'],
+//             styleSrc: ["'self'", "'unsafe-inline'", 'maxcdn.bootstrapcdn.com', 'cdn.jsdelivr.net', 'cdnjs.cloudflare.com', 'fonts.googleapis.com'],
+//             imgSrc: ["'self'", 'images.jodu555.de', 'data:'],
+//             connectSrc: ["'self'"],
+//             fontSrc: ["'self'", 'fonts.gstatic.com', 'cdnjs.cloudflare.com', 'data:'],
+//             objectSrc: ["'self'"],
+//             mediaSrc: ["'self'"],
+//             frameSrc: ["'self'"]
+//         },
+//         reportOnly: true
+//     }
+// }));
 
 app.use(express.json());
 app.use(express.static('static'));
