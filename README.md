@@ -53,6 +53,7 @@ It's always better to start hacking things out and then to codem them for produc
 
 ## Todo
 
+- [ ] Add so the mutliselect can also be used for moving elements to folders
 - [ ] Entry: Image / Text: An Entry is just my naming representation for this system
 - [x] Add an specific key for each user which allows to upload with shareX
   - [x] Where to show this key

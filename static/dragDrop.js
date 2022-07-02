@@ -26,7 +26,7 @@ function initDragDrop() {
 
                     if (draggable.getAttribute('data-entry-UUID')) {
                         patch('entry/' + draggableUUID, JSON.stringify({
-                            folder_UUID: place.getAttribute('data-folder-UUID')
+                            folder_UUID: folderUUID,
                         }));
                     }
 
