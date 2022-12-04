@@ -30,12 +30,7 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title">Create Folder</h5>
-							<button
-								type="button"
-								class="btn-close"
-								data-bs-dismiss="modal"
-								aria-label="Close"
-							></button>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
 							<form id="createFolder">
@@ -43,13 +38,7 @@
 								<div class="row">
 									<div class="col-1"></div>
 									<div class="col">
-										<input
-											type="text"
-											required
-											class="form-control"
-											placeholder="Folder Name"
-											name="name"
-										/>
+										<input type="text" required class="form-control" placeholder="Folder Name" name="name" />
 									</div>
 									<div class="col-1" style="width: 2.333333%"></div>
 									<div class="col-3">
@@ -72,32 +61,16 @@
 				</nav>
 			</div>
 
-			<div
-				class="modal fade"
-				id="viewEntryModal"
-				tabindex="-1"
-				aria-labelledby="viewEntryModalLabel"
-				aria-hidden="true"
-			>
+			<div class="modal fade" id="viewEntryModal" tabindex="-1" aria-labelledby="viewEntryModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-xl">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="viewEntryModalLabel">View Entry</h5>
-							<button
-								type="button"
-								class="btn-close"
-								data-bs-dismiss="modal"
-								aria-label="Close"
-							></button>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
 							<div class="text-center justify-content-center">
-								<img
-									class="text-center justify-content-center"
-									style="max-width: 90%; max-height: 90%"
-									id="view-img"
-									alt="Image"
-								/>
+								<img class="text-center justify-content-center" style="max-width: 90%; max-height: 90%" id="view-img" alt="Image" />
 							</div>
 						</div>
 					</div>
@@ -118,12 +91,7 @@
 					</table>
 				</div>
 				<div class="col-3">
-					<button
-						type="button"
-						class="btn btn-outline-info"
-						data-bs-toggle="modal"
-						data-bs-target="#createFolderModal"
-					>
+					<button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#createFolderModal">
 						<i class="fas fa-folder-plus" style="font-size: 3vw"></i>
 					</button>
 				</div>
@@ -142,9 +110,7 @@
 		function viewEntry(UUID) {
 			const modal = new bootstrap.Modal(document.querySelector('#viewEntryModal'), {});
 			console.log(UUID);
-			document.querySelector('#view-img').src = `${API_URL}image/${UUID}?key=${getCookie(
-				'auth-token'
-			)}`;
+			document.querySelector('#view-img').src = `${API_URL}image/${UUID}?key=${getCookie('auth-token')}`;
 			modal.show();
 		}
 
@@ -264,16 +230,14 @@
 			tr.classList.add('draggable');
 			tr.setAttribute('draggable', true);
 			tr.setAttribute('data-entry-UUID', entry.UUID);
-			tr.innerHTML = `<td onclick="selectEntry(event, '${entry.UUID}')"><img src="${API_URL}image/${
-				entry.UUID
-			}?key=${getCookie('auth-token')}" class="img-thumbnail preview-image" /></td>
+			tr.innerHTML = `<td onclick="selectEntry(event, '${entry.UUID}')"><img src="${API_URL}image/${entry.UUID}?key=${getCookie(
+				'auth-token'
+			)}" class="img-thumbnail preview-image" /></td>
 						<td onclick="selectEntry(event, '${entry.UUID}')">${entry.UUID.split('-')[0]}</td>
 						<td><button onclick="deleteEntry('${
 							entry.UUID
 						}')" href="" class="btn btn-outline-danger"><i class="far fa-trash-alt" style="font-size: 4vh"></i></button>
-						<button onclick="viewEntry('${
-							entry.UUID
-						}')" href="" class="btn btn-outline-info"><i class="far fa-eye" style="font-size: 4vh"></i></button>
+						<button onclick="viewEntry('${entry.UUID}')" href="" class="btn btn-outline-info"><i class="far fa-eye" style="font-size: 4vh"></i></button>
 						</td>`;
 
 			tabelPlace.appendChild(tr);
@@ -298,8 +262,7 @@
 				alert('#genInfoAlert', response.success, response.error);
 				return;
 			}
-			if (getURLParam('view') && getURLParam('view') !== (await account).root_folder_UUID)
-				appendFolder({ UUID: getPrevFolder().UUID, name: '...' });
+			if (getURLParam('view') && getURLParam('view') !== (await account).root_folder_UUID) appendFolder({ UUID: getPrevFolder().UUID, name: '...' });
 			response.json.forEach((dir) => {
 				appendFolder(dir);
 			});

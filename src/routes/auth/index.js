@@ -4,7 +4,7 @@ const authManager = require('../../utils/authManager');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.json({ message: 'Auth-Router works just fine' });
+	res.json({ message: 'Auth-Router works just fine' });
 });
 router.post('/register', controller.register);
 router.post('/login', controller.login);
@@ -12,5 +12,5 @@ router.get('/logout', authManager.authentication, controller.logout);
 router.get('/regen', authManager.authentication, controller.regenShareXToken);
 
 module.exports = {
-    router,
+	router,
 };

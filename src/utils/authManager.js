@@ -27,7 +27,7 @@ function authentication(req, res, next) {
 			};
 			next();
 		} else {
-			next(new Error('Invalid auth-token'))
+			next(new Error('Invalid auth-token'));
 		}
 	} else {
 		next(new Error('Missing auth-token in headers'));

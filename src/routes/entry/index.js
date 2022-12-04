@@ -10,5 +10,5 @@ router.patch('/:uuid', controller.update); // Updates an existing entry
 router.delete('/:uuid', controller.del); //Deletes the entry
 
 module.exports = {
-    router,
+	router,
 };
